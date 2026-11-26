@@ -22,7 +22,7 @@ function remSync(force){const P=remPlug();if(!P||!S.rem)return;
   r.times.forEach((t,j)=>{const hm=String(t).split(':').map(Number),at=new Date(dt.getFullYear(),dt.getMonth(),dt.getDate(),hm[0]||0,hm[1]||0,0);if(at<=now)return;const role=remRole(t);
    if(role==='treino'&&!(S.wd||[]).includes(wd))return;
    if(d===0&&((role==='mente'&&mD)||(role==='treino'&&tD)||(role==='noite'&&all)))return;
-   const L=REMTX[role];out.push({id:id++,title:'Kaien',body:L[(dt.getDate()+j)%L.length].replace('{n}',S.name||'viajante'),schedule:{at:at,allowWhileIdle:true}})})}
+   const L=REMTX[role].concat((REMTXR[rkI(myLvl())]||{})[role]||[]);out.push({id:id++,title:'Kaien',body:L[(dt.getDate()+j)%L.length].replace('{n}',S.name||'viajante'),schedule:{at:at,allowWhileIdle:true}})})}
  try{P.getPending().then(p=>{const ids=((p&&p.notifications)||[]).filter(n=>n.id!==9999).map(n=>({id:n.id}));return ids.length?P.cancel({notifications:ids}):0}).then(()=>out.length?P.schedule({notifications:out}):0).catch(()=>{})}catch(e){}}
 function remCard(){const r=S.rem,on=r&&r.on;
  return '<div class="card"><div class="mt"><span class="g">Lembretes</span><b>'+(on?'Ligados':'Desligados')+'</b></div><div class="lvs"><button class="mb '+(on?'on':'')+'" onclick="remOn(1)">Receber</button><button class="mb '+(!on?'on':'')+'" onclick="remOn(0)">Não receber</button></div>'

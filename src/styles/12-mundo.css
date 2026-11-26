@@ -22,3 +22,5 @@
 @keyframes estc{to{transform:translate(var(--dx),110vh) rotate(420deg)}}@keyframes estv{0%{transform:translateY(0);opacity:0}20%{opacity:.8}100%{transform:translate(var(--dx),-80vh);opacity:0}}@keyframes estn{0%{transform:translateX(-30vw)}100%{transform:translateX(110vw)}}
 body.rfx #est{display:none}
 .card>.g+b{display:block;margin-top:2px}
+.sat{font-style:normal;margin-left:4px;font-size:12px}.sat.s1{color:#cd8c50}.sat.s2{color:#d7dceb}.sat.s3{color:#f1d48a;text-shadow:0 0 6px #f1d48a}
+.mmc{border:1px solid rgba(217,179,106,.5)}
