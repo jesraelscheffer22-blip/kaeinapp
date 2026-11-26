@@ -1,6 +1,6 @@
 # Manifesto de Arte do Kaien
 
-Gerado por `node tools/manifesto.js`. **132 imagens novas** (0 prontas, 132 pendentes), em ordem de importância.
+Gerado por `node tools/manifesto.js`. **132 imagens novas** (16 prontas, 116 pendentes), em ordem de importância.
 
 ## Como gerar e colocar no app
 
@@ -13,7 +13,7 @@ Antes de tudo: **as 45 imagens que já existem no seu index.html de 12,8 MB não
 
 ## 1. Roupas dos ranks (as mais importantes)
 
-### ⬜ `pH20.png`
+### ✅ `pH20.png`
 - **Onde aparece:** Personagem, cinemática de ascensão · Rank C (nível 20)
 - **Tipo:** Personagem, fundo transparente
 - **Referência:** assets/img/pH5.webp (anexe como referência do rosto e do corpo)
@@ -22,7 +22,7 @@ Antes de tudo: **as 45 imagens que já existem no seu index.html de 12,8 MB não
 Dark fantasy murim (Korean martial arts manhwa) illustration, painterly digital art, high detail, cinematic lighting, night palette of deep purple and indigo with crimson and gold accents, ink-wash textures, soft mist. The player's own character from the attached reference image (NOT the mentor Kaien): lean athletic build, short messy black hair, face hidden in deep shadow exactly like the reference (anonymous silhouette face, no visible features), bandaged forearms and hands. Full body, standing straight in a confident relaxed pose, facing the viewer, centered, whole figure visible from head to feet with some margin. New outfit: martial robes in dark jade green and bronze, layered bronze shoulder guard on one side, subtle bamboo-leaf embroidery, jade-green sash, bronze bracers over the bandages. Keep the same hair, shadowed face and body proportions as the reference. Transparent background (PNG with alpha). If transparency is not possible, use a flat pure magenta background (#FF00FF) with no shadows on it (do NOT use green, the subject has green in it). Vertical image, 2:3 ratio (1024x1536). No text, no letters, no calligraphy, no symbols that look like writing, no watermark, no logos, no real brands.
 ```
 
-### ⬜ `pH30.png`
+### ✅ `pH30.png`
 - **Onde aparece:** Personagem, cinemática de ascensão · Rank B (nível 30)
 - **Tipo:** Personagem, fundo transparente
 - **Referência:** assets/img/pH5.webp (anexe como referência do rosto e do corpo)
@@ -31,7 +31,7 @@ Dark fantasy murim (Korean martial arts manhwa) illustration, painterly digital 
 Dark fantasy murim (Korean martial arts manhwa) illustration, painterly digital art, high detail, cinematic lighting, night palette of deep purple and indigo with crimson and gold accents, ink-wash textures, soft mist. The player's own character from the attached reference image (NOT the mentor Kaien): lean athletic build, short messy black hair, face hidden in deep shadow exactly like the reference (anonymous silhouette face, no visible features), bandaged forearms and hands. Full body, standing straight in a confident relaxed pose, facing the viewer, centered, whole figure visible from head to feet with some margin. New outfit: layered silver-grey and ice-blue martial robes, short fur-lined cape, snowflake-like geometric embroidery, polished silver bracers over the bandages, white sash. Keep the same hair, shadowed face and body proportions as the reference. Transparent background (PNG with alpha). If transparency is not possible, use a flat pure green background (#00FF00) with no shadows on it. Vertical image, 2:3 ratio (1024x1536). No text, no letters, no calligraphy, no symbols that look like writing, no watermark, no logos, no real brands.
 ```
 
-### ⬜ `pH40.png`
+### ✅ `pH40.png`
 - **Onde aparece:** Personagem, cinemática de ascensão · Rank A (nível 40)
 - **Tipo:** Personagem, fundo transparente
 - **Referência:** assets/img/pH5.webp (anexe como referência do rosto e do corpo)
@@ -40,7 +40,7 @@ Dark fantasy murim (Korean martial arts manhwa) illustration, painterly digital 
 Dark fantasy murim (Korean martial arts manhwa) illustration, painterly digital art, high detail, cinematic lighting, night palette of deep purple and indigo with crimson and gold accents, ink-wash textures, soft mist. The player's own character from the attached reference image (NOT the mentor Kaien): lean athletic build, short messy black hair, face hidden in deep shadow exactly like the reference (anonymous silhouette face, no visible features), bandaged forearms and hands. Full body, standing straight in a confident relaxed pose, facing the viewer, centered, whole figure visible from head to feet with some margin. New outfit: black and crimson martial robe with gold dragon embroidery winding around the torso, long gold-trimmed open coat, crimson sash, gold bracers over the bandages. Keep the same hair, shadowed face and body proportions as the reference. Transparent background (PNG with alpha). If transparency is not possible, use a flat pure green background (#00FF00) with no shadows on it. Vertical image, 2:3 ratio (1024x1536). No text, no letters, no calligraphy, no symbols that look like writing, no watermark, no logos, no real brands.
 ```
 
-### ⬜ `pH50.png`
+### ✅ `pH50.png`
 - **Onde aparece:** Personagem, cinemática de ascensão · Rank S (nível 50)
 - **Tipo:** Personagem, fundo transparente
 - **Referência:** assets/img/pH5.webp (anexe como referência do rosto e do corpo)
@@ -51,7 +51,7 @@ Dark fantasy murim (Korean martial arts manhwa) illustration, painterly digital 
 
 ## 2. Fundos de cada rank
 
-### ⬜ `bg-bambu.png`
+### ✅ `bg-bambu.png`
 - **Onde aparece:** Fundo do Personagem e da aba Kaien, cinemáticas · Floresta de Bambu (rank C, nível 20)
 - **Tipo:** Cenário, sem personagens, fundo normal
 
@@ -59,7 +59,7 @@ Dark fantasy murim (Korean martial arts manhwa) illustration, painterly digital 
 Dark fantasy murim (Korean martial arts manhwa) illustration, painterly digital art, high detail, cinematic lighting, night palette of deep purple and indigo with crimson and gold accents, ink-wash textures, soft mist. Environment only, no people: a mountain temple courtyard inside a dense misty bamboo forest at night, jade-green tones with warm bronze lanterns, a large full moon tinted violet, stone stairs leading up to a wooden temple gate, fallen bamboo leaves drifting. Keep the lower third of the image calmer and darker, because app panels appear over it. Vertical image, 2:3 ratio (1024x1536). No text, no letters, no calligraphy, no symbols that look like writing, no watermark, no logos, no real brands.
 ```
 
-### ⬜ `bg-montanha.png`
+### ✅ `bg-montanha.png`
 - **Onde aparece:** Fundo do Personagem e da aba Kaien, cinemáticas · Montanha da Tempestade (rank B, nível 30)
 - **Tipo:** Cenário, sem personagens, fundo normal
 
@@ -67,7 +67,7 @@ Dark fantasy murim (Korean martial arts manhwa) illustration, painterly digital 
 Dark fantasy murim (Korean martial arts manhwa) illustration, painterly digital art, high detail, cinematic lighting, night palette of deep purple and indigo with crimson and gold accents, ink-wash textures, soft mist. Environment only, no people: a stone temple carved into a snowy mountain peak during a storm at night, silver and ice-blue tones, distant lightning in purple clouds, snow blowing across stone stairs, glowing lanterns resisting the wind. Keep the lower third of the image calmer and darker, because app panels appear over it. Vertical image, 2:3 ratio (1024x1536). No text, no letters, no calligraphy, no symbols that look like writing, no watermark, no logos, no real brands.
 ```
 
-### ⬜ `bg-palacio.png`
+### ✅ `bg-palacio.png`
 - **Onde aparece:** Fundo do Personagem e da aba Kaien, cinemáticas · Palácio do Dragão (rank A, nível 40)
 - **Tipo:** Cenário, sem personagens, fundo normal
 
@@ -75,7 +75,7 @@ Dark fantasy murim (Korean martial arts manhwa) illustration, painterly digital 
 Dark fantasy murim (Korean martial arts manhwa) illustration, painterly digital art, high detail, cinematic lighting, night palette of deep purple and indigo with crimson and gold accents, ink-wash textures, soft mist. Environment only, no people: the grand courtyard of an ancient imperial palace at night, gold and crimson tones, huge golden dragon statues coiling around red pillars, rows of burning torches and braziers, a full moon above curved rooftops. Keep the lower third of the image calmer and darker, because app panels appear over it. Vertical image, 2:3 ratio (1024x1536). No text, no letters, no calligraphy, no symbols that look like writing, no watermark, no logos, no real brands.
 ```
 
-### ⬜ `bg-lua.png`
+### ✅ `bg-lua.png`
 - **Onde aparece:** Fundo do Personagem e da aba Kaien, cinemáticas · Pico da Lua (rank S, nível 50)
 - **Tipo:** Cenário, sem personagens, fundo normal
 
@@ -83,7 +83,7 @@ Dark fantasy murim (Korean martial arts manhwa) illustration, painterly digital 
 Dark fantasy murim (Korean martial arts manhwa) illustration, painterly digital art, high detail, cinematic lighting, night palette of deep purple and indigo with crimson and gold accents, ink-wash textures, soft mist. Environment only, no people: a small serene shrine on the highest mountain peak above a sea of clouds, an enormous glowing full moon in white-gold and lunar purple, petals and golden sparks floating upward, a sense of peace and transcendence. Keep the lower third of the image calmer and darker, because app panels appear over it. Vertical image, 2:3 ratio (1024x1536). No text, no letters, no calligraphy, no symbols that look like writing, no watermark, no logos, no real brands.
 ```
 
-### ⬜ `bg-bambulua.png`
+### ✅ `bg-bambulua.png`
 - **Onde aparece:** Fundo do Personagem e da aba Kaien, cinemáticas · Bambu ao Luar (nível 29)
 - **Tipo:** Cenário, sem personagens, fundo normal
 
@@ -91,7 +91,7 @@ Dark fantasy murim (Korean martial arts manhwa) illustration, painterly digital 
 Dark fantasy murim (Korean martial arts manhwa) illustration, painterly digital art, high detail, cinematic lighting, night palette of deep purple and indigo with crimson and gold accents, ink-wash textures, soft mist. Environment only, no people: a quiet path through a bamboo forest under strong moonlight, silver-blue light beams between bamboo stalks, a small stone lantern, fireflies, calm and contemplative. Keep the lower third of the image calmer and darker, because app panels appear over it. Vertical image, 2:3 ratio (1024x1536). No text, no letters, no calligraphy, no symbols that look like writing, no watermark, no logos, no real brands.
 ```
 
-### ⬜ `bg-tempestade.png`
+### ✅ `bg-tempestade.png`
 - **Onde aparece:** Fundo do Personagem e da aba Kaien, cinemáticas · Tempestade (nível 35)
 - **Tipo:** Cenário, sem personagens, fundo normal
 
@@ -99,7 +99,7 @@ Dark fantasy murim (Korean martial arts manhwa) illustration, painterly digital 
 Dark fantasy murim (Korean martial arts manhwa) illustration, painterly digital art, high detail, cinematic lighting, night palette of deep purple and indigo with crimson and gold accents, ink-wash textures, soft mist. Environment only, no people: a mountain training ground in heavy rain and wind, dark slate and silver tones, lightning illuminating a lone stone training post, puddles reflecting lantern light. Keep the lower third of the image calmer and darker, because app panels appear over it. Vertical image, 2:3 ratio (1024x1536). No text, no letters, no calligraphy, no symbols that look like writing, no watermark, no logos, no real brands.
 ```
 
-### ⬜ `bg-jardim.png`
+### ✅ `bg-jardim.png`
 - **Onde aparece:** Fundo do Personagem e da aba Kaien, cinemáticas · Jardim do Dragão (nível 45)
 - **Tipo:** Cenário, sem personagens, fundo normal
 
@@ -109,7 +109,7 @@ Dark fantasy murim (Korean martial arts manhwa) illustration, painterly digital 
 
 ## 3. Provas de Ascensão
 
-### ⬜ `prova-c.png`
+### ✅ `prova-c.png`
 - **Onde aparece:** Cartão e tela da Prova do rank C
 - **Tipo:** Cenário, sem personagens, fundo normal
 
@@ -117,7 +117,7 @@ Dark fantasy murim (Korean martial arts manhwa) illustration, painterly digital 
 Dark fantasy murim (Korean martial arts manhwa) illustration, painterly digital art, high detail, cinematic lighting, night palette of deep purple and indigo with crimson and gold accents, ink-wash textures, soft mist. Environment only, no people: an old wooden gate at the edge of a bamboo forest at dawn, a single stone path, two stone lanterns, mist rising, jade and bronze tones. Strong sense of a threshold to cross. Vertical image, 2:3 ratio (1024x1536). No text, no letters, no calligraphy, no symbols that look like writing, no watermark, no logos, no real brands.
 ```
 
-### ⬜ `prova-b.png`
+### ✅ `prova-b.png`
 - **Onde aparece:** Cartão e tela da Prova do rank B
 - **Tipo:** Cenário, sem personagens, fundo normal
 
@@ -125,7 +125,7 @@ Dark fantasy murim (Korean martial arts manhwa) illustration, painterly digital 
 Dark fantasy murim (Korean martial arts manhwa) illustration, painterly digital art, high detail, cinematic lighting, night palette of deep purple and indigo with crimson and gold accents, ink-wash textures, soft mist. Environment only, no people: a steep stone stairway climbing a snowy mountain toward a small gate in a storm, silver and blue tones, distant lightning. Strong sense of a threshold to cross. Vertical image, 2:3 ratio (1024x1536). No text, no letters, no calligraphy, no symbols that look like writing, no watermark, no logos, no real brands.
 ```
 
-### ⬜ `prova-a.png`
+### ✅ `prova-a.png`
 - **Onde aparece:** Cartão e tela da Prova do rank A
 - **Tipo:** Cenário, sem personagens, fundo normal
 
@@ -133,7 +133,7 @@ Dark fantasy murim (Korean martial arts manhwa) illustration, painterly digital 
 Dark fantasy murim (Korean martial arts manhwa) illustration, painterly digital art, high detail, cinematic lighting, night palette of deep purple and indigo with crimson and gold accents, ink-wash textures, soft mist. Environment only, no people: massive palace doors with golden dragon reliefs, slightly open with warm light coming through, crimson and gold tones, braziers on both sides. Strong sense of a threshold to cross. Vertical image, 2:3 ratio (1024x1536). No text, no letters, no calligraphy, no symbols that look like writing, no watermark, no logos, no real brands.
 ```
 
-### ⬜ `prova-s.png`
+### ✅ `prova-s.png`
 - **Onde aparece:** Cartão e tela da Prova do rank S
 - **Tipo:** Cenário, sem personagens, fundo normal
 
@@ -143,7 +143,7 @@ Dark fantasy murim (Korean martial arts manhwa) illustration, painterly digital 
 
 ## 4. Chefes evoluídos (Fase 2)
 
-### ⬜ `boss2-procrastinacao.png`
+### ✅ `boss2-procrastinacao.png`
 - **Onde aparece:** Dungeon Fase 2 · Imperador do Amanhã
 - **Tipo:** Monstro, fundo transparente
 - **Referência:** assets/img/boss-procrastinacao.webp (anexe como referência: a versão evoluída deve lembrar a original)

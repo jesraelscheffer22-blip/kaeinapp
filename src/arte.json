@@ -24,80 +24,80 @@
 "filtro": "sepia(.55) hue-rotate(60deg) saturate(1.5) brightness(1.05)"
 },
 "spin20-0": {
-"base": "spin-0",
-"filtro": "sepia(.55) hue-rotate(60deg) saturate(1.5) brightness(1.05)"
+"base": "pH20",
+"filtro": "none"
 },
 "spin20-1": {
-"base": "spin-1",
-"filtro": "sepia(.55) hue-rotate(60deg) saturate(1.5) brightness(1.05)"
+"base": "pH20",
+"filtro": "none"
 },
 "spin20-2": {
-"base": "spin-2",
-"filtro": "sepia(.55) hue-rotate(60deg) saturate(1.5) brightness(1.05)"
+"base": "pH20",
+"filtro": "none"
 },
 "spin20-3": {
-"base": "spin-3",
-"filtro": "sepia(.55) hue-rotate(60deg) saturate(1.5) brightness(1.05)"
+"base": "pH20",
+"filtro": "none"
 },
 "pH30": {
 "base": "pH5",
 "filtro": "grayscale(.5) brightness(1.25) hue-rotate(170deg) saturate(.8)"
 },
 "spin30-0": {
-"base": "spin-0",
-"filtro": "grayscale(.5) brightness(1.25) hue-rotate(170deg) saturate(.8)"
+"base": "pH30",
+"filtro": "none"
 },
 "spin30-1": {
-"base": "spin-1",
-"filtro": "grayscale(.5) brightness(1.25) hue-rotate(170deg) saturate(.8)"
+"base": "pH30",
+"filtro": "none"
 },
 "spin30-2": {
-"base": "spin-2",
-"filtro": "grayscale(.5) brightness(1.25) hue-rotate(170deg) saturate(.8)"
+"base": "pH30",
+"filtro": "none"
 },
 "spin30-3": {
-"base": "spin-3",
-"filtro": "grayscale(.5) brightness(1.25) hue-rotate(170deg) saturate(.8)"
+"base": "pH30",
+"filtro": "none"
 },
 "pH40": {
 "base": "pH5",
 "filtro": "sepia(.85) saturate(2.2) hue-rotate(-12deg) brightness(1.12)"
 },
 "spin40-0": {
-"base": "spin-0",
-"filtro": "sepia(.85) saturate(2.2) hue-rotate(-12deg) brightness(1.12)"
+"base": "pH40",
+"filtro": "none"
 },
 "spin40-1": {
-"base": "spin-1",
-"filtro": "sepia(.85) saturate(2.2) hue-rotate(-12deg) brightness(1.12)"
+"base": "pH40",
+"filtro": "none"
 },
 "spin40-2": {
-"base": "spin-2",
-"filtro": "sepia(.85) saturate(2.2) hue-rotate(-12deg) brightness(1.12)"
+"base": "pH40",
+"filtro": "none"
 },
 "spin40-3": {
-"base": "spin-3",
-"filtro": "sepia(.85) saturate(2.2) hue-rotate(-12deg) brightness(1.12)"
+"base": "pH40",
+"filtro": "none"
 },
 "pH50": {
 "base": "pH5",
 "filtro": "sepia(.6) saturate(1.8) hue-rotate(220deg) brightness(1.25)"
 },
 "spin50-0": {
-"base": "spin-0",
-"filtro": "sepia(.6) saturate(1.8) hue-rotate(220deg) brightness(1.25)"
+"base": "pH50",
+"filtro": "none"
 },
 "spin50-1": {
-"base": "spin-1",
-"filtro": "sepia(.6) saturate(1.8) hue-rotate(220deg) brightness(1.25)"
+"base": "pH50",
+"filtro": "none"
 },
 "spin50-2": {
-"base": "spin-2",
-"filtro": "sepia(.6) saturate(1.8) hue-rotate(220deg) brightness(1.25)"
+"base": "pH50",
+"filtro": "none"
 },
 "spin50-3": {
-"base": "spin-3",
-"filtro": "sepia(.6) saturate(1.8) hue-rotate(220deg) brightness(1.25)"
+"base": "pH50",
+"filtro": "none"
 },
 "spin0-0": {
 "base": "spin-0",

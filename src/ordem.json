@@ -12,6 +12,7 @@
   "styles/10-cinematica.css",
   "styles/11-jornada.css",
   "styles/12-mundo.css",
+  "styles/13-vivo.css",
   "styles/08-imagens.css"
  ],
  "js": [
@@ -50,6 +51,7 @@
   "js/64-itens.js",
   "js/65-bot.js",
   "js/66-seguranca.js",
+  "js/67-vivo.js",
   "js/17-estado-e-boot.js"
  ]
 }
