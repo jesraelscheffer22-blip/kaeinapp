@@ -1,2 +1,3 @@
 /* ===== capítulos com imagem ===== */
 .rdr .chimg.ci{background-size:cover;background-position:center 18%;background-repeat:no-repeat}
+.scnt{max-height:80%;overflow-y:auto}.scnt p+p{margin-top:2px}

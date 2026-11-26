@@ -1,4 +1,4 @@
-function isTrain(d){const o=S.ov[d];if(o!==undefined)return o;if(!S.wd.length)return true;return S.wd.includes((S.wd0+d-1)%7)}
+function isTrain(d){if(S.ret&&d>=S.ret.de&&d<=S.ret.ate)return false;const o=S.ov[d];if(o!==undefined)return o;if(!S.wd.length)return true;return S.wd.includes((S.wd0+d-1)%7)}
 function toggleWd(i){const inStep=steps[S.i]&&steps[S.i].t==='wdays',w=S.wd,k=w.indexOf(i);
  if(k>=0){if(!inStep&&w.length<=2){S.wdMsg='O mínimo é 2 dias por semana.';render();return}if(!inStep)S.ov[S.day]=isTrain(S.day);w.splice(k,1)}
  else{if(w.length>=6){S.wdMsg='O máximo é 6 dias. O corpo precisa de pelo menos um dia de descanso.';render();return}if(!inStep)S.ov[S.day]=isTrain(S.day);w.push(i)}
@@ -6,7 +6,9 @@ function toggleWd(i){const inStep=steps[S.i]&&steps[S.i].t==='wdays',w=S.wd,k=w.
 function doneWd(){if(S.wd.length<2||S.wd.length>6)return;S.wd.sort((a,b)=>a-b);S.wd0=(new Date().getDay()+6)%7;S.wdMsg='';const n=S.wd.length;
  S.react={x:n+(n===1?' dia':' dias')+' por semana. Os outros dias são de descanso, e descanso também faz parte do treino.',p:'B'};render()}
 function swapToday(v){if(Object.keys(S.ms).length)return;S.ov[S.day]=v;S.top=true;render()}
-function plan(){const R=calc(),gs=R.gs;const low=ST.filter(x=>x!==gs).sort((a,b)=>R.v[a]-R.v[b])[0];
+// Plano do dia = plano base + ajustes dos módulos (PLAN_MODS).
+function plan(){let ms=plan0();PLAN_MODS.forEach(f=>{try{ms=f(ms)||ms}catch(e){console.warn(e)}});return ms}
+function plan0(){const R=calc(),gs=R.gs;const low=ST.filter(x=>x!==gs).sort((a,b)=>R.v[a]-R.v[b])[0];
  const tr=isTrain(S.day),MEN=['Foco','Calma','Disciplina'];
  const men=Object.assign(lib(MEN[(S.day-1)%3]),{tag:'Mente',key:'low'});
  const phys=tr?Object.assign(S.a.pain===3?lib('Força'):(()=>{const t=sessType();return t[0]==='a'?lib('Agilidade',t):lib('Força',t)})(),{tag:'Treino',key:'obj'}):{stat:'Calma',tag:'Descanso ativo',key:'obj',title:'Alongamento e caminhada leve',steps:[TM('Alongamento suave',pk([8,10,12])),TM('Caminhada curta e leve',pk([5,10,10]))],min:pk([13,20,22]),xp:10};
@@ -59,7 +61,7 @@ function setCups(n){S.cups=n;render()}
 const SLC=['Menos de 5 h','5 a 6 h','6 a 7 h','7 a 8 h','Mais de 8 h'];
 function slpOpen(){return !(S.slp&&S.slp.day===S.day)}
 function slpEligible(){return S.lvl>0&&S.lvBase==null&&!Object.keys(S.ms).length&&!S.cups}
-function slpSet(c){if(!slpOpen())return;S.slp={day:S.day,c:c,ask:(c<=1&&slpEligible())?1:0};S.slh=(S.slh||[]).concat([c]).slice(-7);S.xpPrev+=3;render()}
+function slpSet(c){if(!slpOpen())return;S.slp={day:S.day,c:c,ask:(c<=1&&slpEligible())?1:0};S.slh=(S.slh||[]).concat([c]).slice(-7);S.slc=(S.slc||0)+1;S.xpPrev+=3;render()}
 function slpLite(y){if(y&&S.slp&&S.slp.ask&&slpEligible()){S.lvBase=S.lvl;S.lvl=0;S.ms={};S.cups=0}if(S.slp)S.slp.ask=0;render()}
 function slpCard(){const s=S.slp;
  if(slpOpen())return `<div class="card"><div class="mt"><span class="g">Kaien pergunta</span><b>Quantas horas você dormiu?</b></div><p class="note">Sem certo ou errado. Só registrar já vale +3 XP.</p><div style="display:flex;flex-wrap:wrap;gap:6px;margin-top:8px">${SLC.map((t,i)=>`<button class="mb" onclick="slpSet(${i})">${t}</button>`).join('')}</div></div>`;

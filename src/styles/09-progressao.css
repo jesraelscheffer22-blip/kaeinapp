@@ -23,3 +23,5 @@ body.hc .lk{text-decoration:underline}
 .prova-c{background-image:url(@@IMG:prova-c@@)}.prova-b{background-image:url(@@IMG:prova-b@@)}.prova-a{background-image:url(@@IMG:prova-a@@)}.prova-s{background-image:url(@@IMG:prova-s@@)}
 .pvxtm{text-align:center;margin:6px 0}.pvxtm b{font:700 54px Georgia,serif;color:#f1d48a;text-shadow:0 0 18px rgba(217,179,106,.5)}
 .ajl{display:flex;flex-direction:column;gap:8px}.ajl .mb{text-align:left}
+.kchips{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 10px}.kchips .mb{padding:6px 10px;font-size:12.5px;min-height:34px}
+.kfh .kq{font-size:15px}

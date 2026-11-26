@@ -92,6 +92,8 @@ html = html.replace(/@@FONT:([A-Za-z0-9_-]+)@@/g, (_, nome) => {
   fontesUsadas.add(nome);
   return modo === 'arquivos' ? 'assets/fonts/' + nome + '.woff2' : 'data:font/woff2;base64,' + fs.readFileSync(arq).toString('base64');
 });
+// @@TEM:nome@@ -> true/false: se a arte própria existe.
+html = html.replace(/@@TEM:([A-Za-z0-9_-]+)@@/g, (_, n) => existe(n) ? 'true' : 'false');
 html = html.replace(/@@TESTE@@/g, variante === 'teste' ? 'true' : 'false');
 if (/@@[A-Z]+[:@]/.test(html)) throw new Error('Sobrou marcador @@ sem substituir');
 
@@ -100,6 +102,9 @@ if (variante === 'teste') {
   html = html.replace('<head>', '<head><script>try{localStorage.clear();sessionStorage.clear()}catch(e){}</script>');
 }
 
+// Confere a sintaxe do JavaScript antes de gravar (sem executar).
+{ const a = html.lastIndexOf('<script>'), b = html.lastIndexOf('</script>');
+  try { new Function(html.slice(a + 8, b)); } catch (e) { throw new Error('Erro de sintaxe no JS montado: ' + e.message); } }
 fs.rmSync(saida, { recursive: true, force: true });
 fs.mkdirSync(saida, { recursive: true });
 fs.writeFileSync(path.join(saida, 'index.html'), html);

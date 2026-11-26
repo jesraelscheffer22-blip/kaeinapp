@@ -1,0 +1,34 @@
+/* ===== Jornada e práticas ===== */
+.jts{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.jt{display:flex;flex-direction:column;align-items:center;gap:3px;min-height:76px;padding:8px 4px;border-radius:12px;border:1px solid rgba(217,179,106,.35);background:rgba(20,16,40,.75);color:#eef0ff;font:inherit;cursor:pointer}
+.jt i{font-style:normal;font-size:22px}.jt b{font-size:12px;line-height:1.15;text-align:center}.jt small{font-size:10.5px;color:var(--mut)}.jt.lk2{opacity:.45}
+.intin{width:100%;margin:8px 0;background:rgba(13,16,34,.93);border:1px solid var(--line);border-radius:12px;padding:10px 12px;color:var(--tx);font:inherit;font-size:14px}
+.intc b{display:block;font:700 22px Georgia,serif;color:#f1d48a}.retc{border:1px solid rgba(95,205,155,.45)}
+.mpw{max-height:64vh;overflow-y:auto;border-radius:14px;background:linear-gradient(180deg,#1b1530,#100c22);border:1px solid rgba(217,179,106,.3);flex:none}
+.mpsvg{display:block}.mps{cursor:pointer}.mpr{font:700 13px Georgia,serif;letter-spacing:.06em}
+.mpme{animation:mpme 1.8s ease-in-out infinite}@keyframes mpme{50%{stroke-width:7px}}
+.ctw{position:absolute;inset:0;background:rgba(5,4,14,.86);display:flex;align-items:center;justify-content:center;padding:18px}
+.ctp{position:relative;width:100%;max-width:420px;max-height:88%;overflow-y:auto;background:linear-gradient(180deg,#eadbb8,#dcc896);color:#2a1d10;border-radius:4px;padding:28px 20px 18px;box-shadow:0 10px 40px rgba(0,0,0,.6);font-family:Georgia,serif;animation:cnin .7s ease}
+.ctp .g{color:#8e1f1a}.ctp>b{display:block;font-size:21px;margin:2px 0 10px}.ctx p{margin:0 0 10px;font-size:15px;line-height:1.55}
+.ctselo{position:absolute;right:16px;top:14px;width:46px;height:46px;border-radius:50%;background:radial-gradient(circle at 40% 35%,#c23a2e,#8e1f1a 70%);color:#f1d48a;display:flex;align-items:center;justify-content:center;font:900 18px Georgia,serif;box-shadow:0 2px 6px rgba(0,0,0,.4)}
+.ctl{display:flex;flex-direction:column;align-items:flex-start;gap:2px;text-align:left;width:100%;border:1px solid rgba(217,179,106,.35);color:var(--tx);font:inherit;cursor:pointer}
+.mdk small{display:block;color:var(--mut);font-size:12px;margin-top:2px}
+.mselo{display:inline-flex;align-items:center;justify-content:center;width:22px;height:22px;border-radius:50%;font:700 10px Georgia,serif;font-style:normal;margin-left:4px;background:#8e1f1a;color:#f1d48a}.mselo.s21{background:#2f7a5a}.mselo.s66{background:#d9b36a;color:#2a1d10}
+.mbar{position:relative;height:8px;border-radius:5px;background:#2a3158;margin:8px 0;overflow:visible}.mbar i{display:block;height:100%;border-radius:5px;background:linear-gradient(90deg,#8e1f1a,#d9b36a)}.mbar span{position:absolute;top:-3px;width:2px;height:14px;background:rgba(255,255,255,.5)}
+.trnc{cursor:pointer;border:1px solid rgba(217,179,106,.35)}.ddpg{background:linear-gradient(180deg,rgba(234,219,184,.08),rgba(220,200,150,.04))}
+.apc{border:1px solid #d9b36a;background:rgba(60,40,20,.6)}
+.ktl{margin:4px 0 8px;padding-left:18px;font-size:13.5px;color:#d6d9ee}.ktl li{margin:2px 0}
+.hmw{display:flex;gap:3px;overflow-x:auto;padding:4px 0}.hmc{display:flex;flex-direction:column;gap:3px}
+.hm{display:block;width:14px;height:14px;border-radius:40% 55% 45% 60%;background:#232845}
+.hm.on{background:#d9b36a;box-shadow:0 0 4px rgba(217,179,106,.6)}.hm.ld{background:#5fbf8a}.hm.rs{background:#3a3f63}.hm.rt{background:#9b7be0}.hm.na{background:#2a2f4d;opacity:.7}.hm.fu{background:transparent;border:1px dashed rgba(255,255,255,.08)}
+.hml{display:flex;flex-wrap:wrap;gap:8px;margin-top:6px;font-size:11.5px;color:var(--mut)}.hml span{display:flex;align-items:center;gap:4px}.hml .hm{width:11px;height:11px}
+.stg{display:grid;grid-template-columns:1fr 1fr;gap:10px}.stg div{display:flex;flex-direction:column;background:rgba(255,255,255,.04);border-radius:10px;padding:10px}.stg b{font:700 22px Georgia,serif;color:#f1d48a}.stg span{font-size:12px;color:var(--mut)}
+.rtp{background:linear-gradient(180deg,#eadbb8,#dcc896);color:#2a1d10;font-family:Georgia,serif}.rtp .g{color:#8e1f1a}.rtp>b{font-size:19px}.rtp ul{padding-left:18px;margin:8px 0}.rtp li{margin:4px 0}.rtp .note{color:#4a3a22}
+
+/* sem rolagem horizontal (o carrossel de dungeons passava 16px da tela, já no original) */
+.sheet.app{overflow-x:hidden}
+.seg{flex-wrap:wrap}.seg button{min-width:0;padding:9px 6px}
+.lvs{flex-wrap:wrap}
+.dcw{margin:0 -14px!important}.dcw .dcs{margin:0!important}
+.sheet .card.rtp{background:linear-gradient(180deg,#eadbb8,#dcc896);color:#2a1d10}.sheet .card.rtp .note{color:#4a3a22}.sheet .card.rtp b{color:#2a1d10}
+.pvk span small{display:block;font-size:11.5px;color:#d9b36a;letter-spacing:.04em;text-transform:uppercase}

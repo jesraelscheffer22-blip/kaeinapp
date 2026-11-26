@@ -22,7 +22,7 @@ function dgBack(){S.dgList=0;S.top=true;render()}
 function dgExit(){S.dgAsk=1;S.top=false;render()}
 function dgCancel(){S.dgAsk=0;S.top=false;render()}
 function dgLeave(){const D=S.dg,h=D.habit;S.xpPrev+=D.fl.reduce((a,f)=>a+(f?f.xp:0),0);const c=D.fl.filter(Boolean).length;S.dgHist.push({cleared:c,left:1});S.dgNx=S.dgNx||{};const k=dgK(h,D.ph,D.rp),nx=Math.max(S.dgNx[k]||0,c,D.nx||0);S.dgNx[k]=nx;delete S.dgAll[h];S.dg=null;S.dgAsk=0;S.dgList=0;S.dgMsg='Você desistiu de '+DGH[h].m+'. O XP ganho ficou salvo.'+(nx?' Se voltar a ele, o monstro começa com a vida cheia e os andares até o '+nx+'º não darão XP.':' Se voltar a ele, o monstro começa com a vida cheia.');S.top=true;render()}
-function gRec(){completeMission('rec',null)}
+function gRec(){S.dgRecDay=S.day;completeMission('rec',null)}
 function dgRoll(){}
 function dgRoll2(){const p=S.dgRot&&S.dgRot.h;if(p&&!(S.dgAll&&S.dgAll[p]))S.dgMiss={h:p,day:S.day};else S.dgMiss=null;S.dgRi=(S.dgRi||0)+1;dgPick()}
 const dgEst=st=>Math.round(st.reduce((a,x)=>a+(x.k==='timer'?x.sec/60:x.k==='sets'?x.sets*(1.2+(x.rest||0)/60):1),0)/5)*5;

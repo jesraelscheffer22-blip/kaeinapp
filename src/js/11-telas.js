@@ -17,7 +17,7 @@ function persView(){const L=myLvl(),eq=S.eq||{},sub=S.psub||'a';
 
 function sceneView(){const lv=Array.from({length:16},(_,i)=>'<i class="lf" style="left:'+Math.round(Math.random()*100)+'%;--d:'+(7+Math.random()*7).toFixed(1)+'s;--w:'+(Math.random()*70-35).toFixed(0)+'px;--s:'+(.6+Math.random()*.9).toFixed(2)+';animation-delay:-'+(Math.random()*12).toFixed(1)+'s;filter:blur('+(Math.random()<.35?1.5:0)+'px)"></i>').join('');
  const em=Array.from({length:8},(_,i)=>'<i class="em" style="left:'+(i<4?3+Math.random()*8:90+Math.random()*8).toFixed(0)+'%;top:'+(i<4?20:48)+'%;animation-delay:-'+(Math.random()*5).toFixed(1)+'s"></i>').join('');
- return '<div class="scn"><div class="scnbg scnimg"></div><div class="tg" style="left:2%;top:15%"></div><div class="tg" style="right:-2%;top:40%"></div><div class="tg sm" style="right:6%;top:31%"></div>'+lv+em+'<div class="scnt"><span class="g">Capítulo 1 · Mestre Kaien</span><b>A noite no pátio</b><p>'+esc(SCENE)+'</p><button class="cta" onclick="sceneClose()">Continuar</button></div></div>'}
+ return '<div class="scn"><div class="scnbg scnimg"></div><div class="tg" style="left:2%;top:15%"></div><div class="tg" style="right:-2%;top:40%"></div><div class="tg sm" style="right:6%;top:31%"></div>'+lv+em+'<div class="scnt"><span class="g">Capítulo 1 · Mestre Kaien</span><b>A noite no pátio</b>'+paras(HIS[0].ch[0][2])+'<button class="cta" onclick="sceneClose()">Continuar</button></div></div>'}
 function sceneClose(){S.scn=0;S.top=true;render()}
 function sceneOpen(){S.scn=1;S.top=true;render()}
 
