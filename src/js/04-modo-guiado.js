@@ -1,6 +1,6 @@
 /* ---- guided mode ---- */
 let _ac=null,_wl=null;
-function beep(){try{if(!_ac)_ac=new (window.AudioContext||window.webkitAudioContext)();const o=_ac.createOscillator(),g=_ac.createGain();o.frequency.value=880;g.gain.value=.08;o.connect(g);g.connect(_ac.destination);o.start();o.stop(_ac.currentTime+.18)}catch(e){}try{navigator.vibrate&&navigator.vibrate(200)}catch(e){}}
+function beep(){if(S&&S.cfg&&S.cfg.som===0)return;try{if(!_ac)_ac=new (window.AudioContext||window.webkitAudioContext)();const o=_ac.createOscillator(),g=_ac.createGain();o.frequency.value=880;g.gain.value=.08*((S&&S.cfg&&S.cfg.vol!=null)?[.5,1,1.6][S.cfg.vol]:1);o.connect(g);g.connect(_ac.destination);o.start();o.stop(_ac.currentTime+.18)}catch(e){}try{navigator.vibrate&&navigator.vibrate(200)}catch(e){}}
 function holdWake(){try{if(navigator.wakeLock)navigator.wakeLock.request('screen').then(w=>{_wl=w}).catch(()=>{})}catch(e){}}
 function relWake(){try{if(_wl){_wl.release();_wl=null}}catch(e){}}
 const elapsed=g=>g.acc+(g.paused?0:(Date.now()-g.t0)*F());

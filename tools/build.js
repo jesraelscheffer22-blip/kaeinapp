@@ -64,14 +64,26 @@ let html = ler('index.template.html')
   .replace('{{CSS}}', () => ordem.css.map(ler).join('\n'))
   .replace('{{JS}}', () => ordem.js.map(ler).join('\n'));
 
-const usadas = new Set(), faltando = new Set();
+// Variações: arte nova que ainda não existe pode usar uma arte existente com filtro de cor
+// (src/arte.json: nome -> {base, filtro}). O filtro vai na classe .af-<nome>, que só é
+// emitida enquanto a arte própria não existir.
+const ARTE = JSON.parse(fs.readFileSync(path.join(SRC, 'arte.json'), 'utf8'));
+const existe = n => fs.existsSync(path.join(IMG, n + '.webp'));
+const usadas = new Set(), faltando = new Set(), variacoes = new Map();
+const refImg = nome => {
+  usadas.add(nome);
+  return modo === 'inline' ? 'data:image/webp;base64,' + fs.readFileSync(path.join(IMG, nome + '.webp')).toString('base64') : 'assets/img/' + nome + '.webp';
+};
 html = html.replace(/@@IMG:([A-Za-z0-9_-]+)@@/g, (_, nome) => {
   if (modo === 'sem') return 'data:image/webp;base64,__IMG__';
-  usadas.add(nome);
-  const arq = path.join(IMG, nome + '.webp');
-  if (!fs.existsSync(arq)) { faltando.add(nome); return svgUri(placeholder(nome)); }
-  return modo === 'inline' ? 'data:image/webp;base64,' + fs.readFileSync(arq).toString('base64') : 'assets/img/' + nome + '.webp';
+  if (existe(nome)) return refImg(nome);
+  faltando.add(nome);
+  const v = ARTE[nome];
+  if (v && existe(v.base)) { variacoes.set(nome, v.filtro || 'none'); return refImg(v.base); }
+  return svgUri(placeholder(nome));
 });
+const afCss = [...variacoes].map(([n, f]) => `.af-${n}{filter:${f}!important}`).join('\n');
+html = html.replace('/*@@AF-CSS@@*/', () => afCss);
 // Fontes: arquivo em assets/fonts/ ou embutida em base64.
 const FONTES = path.join(RAIZ, 'assets', 'fonts'), fontesUsadas = new Set();
 html = html.replace(/@@FONT:([A-Za-z0-9_-]+)@@/g, (_, nome) => {
@@ -93,7 +105,7 @@ fs.mkdirSync(saida, { recursive: true });
 fs.writeFileSync(path.join(saida, 'index.html'), html);
 if (modo === 'arquivos') {
   fs.mkdirSync(path.join(saida, 'assets', 'img'), { recursive: true });
-  for (const n of usadas) if (!faltando.has(n)) fs.copyFileSync(path.join(IMG, n + '.webp'), path.join(saida, 'assets', 'img', n + '.webp'));
+  for (const n of usadas) fs.copyFileSync(path.join(IMG, n + '.webp'), path.join(saida, 'assets', 'img', n + '.webp'));
   if (fontesUsadas.size) {
     fs.mkdirSync(path.join(saida, 'assets', 'fonts'), { recursive: true });
     for (const n of fontesUsadas) fs.copyFileSync(path.join(FONTES, n + '.woff2'), path.join(saida, 'assets', 'fonts', n + '.woff2'));
@@ -102,5 +114,7 @@ if (modo === 'arquivos') {
 }
 const tam = p => { const st = fs.statSync(p); return st.isDirectory() ? fs.readdirSync(p).reduce((a, f) => a + tam(path.join(p, f)), 0) : st.size; };
 console.log(`Build ${variante} (${modo}) em ${path.relative(RAIZ, saida)}/ · ${(tam(saida) / 1048576).toFixed(2)} MB` +
-  (modo !== 'sem' ? ` · imagens: ${usadas.size - faltando.size} reais, ${faltando.size} placeholders` : ''));
-if (faltando.size && process.argv.includes('--listar')) console.log('Placeholders: ' + [...faltando].sort().join(', '));
+  (modo !== 'sem' ? ` · imagens: ${usadas.size} arquivos, ${variacoes.size} variações por filtro, ${faltando.size - variacoes.size} placeholders` : ''));
+if (faltando.size && process.argv.includes('--listar')) console.log('Sem arte própria: ' + [...faltando].sort().join(', '));
+// Lista para o manifesto de arte
+fs.writeFileSync(path.join(saida, 'arte-pendente.json'), JSON.stringify([...faltando].sort(), null, 1));

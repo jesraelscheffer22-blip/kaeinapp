@@ -93,7 +93,7 @@ T('Vou te dar uma chance. Aqui está o seu personagem.','D'),
 {t:'sheet'},{t:'level'},{t:'day1'}];
 steps.find(s=>s.id==='trig').if=steps.find(s=>s.id==='ctrl').if=steps.find(s=>s.id==='want').if=()=>hasHabit();
 let S;const $=id=>document.getElementById(id);
-function reset(){S={i:0,a:{},sc:{},name:'',age:null,h:null,w:null,pull:[],react:null,err:'',lvl:null,done:{},cups:0,noWater:false,warned:false,tab:'ini',top:false,ms:{},day:1,hist:[],progAcc:{},xpPrev:0,g:null,cel:null,fast:false,sugDay:0,dg:null,dgAll:{},dgHist:[],dgDone:0,dgMsg:'',wd:[],wd0:0,ov:{},wdMsg:'',eq:{aura:0,pose:0,bg:0,tone:0,frame:0,title:''},mhp:{},defeated:{}};render()}
+function reset(){S={i:0,a:{},sc:{},name:'',age:null,h:null,w:null,pull:[],react:null,err:'',lvl:null,done:{},cups:0,noWater:false,warned:false,tab:'ini',top:false,ms:{},day:1,hist:[],progAcc:{},xpPrev:0,g:null,cel:null,fast:false,sugDay:0,dg:null,dgAll:{},dgHist:[],dgDone:0,dgMsg:'',wd:[],wd0:0,ov:{},wdMsg:'',eq:{aura:0,pose:0,bg:0,tone:0,frame:0,title:''},mhp:{},defeated:{}};runMigs();render()}
 function hasHabit(){return S.pull.some(x=>!NONE.includes(x))}
 function adv(){do{S.i++}while(steps[S.i]&&steps[S.i].if&&!steps[S.i].if());render()}
 function tap(){if(S.react){S.react=null;adv();return}const s=steps[S.i];if(s.t==='talk')adv()}

@@ -36,7 +36,7 @@ function suggestion(){const TH=S.hist.filter(h=>h.train);if(TH.length<3||S.sugDa
  if(nd>=5&&S.lvl>0)return 'down';if(full&&S.lvl<2&&!(S.a.pain>=2))return 'up';return null}
 function chooseLvl(i){S.px={};S.lvl=i;S.tab='ini';S.ms={};S.cups=0;const weak=i===2&&(S.a.flex<=1||S.a.breath===0||S.a.mov===0);
  if(weak&&!S.warned){S.warned=true;S.react={x:'Esse é o caminho mais duro, e a sua ficha ainda está no começo. Eu respeito a escolha, mas se pesar demais, você pode descer de nível a qualquer momento.',p:'A'};render()}else adv()}
-function setTab(x){S.tab=x;if(x==='dun'&&S.dg)S.dgList=1;S.top=true;render()}
+function setTab(x){S.tab=x;S.tela=null;if(x==='dun'&&S.dg)S.dgList=1;S.top=true;render()}
 function setLvl(i){S.px={};S.lvBase=null;S.lvl=i;S.ms={};S.cups=0;S.top=true;render()}
 function addDia(txt,src,title){S.dia=S.dia||[];S.dia.unshift({id:Date.now()+Math.random(),t:Date.now(),src:src,title:title||'',txt:txt})}
 function diaOpen(){S.dv=1;S.dedit=null;S.ddel=null;S.top=true;render()}

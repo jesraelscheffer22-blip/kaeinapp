@@ -1,0 +1,25 @@
+.pH20{background-image:url(@@IMG:pH20@@)}.sheet.app.per .av.pH20{background-size:auto 300px;height:310px}
+.pH30{background-image:url(@@IMG:pH30@@)}.sheet.app.per .av.pH30{background-size:auto 300px;height:310px}
+.pH40{background-image:url(@@IMG:pH40@@)}.sheet.app.per .av.pH40{background-size:auto 300px;height:310px}
+.pH50{background-image:url(@@IMG:pH50@@)}.sheet.app.per .av.pH50{background-size:auto 300px;height:310px}
+.bg.fd-bambu{background-image:url(@@IMG:bg-bambu@@)}
+.bg.fd-bambulua{background-image:url(@@IMG:bg-bambulua@@)}
+.bg.fd-montanha{background-image:url(@@IMG:bg-montanha@@)}
+.bg.fd-tempestade{background-image:url(@@IMG:bg-tempestade@@)}
+.bg.fd-palacio{background-image:url(@@IMG:bg-palacio@@)}
+.bg.fd-jardim{background-image:url(@@IMG:bg-jardim@@)}
+.bg.fd-lua{background-image:url(@@IMG:bg-lua@@)}
+.bg.fd{background-position:50% 20%}.bg.live.fd{animation:none}
+.bg.live.fd:after{background:linear-gradient(180deg,rgba(14,6,40,.2),rgba(14,6,40,.35) 45%,rgba(8,4,26,.78))}
+#fx.fd .glow,#fx.fd #em{display:none}#fx.fd #lv{display:block}
+/* auras coloridas: --au = R,G,B */
+.avw.aur.auc{filter:drop-shadow(0 0 2px rgba(var(--au),.95)) drop-shadow(0 0 9px rgba(var(--au),.8)) drop-shadow(0 0 22px rgba(var(--au),.55))}
+.psw{flex:none;width:22px;height:22px;border-radius:50%;border:1px solid rgba(255,255,255,.35)}
+/* Ajustes de experiência */
+body.rfx *,body.rfx *:before,body.rfx *:after{animation-duration:.001s!important;animation-delay:0s!important;animation-iteration-count:1!important;transition-duration:.001s!important}
+body.fs2 .sheet{zoom:1.12}body.fs3 .sheet{zoom:1.25}
+body.hc{--mut:#d6dbf5;--line:#8090d8}body.hc .note{color:#dfe3f7!important}body.hc .card{background:#141832;border:1px solid #5d6bb5}body.hc .sheet.app .b{background:#141832}
+body.hc .lk{text-decoration:underline}
+.prova-c{background-image:url(@@IMG:prova-c@@)}.prova-b{background-image:url(@@IMG:prova-b@@)}.prova-a{background-image:url(@@IMG:prova-a@@)}.prova-s{background-image:url(@@IMG:prova-s@@)}
+.pvxtm{text-align:center;margin:6px 0}.pvxtm b{font:700 54px Georgia,serif;color:#f1d48a;text-shadow:0 0 18px rgba(217,179,106,.5)}
+.ajl{display:flex;flex-direction:column;gap:8px}.ajl .mb{text-align:left}
