@@ -94,6 +94,7 @@ html = html.replace(/@@FONT:([A-Za-z0-9_-]+)@@/g, (_, nome) => {
 });
 // @@TEM:nome@@ -> true/false: se a arte própria existe.
 html = html.replace(/@@TEM:([A-Za-z0-9_-]+)@@/g, (_, n) => existe(n) ? 'true' : 'false');
+html = html.replace(/@@BOT@@/g, (process.argv.includes('--bot') || variante === 'teste') ? 'true' : 'false');
 html = html.replace(/@@TESTE@@/g, variante === 'teste' ? 'true' : 'false');
 if (/@@[A-Z]+[:@]/.test(html)) throw new Error('Sobrou marcador @@ sem substituir');
 

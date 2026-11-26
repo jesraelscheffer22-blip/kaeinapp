@@ -45,6 +45,9 @@
   "js/60-mundo.js",
   "js/61-colecao.js",
   "js/62-variedade.js",
+  "js/63-errantes.js",
+  "js/64-itens.js",
+  "js/65-bot.js",
   "js/17-estado-e-boot.js"
  ]
 }

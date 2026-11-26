@@ -1,6 +1,11 @@
 name: Gerar APK
 on:
   workflow_dispatch:
+    inputs:
+      bot:
+        description: 'Incluir o bot de teste 🤖 (desligue antes de publicar)'
+        type: boolean
+        default: true
   push:
     branches: [main]
 permissions:
@@ -21,7 +26,7 @@ jobs:
         run: |
           sudo apt-get install -y webp
           node tools/otimizar-imagens.js
-          node tools/build.js
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ] && [ "${{ inputs.bot }}" = "true" ]; then node tools/build.js --bot; else node tools/build.js; fi
           mkdir -p www
           cp -r dist/* www/
       - name: Preparar o Capacitor

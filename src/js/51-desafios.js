@@ -29,13 +29,13 @@ const Bestiario={
  lista(){const o=[];Object.keys(SIMB).forEach(h=>{const s=SIMB[h];
   if(h!=='O Espelho')[0,1,2,3].forEach(i=>o.push({h,ph:1,i,n:(MOBS[h]||[])[i]?MOBS[h][i][0]:'?',s:s[i]}));
   o.push({h,ph:1,i:'b',n:DGH[h].m,s:s[4]});[0,1,2,3].forEach(i=>o.push({h,ph:2,i,n:MOBS2[h][i][0],s:s[5+i]}));o.push({h,ph:2,i:'b',n:DGH2[h].m,s:s[9]});o.push({h,ph:3,i:'b',n:DGH3[h].m,s:s[10]})});
-  INVK.forEach(k=>o.push({h:'inv',ph:0,i:k,n:INV[k].n,s:INV[k].s}));return o},
- dia(e){if(e.h==='inv'){const w=Object.keys(S.inv||{}).find(x=>x.endsWith(e.i)&&S.inv[x].won);return w?S.inv[w].day:null}return (S.bst||{})[e.h+'|'+e.ph+'|'+e.i]||null},
+  INVK.forEach(k=>o.push({h:'inv',ph:0,i:k,n:INV[k].n,s:INV[k].s}));ERR.forEach(e=>o.push({h:'err',ph:0,i:e.id,n:e.n,s:e.s}));return o},
+ dia(e){if(e.h==='err')return (S.errd||{})[e.i]||null;if(e.h==='inv'){const w=Object.keys(S.inv||{}).find(x=>x.endsWith(e.i)&&S.inv[x].won);return w?S.inv[w].day:null}return (S.bst||{})[e.h+'|'+e.ph+'|'+e.i]||null},
  qtd(){return Bestiario.lista().filter(e=>Bestiario.dia(e)).length},
- img(e){let src='',nm='';if(e.h==='inv'){src=INVIMG[e.i];nm='inv-'+e.i}else if(e.i==='b'){src=e.ph===3?MIMG3[e.h]:e.ph===2?MIMG2[e.h]:MIMG[e.h];nm=(e.ph===3?'boss3-':e.ph===2?'boss2-':'boss-')+SLUGH[e.h]}else{src=e.ph===2?MOBIMG2[e.h+'|'+e.i]:MOBIMG[e.h+'|'+e.i];nm=(e.ph===2?'mob2-':'mob-')+SLUGH[e.h]+'-'+e.i}
+ img(e){if(e.h==='err'){const E=ERR.find(x=>x.id===e.i);return '<div class="bsi">'+errSvg(E,74)+'</div>'}let src='',nm='';if(e.h==='inv'){src=INVIMG[e.i];nm='inv-'+e.i}else if(e.i==='b'){src=e.ph===3?MIMG3[e.h]:e.ph===2?MIMG2[e.h]:MIMG[e.h];nm=(e.ph===3?'boss3-':e.ph===2?'boss2-':'boss-')+SLUGH[e.h]}else{src=e.ph===2?MOBIMG2[e.h+'|'+e.i]:MOBIMG[e.h+'|'+e.i];nm=(e.ph===2?'mob2-':'mob-')+SLUGH[e.h]+'-'+e.i}
   return src?'<img class="bsi af-'+nm+'" alt="" src="'+src+'">':'<div class="bsi sil" style="background-image:'+SIL+'"></div>'},
  v(){const L=Bestiario.lista(),sel=S.bstSel,n=Bestiario.qtd();
-  const det=sel!=null&&L[sel]&&Bestiario.dia(L[sel])?(()=>{const e=L[sel],d=Bestiario.dia(e),dc=e.h==='inv'?INV[e.i].dica:DICA[e.h][(typeof e.i==='number'?e.i:3)%3];return '<div class="card bsd"><div class="bsdi">'+Bestiario.img(e)+'</div><span class="g">'+(e.h==='inv'?'Invasão':esc(e.h)+' · '+(e.ph===3?'Forma Verdadeira':'Fase '+e.ph))+'</span><b>'+esc(e.n)+'</b><p class="note">Simboliza: <b>'+esc(e.s)+'</b>.</p><p class="note">Dica real: '+esc(dc)+'</p><p class="note">Vencido no dia '+d+' do caminho.</p></div>'})():'';
+  const det=sel!=null&&L[sel]&&Bestiario.dia(L[sel])?(()=>{const e=L[sel],d=Bestiario.dia(e),dc=e.h==='err'?ERR.find(x=>x.id===e.i).dica:e.h==='inv'?INV[e.i].dica:DICA[e.h][(typeof e.i==='number'?e.i:3)%3];return '<div class="card bsd"><div class="bsdi">'+Bestiario.img(e)+'</div><span class="g">'+(e.h==='err'?'Chefe Errante':e.h==='inv'?'Invasão':esc(e.h)+' · '+(e.ph===3?'Forma Verdadeira':'Fase '+e.ph))+'</span><b>'+esc(e.n)+'</b><p class="note">Simboliza: <b>'+esc(e.s)+'</b>.</p><p class="note">Dica real: '+esc(dc)+'</p><p class="note">Vencido no dia '+d+' do caminho.</p></div>'})():'';
   return tutH('bst','Bestiário','Aqui ficam os monstros que você já venceu: o que cada um simboliza e uma dica prática para lidar com o gatilho dele.')+'<div class="card"><span class="g">Bestiário</span><b>'+n+' de '+L.length+' registrados</b></div>'+det+'<div class="bsg">'+L.map((e,i)=>{const ok=!!Bestiario.dia(e);return '<button class="bsc'+(ok?'':' lk2')+(sel===i?' on':'')+'" '+(ok?'onclick="S.bstSel='+i+';S.top=true;render()"':'disabled')+' style="--mc:'+(MCOL[e.h]||'200,160,255')+'">'+(ok?Bestiario.img(e):'<div class="bsi q">?</div>')+'<small>'+(ok?esc(e.n):'???')+'</small></button>'}).join('')+'</div>'}
 };
 
@@ -90,7 +90,7 @@ TELAS.espF={t:'O Espelho do Futuro',v:()=>Espelhos.v('f')};
 TITX.push(()=>Object.keys(S.espR||{}).map(k=>ESPQ[k].tit));
 const Desafios={
  espelho2(ph){S.dsub='d';enterDg('O Espelho',ph,0)},
- chefesExtra(){const L=myLvl();let h='';const D=S.dgAll&&S.dgAll['O Espelho'];
+ chefesExtra(){const L=myLvl();let h=Errante.card(true)+Errante.colecao();const D=S.dgAll&&S.dgAll['O Espelho'];
   const cd=(tag,nome,txt,btn)=>'<div class="card esx"><span class="g">'+tag+'</span><b>'+esc(nome)+'</b><p class="note">'+txt+'</p>'+(btn||'')+'</div>';
   if(L<20)h+=cd('Chefe · nível 20','A Sombra no Espelho','O Espelho volta no nível 20, mais profundo. Desta vez, quem aparece é a sua própria sombra.');
   else if(D&&!D.won)h+=cd('Em andamento',dgNome('O Espelho'),'Andar '+(D.fl.filter(Boolean).length+1)+' de '+D.fl.length+'.','<button class="mb on" onclick="dsub(\'d\');dgOpen(\'O Espelho\')">Continuar</button>');
