@@ -33,3 +33,7 @@
 .dcimg,.bsd .bsi,.errsvg{animation:vflut 4.2s ease-in-out infinite}
 @keyframes vflut{50%{transform:translateY(-8px)}}
 body.rfx #vivo,body.rfx .vdust,body.rfx .vgate{display:none}
+/* correções: nada na lista da aba encolhe até sumir; personagem visível na Personalizar */
+.sheet.app>*{flex-shrink:0}
+.dcw{flex:none}
+.pvw .avw{display:block;width:100%}
