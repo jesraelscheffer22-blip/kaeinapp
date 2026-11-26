@@ -48,7 +48,7 @@ function endDs(){S.dgSplash=S.day;S.top=true;render()}
 function endSplash(){clearTimeout(_spT);S.splashDay=S.day;S.top=true;S.entering=1;render();setTimeout(()=>{S.entering=0},1000)}
 function closeCel(){const h=S.cel&&S.cel.dg;S.cel=null;S.top=true;S.hit=!!h;render();setTimeout(()=>{S.hit=0},900)}
 function partText(p){return 'Parcial: '+p.exDone+' de '+p.exTotal+' exercícios concluídos antes. '+p.cur+'.'}
-function animCel(){const c=S.cel;if(!c||c.st!=='done')return;if(!c._snd){c._snd=1;try{beep();if(navigator.vibrate)navigator.vibrate([30,40,30,40,140])}catch(e){}}const mb=$('mbar');if(c.dg&&!c.dg.mob&&mb){const d=c.dg,w=v=>Math.max(d.hp1,v)/d.max*100+'%';setTimeout(()=>{mb.style.width=w(d.hp0-d.dm)},500);setTimeout(()=>{mb.style.width=w(d.hp0-2*d.dm)},1100);setTimeout(()=>{mb.style.width=w(0)},1700)}const el=$('xpn'),bar=$('xbar');let t0=null;
+function animCel(){const c=S.cel;if(!c||c.st!=='done')return;if(!c._snd){c._snd=1;try{Som.pincel();if(navigator.vibrate)navigator.vibrate([30,40,30,40,140])}catch(e){}}const mb=$('mbar');if(c.dg&&!c.dg.mob&&mb){const d=c.dg,w=v=>Math.max(d.hp1,v)/d.max*100+'%';setTimeout(()=>{mb.style.width=w(d.hp0-d.dm)},500);setTimeout(()=>{mb.style.width=w(d.hp0-2*d.dm)},1100);setTimeout(()=>{mb.style.width=w(0)},1700)}const el=$('xpn'),bar=$('xbar');let t0=null;
  requestAnimationFrame(function f(ts){if(!t0)t0=ts;const p=Math.min(1,(ts-t0)/1000);if(el)el.textContent='+'+Math.round(c.xp*p)+' XP';if(p<1&&S.cel===c)requestAnimationFrame(f)});
  setTimeout(()=>{if(bar)bar.style.width=(c.lvl?100:xpInOf(c.af)/costOf(lvlOf(c.af))*100)+'%'},60)}
 function guideView(){const g=S.g,m=curM(),st=m.steps[g.si],n=m.steps.length;
@@ -77,7 +77,7 @@ function lvWatch(){provaInit();try{remSync()}catch(e){}if(S.rkm==null)rkSnap();i
  S.eq=S.eq||{};for(let L=S.lvShown+1;L<=myLvl();L++){grantLv(L)}
  S.lu={b4:cum(S.lvShown),lvl:myLvl()};if(rkI(myLvl())>rkI(lvlOf(S.lu.b4)))S.rcv={lvl:myLvl()}}
 function lvView(c){const A=[];const rkUp=rkI(c.lvl)>rkI(lvlOf(c.b4));for(let L=lvlOf(c.b4)+1;L<=c.lvl;L++)if(REW[L]&&!(rkUp&&REW[L].rk))A.push([L,REW[L]]);const _u=0,mk=rkUp||A.some(x=>x[1].m)||c.lvl%5===0;
- if(!c.fx){c.fx=1;setTimeout(()=>{try{beep();if(navigator.vibrate)navigator.vibrate(mk?[80,50,80,50,200]:[60,40,120])}catch(e){}},50)}
+ if(!c.fx){c.fx=1;setTimeout(()=>{try{Som.selo();if(navigator.vibrate)navigator.vibrate(mk?[80,50,80,50,200]:[60,40,120])}catch(e){}},50)}
  const sp=Array.from({length:mk?28:18},(_,i)=>{const a=i/(mk?28:18)*6.283,r=110+Math.random()*100;return '<i class="spk" style="--bx:'+Math.round(Math.cos(a)*r)+'px;--by:'+Math.round(Math.sin(a)*r)+'px"></i>'}).join('');
  const ico=n=>/roupa|visual/i.test(n)?'👘':/aura/i.test(n)?'✨':/pose/i.test(n)?'🧍':/título|titulo/i.test(n)?'🏷️':/moldura/i.test(n)?'🖼️':/fundo|cena/i.test(n)?'🌄':/dungeon/i.test(n)?'🗝️':/cap[ií]tulo/i.test(n)?'📖':'🎁';
  const rkC=rkUp?'<div class="ulk"><span class="ui">⭐</span><div><b>Rank '+rankOf(c.lvl)+'</b><br><span class="note">Suas missões passam a render ×'+String(RM[rkI(c.lvl)]).replace('.',',')+' de XP, a partir de amanhã.</span></div></div>':'';

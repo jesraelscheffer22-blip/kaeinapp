@@ -68,6 +68,7 @@ const Ajustes={
   +'<p class="note">Paisagem sonora do rank (música ambiente suave)</p><div class="lvs">'+b('amb',0,'Desligada')+b('amb',1,'Ligada')+'</div>'
   +'<p class="note">Vibração</p><div class="lvs">'+b('vib',1,'Ligada')+b('vib',0,'Desligada')+'</div>'
   +'<p class="note">Tamanho do texto</p><div class="lvs">'+b('fs',1,'Normal')+b('fs',2,'Grande')+b('fs',3,'Maior')+'</div>'
+  +'<p class="note">Estações e clima no fundo (folhas, flores, névoa)</p><div class="lvs">'+b('est',null,'Ligado')+b('est',0,'Desligado')+'</div>'
   +'<p class="note">Alto contraste</p><div class="lvs">'+b('hc',0,'Normal')+b('hc',1,'Alto contraste')+'</div></div>'
   +'<div class="card"><div class="mt"><span class="g">Seus dados</span><b>Progresso e privacidade</b></div><div class="ajl">'
   +'<button class="mb" onclick="telaAbrir(\'stats\')">📊 Estatísticas e constância</button>'

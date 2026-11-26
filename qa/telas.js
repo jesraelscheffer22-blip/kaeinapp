@@ -10,13 +10,14 @@ const TAM = [[360, 640], [390, 844], [412, 915]];
   for (const [w, h] of TAM) {
     const p = await b.newPage({ viewport: { width: w, height: h } }); const erros = []; p.on('pageerror', e => erros.push(e.message));
     await p.goto('file://' + alvo); await p.evaluate(() => localStorage.clear()); await p.reload(); await p.waitForTimeout(300);
-    const ids = await p.evaluate(n => {
+    const ids = await p.evaluate(n => { try {
       quick(); _ab = 1; S.splashDay = S.day; S.slp = { day: S.day, c: 3, ask: 0 }; S.bgRev = 99; S.scnP = 0; S.dgSplash = S.day;
       ['provaD', 'provaC', 'provaB', 'provaA', 'provaS'].forEach(k => S[k] = 1);
       for (let d = 0; d < 20; d++) { testDoneAll(); nextDay(); }
       S.xpPrev = cum(n) + 5; for (let L = 2; L <= n; L++) grantLv(L); S.lvShown = myLvl(); S.cartaQ = []; S.cartas = {}; Object.keys(CARTAS).forEach(k => S.cartas[k] = 1); S.cel = null; S.lu = null; S.rcv = null; S.tp = { mis: 1, kai: 1 }; S.tut = { x: 1 };
-      Mand.criar('Dormir antes das 23h'); render(); return Object.keys(TELAS);
+      Mand.criar('Dormir antes das 23h'); render(); return Object.keys(TELAS); } catch (e) { return 'ERRO ' + e.stack }
     }, nivel);
+    if (typeof ids === 'string') { console.log(ids); process.exit(1) }
     const shots = [['ini', null], ['mis', null], ['per', null], ['kai', null], ['dun', null], ['prf', null]].concat(ids.map(i => ['ini', i]));
     for (const [tab, tela] of shots) {
       await p.evaluate(([t, x]) => { setTab(t); S.dgSplash = S.day; S.bi = null; if (x) { S.tela = x; S.tut = S.tut || {}; } S.top = true; render() }, [tab, tela]);

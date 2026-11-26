@@ -11,6 +11,7 @@
   "styles/09-progressao.css",
   "styles/10-cinematica.css",
   "styles/11-jornada.css",
+  "styles/12-mundo.css",
   "styles/08-imagens.css"
  ],
  "js": [
@@ -41,6 +42,8 @@
   "js/42-dados.js",
   "js/50-dungeons2.js",
   "js/51-desafios.js",
+  "js/60-mundo.js",
+  "js/61-colecao.js",
   "js/17-estado-e-boot.js"
  ]
 }

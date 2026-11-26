@@ -28,7 +28,7 @@ const ALVOS = [1, 5, 9, 10, 16];
     const depois = await p.evaluate(() => ({ titulo: S.eq.title, aura: S.eq.aura, xp: totalXp(), lvl: myLvl(), dia: S.day, ver: S.ver, rk: 'rk' in S, bak: !!localStorage.getItem('kaien.v1.bak'),
       campos: Object.keys(S).sort(), telaNivel: !!S.lu, eq: S.eq, provaPronta: pvReady() }));
     const perdidos = antes.campos.filter(c => !depois.campos.includes(c) && c !== 'rk');
-    const ok = depois.xp === antes.xp && !perdidos.length && depois.bak && depois.ver === 4 && !erros.length && depois.dia === antes.dia;
+    const ok = depois.xp === antes.xp && !perdidos.length && depois.bak && depois.ver === 5 && !erros.length && depois.dia === antes.dia;
     if (!ok) falhou = true;
     console.log(`Save nível ${antes.lvl} (dia ${antes.dia}, ${antes.xp} XP) → nível ${depois.lvl}${depois.provaPronta ? ' (Prova do rank D liberada)' : ''} · XP ${depois.xp === antes.xp ? 'idêntico' : 'DIFERENTE ' + depois.xp} · campos perdidos: ${perdidos.length ? perdidos.join(',') : 'nenhum'} · backup ${depois.bak ? 'ok' : 'FALTA'} · tela de subir de nível: ${depois.telaNivel ? "sim" : "não"} · título: ${depois.titulo || "-"} · erros: ${erros.length} → ${ok ? 'OK' : 'FALHOU'}`);
     await ctx.close();

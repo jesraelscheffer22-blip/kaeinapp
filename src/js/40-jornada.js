@@ -18,7 +18,7 @@ INI_CARDS.push(()=>Jornada.card());
 const REG=[['E','Aldeia',1,9,'190,190,205','A aldeia ao pé da montanha. Onde todo mundo começa.'],['D','Templo das Cachoeiras',10,19,'150,180,225','O templo onde a água ensina a insistir.'],['C','Floresta de Bambu',20,29,'95,205,155','A floresta onde se aprende a vergar sem quebrar.'],['B','Montanha da Tempestade',30,39,'215,225,245','A montanha que testa quem sobe com pressa.'],['A','Palácio do Dragão',40,49,'255,200,90','O palácio onde o dragão reconhece quem não desistiu.'],['S','Pico da Lua',50,50,'210,180,255','O pico de onde se vê o caminho inteiro.']];
 const MAPAF=['Um passo de cada vez.','Aqui você aprendeu a voltar.','Este trecho teve chuva. Você passou.','Lembra deste dia? Eu lembro.','A pedra desta parada tem a sua marca.','Daqui já dá para ver o próximo portão.','Você não estava sozinho neste trecho.','O caminho ficou mais leve depois daqui.','Uma parada para respirar e olhar para trás.','O portão estava perto. Você sabia.'];
 const Mapa={
- v(){const L=myLvl(),sel=S.telaX||L;const W=340,H=50*62+80;let path='',pts=[];
+ v(){const L=myLvl(),sel=Math.min(50,S.telaX||L);const W=340,H=50*62+80;let path='',pts=[];
   for(let n=1;n<=50;n++){const y=H-40-(n-1)*62,x=W/2+Math.sin(n*0.9)*110;pts.push([x,y,n])}
   path='M'+pts.map(p=>p[0].toFixed(0)+' '+p[1].toFixed(0)).join(' L');
   const reg=n=>REG.find(r=>n>=r[2]&&n<=r[3]);
