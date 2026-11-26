@@ -1,0 +1,33 @@
+{
+ "css": [
+  "styles/00-fontes.css",
+  "styles/01-base.css",
+  "styles/02-app.css",
+  "styles/03-abertura-murim.css",
+  "styles/04-capitulos.css",
+  "styles/05-prova-d.css",
+  "styles/06-rank-d.css",
+  "styles/07-dias-lembretes.css",
+  "styles/08-imagens.css"
+ ],
+ "js": [
+  "js/00-config.js",
+  "js/01-abertura-perguntas.js",
+  "js/02-missoes-treino.js",
+  "js/03-dia-e-xp.js",
+  "js/04-modo-guiado.js",
+  "js/05-dungeons-fluxo.js",
+  "js/06-progressao.js",
+  "js/07-kaien.js",
+  "js/08-personagem.js",
+  "js/09-dungeons-dados.js",
+  "js/10-extras.js",
+  "js/11-telas.js",
+  "js/12-abertura-nova.js",
+  "js/ranks/13-rank-d.js",
+  "js/14-lembretes.js",
+  "js/15-render.js",
+  "js/16-efeitos.js",
+  "js/17-estado-e-boot.js"
+ ]
+}

@@ -1,0 +1,100 @@
+/* ---- guided mode ---- */
+let _ac=null,_wl=null;
+function beep(){try{if(!_ac)_ac=new (window.AudioContext||window.webkitAudioContext)();const o=_ac.createOscillator(),g=_ac.createGain();o.frequency.value=880;g.gain.value=.08;o.connect(g);g.connect(_ac.destination);o.start();o.stop(_ac.currentTime+.18)}catch(e){}try{navigator.vibrate&&navigator.vibrate(200)}catch(e){}}
+function holdWake(){try{if(navigator.wakeLock)navigator.wakeLock.request('screen').then(w=>{_wl=w}).catch(()=>{})}catch(e){}}
+function relWake(){try{if(_wl){_wl.release();_wl=null}}catch(e){}}
+const elapsed=g=>g.acc+(g.paused?0:(Date.now()-g.t0)*F());
+const curM=()=>S.g.snap||(S.g.dg!=null?dgFloors()[S.g.dg]:plan().find(x=>x.key===S.g.key));
+const curStep=()=>curM().steps[S.g.si];
+function startGuide(key,dg){try{if(!_ac)_ac=new (window.AudioContext||window.webkitAudioContext)()}catch(e){}holdWake();
+ S.g={key,dg:dg==null?null:dg,si:0,set:1,ph:'work',t0:Date.now(),acc:0,paused:false,times:[],fin:false};S.g.snap=JSON.parse(JSON.stringify(curM()));S.top=true;render()}
+function exitGuide(){S.g=null;relWake();S.top=true;render()}
+function gPause(){const g=S.g;if(g.ph!=='work')return;if(g.paused){g.t0=Date.now();g.paused=false}else{g.acc+=(Date.now()-g.t0)*F();g.paused=true}render()}
+function gSetDone(){const g=S.g,st=curStep();if(g.set<st.sets){if(st.rest>0){g.ph='rest';g.rs=Date.now();g.rtot=st.rest}else g.set++}else finishStep();render()}
+function gRestSkip(){const g=S.g;g.ph='work';g.set++;render()}
+function wrIn(el){const g=S.g,st=curStep(),m=curM();g.note=el.value;S.wdr=S.wdr||{};S.wdr[m.key+'|'+g.si]=el.value;const n=el.value.trim().length,ok=n>=st.min,b=$('wrb'),c=$('wrc');if(b)b.disabled=!ok;if(c)c.textContent=ok?n+' caracteres':'Escreva pelo menos '+st.min+' caracteres ('+n+')'}
+function finishStep(){const g=S.g,st=curStep();if(st.k==='write'&&(g.note||'').trim().length<st.min)return;if(st.fb&&g.dg==null&&g.ph!=='fb'){g.ph='fb';render();return}finishStep2()}
+function gFb(a){const g=S.g,st=curStep(),t=applyFb(st.fb,a);g.fbs=(g.fbs||[]).concat([[st.fb==='men'?curM().title:st.name.split(':')[0],t]]);finishStep2(t)}
+function finishStep2(toast){const g=S.g,m=curM(),st=curStep();if(g.note&&g.note.trim()){addDia(g.note.trim(),g.dg!=null&&S.dg?'dg':'ms',g.dg!=null&&S.dg?S.dg.habit+' · andar '+(g.dg<4?g.dg+1:'chefe'):(st.k==='write'?m.title+' · '+st.name:m.title))}if(S.wdr)delete S.wdr[m.key+'|'+g.si];g.note='';g.times.push({name:st.name,sec:Math.round(elapsed(g)/1000)});
+ g.toast=toast||null;if(g.si+1<m.steps.length){g.si++;g.set=1;g.ph='work';g.acc=0;g.t0=Date.now();g.paused=false;g.fin=false;render()}else completeMission('done')}
+function gPart(){const g=S.g,st=curStep(),e=elapsed(g);let def=0,max=0,unit='';
+ if(st.k==='sets'){max=st.sets;def=g.ph==='rest'?g.set:g.set-1;unit='séries completas'}else if(st.k==='timer'){max=Math.round(st.sec/60);def=Math.min(max,Math.floor(e/60000));unit='minutos feitos'}
+ g.ph0=g.ph;g.ph='ask';g.ask={v:def,max,unit};render()}
+function gAsk(d){const a=S.g.ask;a.v=Math.max(0,Math.min(a.max,a.v+d));render()}
+function gAskBack(){const g=S.g;g.ph=g.ph0;g.ask=null;if(g.ph==='work'&&!g.paused){}render()}
+function gAskOk(){const g=S.g,m=curM(),st=curStep(),a=g.ask;let cur=st.name.split(':')[0];if(a.max)cur+=': '+a.v+' de '+a.max+' '+a.unit;
+ completeMission('parcial',{exDone:g.si,exTotal:m.steps.length,cur})}
+function gPain(){completeMission('dor',null)}
+function completeMission(st,part){const g=S.g,m=curM(),b4=totalXp(),pb=progOf(m.stat);
+ if(g.dg!=null){if(st==='done'){const D=S.dg,h=D.habit,dm=dmgOf(h),hp0=D.hp;D.fl[g.dg]={dmg:dm,st:'done',day:S.day,xp:Math.round(m.xp*LV[S.lvl].m*dgMul(D,g.dg)),times:g.times.slice()};const won=g.dg===4,hp1=won?0:hp0;D.hp=hp1;const bon=Math.round(100*(D.ph===2?1.5:1)*(D.rp?.5:1));_dgi=won?{h,dm,hp0,hp1,max:D.max,won,bon,rp:D.rp}:{h,idx:g.dg,mob:true,dm:0,hp0,hp1,max:D.max,won:false};if(won){D.won=true;S.defeated=S.defeated||{};S.defeated2=S.defeated2||{};if(!D.rp){if(D.ph===2)S.defeated2[h]=S.day;else S.defeated[h]=S.day}S.xpPrev+=bon;if(S.dgNx)delete S.dgNx[dgK(h,D.ph,D.rp)]}S.floorDay=S.day;S.dgDone=(S.dgDone||0)+1;S.progAcc[m.stat]=(S.progAcc[m.stat]||0)+1}else S.dg.last={idx:g.dg,st,day:S.day}}else S.ms[m.key]={st,times:g.times.slice(),part:part||null};if(st==='done')S._eh=espHit();S.g=null;relWake();
+ const af=totalXp(),pa=progOf(m.stat),lu=lvlOf(af)>lvlOf(b4);if(lu){S.eq=S.eq||{};for(let L=lvlOf(b4)+1;L<=lvlOf(af);L++){grantLv(L)}}
+ S.cel={st,key:m.key,title:m.title,stat:m.stat,b4,af,xp:af-b4,lvl:lu?lvlOf(af):0,pb,pa,plus:Math.floor(pa/5)>Math.floor(pb/5),times:g.times.slice(),fbs:(g.fbs||[]).slice(),part:part||null,dg:(g.dg!=null&&st==='done')?_dgi:null,esp:(st==='done'&&S.esp)?{d:S._eh||0,hp:S.esp.hp,max:S.esp.max}:null};_dgi=null;S._eh=0;if(lu&&rkI(lvlOf(af))>rkI(lvlOf(b4)))S.rcv={lvl:lvlOf(af)};S.top=true;render()}
+let _spT=null;
+function testDoneAll(){const C=calcXp();C.ms.forEach(m=>{S.ms[m.key]={st:'done',times:[]}});if(!S.noWater)S.cups=Math.max(S.cups||0,C.wp.cups);S.top=true;render()}
+function testAll1(){const C=calcXp();C.ms.forEach(m=>{S.ms[m.key]={st:'done',times:[]}});if(!S.noWater)S.cups=Math.max(S.cups||0,C.wp.cups);
+ Object.keys(S.dgAll||{}).forEach(h=>{const D=S.dgAll[h];if(!D||D.won)return;S.dg=D;for(let i=0;i<5;i++){if(D.fl[i])continue;S.floorDay=-1;startGuide('dg'+i,i);completeMission('done');S.g=null;S.cel=null}});
+ S.floorDay=S.day;S.dgList=0;S.top=true;render()}
+function testFloor(){S.floorDay=-1;S.dgSplash=-1;S.top=true;render()}
+function testReset(){if(!S.rstAsk){S.rstAsk=1;S.top=false;render();setTimeout(()=>{if(S.rstAsk){S.rstAsk=0;render()}},5000);return}try{localStorage.removeItem('kaien.v1')}catch(e){}quick();S.rstAsk=0;render()}
+let _ab=0;
+const OPL=['Um dia de cada vez.','Quem aparece todo dia já venceu metade da luta.','Sem pressa. Sem atalho.','Hoje é um bom dia para evoluir.'];
+function openH(){const ph=OPL[new Date().getDay()%OPL.length];const ps=Array.from({length:22},(_,k)=>'<i class="opp" style="left:'+(4+k*4.3)+'%;animation-delay:'+(Math.random()*2.6).toFixed(2)+'s;animation-duration:'+(3+Math.random()*2.5).toFixed(2)+'s"></i>').join('');
+  return '<div class="opn o1" onclick="endOpen()">'+ps+'<div class="o1t">KAIEN</div><div class="o1l"></div><div class="o1s">'+ph+'</div></div>'}
+function openAnim(){clearTimeout(window._opT);window._opT=setTimeout(()=>{if(!_ab)endOpen()},3800)}
+function testOpen(){_ab=0;S.tab='ini';S.top=true;render()}
+(function(){const mk=()=>{const a=document.getElementById('app');if(!a||document.getElementById('clk'))return;const c=document.createElement('div');c.id='clk';a.appendChild(c);const u=()=>{const d=new Date();c.textContent=String(d.getHours()).padStart(2,'0')+':'+String(d.getMinutes()).padStart(2,'0')};u();setInterval(u,15000)};mk()})();
+function endOpen(){_ab=1;S.top=true;S.entering=0;render()}
+function endDs(){S.dgSplash=S.day;S.top=true;render()}
+function endSplash(){clearTimeout(_spT);S.splashDay=S.day;S.top=true;S.entering=1;render();setTimeout(()=>{S.entering=0},1000)}
+function closeCel(){const h=S.cel&&S.cel.dg;S.cel=null;S.top=true;S.hit=!!h;render();setTimeout(()=>{S.hit=0},900)}
+function partText(p){return 'Parcial: '+p.exDone+' de '+p.exTotal+' exercícios concluídos antes. '+p.cur+'.'}
+function animCel(){const c=S.cel;if(!c||c.st!=='done')return;if(!c._snd){c._snd=1;try{beep();if(navigator.vibrate)navigator.vibrate([30,40,30,40,140])}catch(e){}}const mb=$('mbar');if(c.dg&&!c.dg.mob&&mb){const d=c.dg,w=v=>Math.max(d.hp1,v)/d.max*100+'%';setTimeout(()=>{mb.style.width=w(d.hp0-d.dm)},500);setTimeout(()=>{mb.style.width=w(d.hp0-2*d.dm)},1100);setTimeout(()=>{mb.style.width=w(0)},1700)}const el=$('xpn'),bar=$('xbar');let t0=null;
+ requestAnimationFrame(function f(ts){if(!t0)t0=ts;const p=Math.min(1,(ts-t0)/1000);if(el)el.textContent='+'+Math.round(c.xp*p)+' XP';if(p<1&&S.cel===c)requestAnimationFrame(f)});
+ setTimeout(()=>{if(bar)bar.style.width=(c.lvl?100:xpInOf(c.af)/costOf(lvlOf(c.af))*100)+'%'},60)}
+function guideView(){const g=S.g,m=curM(),st=m.steps[g.si],n=m.steps.length;
+ const dots=m.steps.map((_,i)=>'<i class="'+(i<g.si?'on':i===g.si?'cur':'')+'"></i>').join('');
+ const pose=g.ph==='rest'?'B':'C';let main='',btn='',sec='';
+ const kl=g.toast&&g.ph==='work'?g.toast:g.ph==='fb'?'Seja honesto. É assim que o treino cresce com você.':g.ph==='ask'?'Sem vergonha. Diga o que você conseguiu.':g.ph==='rest'?'Descanse. Respire fundo.':g.paused?'Pausado. Volte quando estiver pronto.':st.k==='timer'&&st.breath?'Siga o ritmo da respiração.':'Com controle, não com pressa.';
+ if(g.ph==='ask'){const a=g.ask;main='<div class="gl">Quanto você conseguiu?</div>'+(a.max?'<div class="stp"><button onclick="gAsk(-1)">−</button><b>'+a.v+' de '+a.max+'</b><button onclick="gAsk(1)">+</button></div><p class="note">'+a.unit+' neste exercício</p>':'<p class="note">Vou registrar os passos que você já concluiu.</p>')+'<p class="note">Sem XP desta vez, mas fica anotado na sua evolução.</p>';
+  btn='<button class="cta" onclick="gAskOk()">Registrar</button><button class="lk" onclick="gAskBack()">Voltar ao exercício</button>'}
+ else if(g.ph==='fb'){main='<div class="gl">Como foi: '+esc(st.fb==='men'?m.title:st.name.split(':')[0])+'?</div><p class="note">Sua resposta ajusta o próximo treino.</p>';btn='<button class="cta" onclick="gFb(\'f\')">Fácil</button><button class="cta" style="background:#2a3158;color:#fff" onclick="gFb(\'o\')">No ponto</button><button class="cta" style="background:#2a3158;color:#fff" onclick="gFb(\'h\')">Pesado</button>'}
+ else if(g.ph==='rest'){main='<div class="gl">Descanso</div><div class="gbig" id="gc">'+fmt(g.rtot)+'</div><p class="note">Beba um gole de água se precisar.</p>';btn='<button class="cta" onclick="gRestSkip()">Pular descanso</button>'}
+ else if(st.k==='sets'){main='<div class="gl">'+esc(st.name)+'</div><div class="gbig2">Série '+g.set+' de '+st.sets+'</div><p class="gt2">'+esc(st.target)+'</p>';btn='<button class="cta" '+(g.paused?'disabled':'')+' onclick="gSetDone()">Série feita</button>'}
+ else if(st.k==='timer'){main='<div class="gl">'+esc(st.name)+'</div><div class="ring" id="gring" style="--p:0"><div class="gbig" id="gc">'+fmt(st.sec)+'</div></div>'+(st.breath?'<div class="brw"><div class="brc" id="gbc"></div><div class="gl" id="gbr">Inspire</div></div>':'')+(st.bg?'<p class="note">No app de verdade você pode guardar o celular e ele avisa no fim. Neste teste, deixe a página aberta.</p>':'');
+  btn='<button class="cta" '+(g.fin?'':'disabled')+' onclick="finishStep()">'+(g.fin?'Concluir':'Aguarde o fim do tempo')+'</button>'}
+ else if(st.k==='write'){const dk=m.key+'|'+g.si;if(!g.note&&S.wdr&&S.wdr[dk])g.note=S.wdr[dk];const nn=(g.note||'').trim().length;main='<div class="gl">'+esc(st.name)+'</div><textarea class="dnote wr" rows="7" placeholder="Escreva aqui. Fica salvo em Recordações." oninput="wrIn(this)">'+esc(g.note||'')+'</textarea><p class="note" id="wrc">'+(nn>=st.min?nn+' caracteres':'Escreva pelo menos '+st.min+' caracteres ('+nn+')')+'</p>';btn='<button class="cta" id="wrb" '+(nn>=st.min?'':'disabled')+' onclick="finishStep()">Salvar e continuar</button>'}
+ else{const isN=/^(anote|escreva|liste)/i.test(st.name);main='<div class="gl">'+esc(st.name)+'</div>'+(isN?'<textarea class="dnote" rows="4" placeholder="Escreva aqui (opcional). Fica salvo em Recordações." oninput="S.g.note=this.value">'+esc(g.note||'')+'</textarea>':'');btn='<button class="cta" onclick="finishStep()">Feito</button>'}
+ if(g.ph!=='ask'&&g.ph!=='fb')sec='<div class="grow">'+(g.ph==='work'?'<button class="lk" onclick="gPause()">'+(g.paused?'Retomar':'Pausar')+'</button>':'')+'<button class="lk" onclick="gPart()">Fiz parte</button>'+(g.dg!=null?'<button class="lk" onclick="gRec()">Tive uma recaída</button>':'<button class="lk" onclick="gPain()">Parei por dor</button>')+'</div>';
+ const sw=(g.ph==='ask'||g.ph==='fb')?'':'<div class="note" style="text-align:center">Tempo neste exercício: <b id="gt">'+fmt(elapsed(g)/1000)+'</b></div>';
+ const dgH=(g.dg!=null&&S.dg)?(()=>{const hb=S.dg.habit,im=g.dg<4?mobImg(hb,g.dg,'monbg gbg'):monImg(hb,'monbg gbg'),col=MCOL[hb]||'120,100,200';return im.indexOf('<img')===0?im.replace('class=','style="filter:drop-shadow(0 0 28px rgba('+col+',.55))" class='):im})():'';
+ const o_av='<div class="av gm '+('p'+pose)+'"></div>';
+ const dgI=(g.dg!=null&&S.dg&&g.dg<4)?'<div class="mobsay"><b>'+esc(mobOf(S.dg.habit,g.dg)[0])+'</b>: “'+esc(mobIn(S.dg.habit,g.dg))+'”</div>':'';
+ return '<div class="guide">'+dgH+dgI+'<div class="gh"><button class="lk" onclick="exitGuide()">‹ Sair</button><span class="note">'+esc(m.title)+' · '+(g.si+1)+' de '+n+'</span></div><div class="dots">'+dots+'</div><p class="note gtl">Passo '+(g.si+1)+' de '+n+(m.min?' · faltam cerca de '+Math.max(1,Math.round(m.min*(n-g.si)/n))+' min':'')+'</p>'+(g.dg!=null&&S.dg?'<div style="height:34vh;flex:none"></div>':o_av)+'<div class="b" style="animation:none"><p><span class="g">Kaien</span><br>'+esc(kl)+'</p></div><div class="gcard">'+main+'</div>'+sw+btn+sec+'</div>'}
+const LVK=['Você sobe devagar, e é assim que se sobe de verdade.','Mais um degrau. Quem aparece todo dia já venceu metade da luta.','Eu vi o que você fez. Continue.','Ninguém te deu isso. Você construiu.','Olhe para trás: você não é mais quem começou.'];
+function lvSeen(){if(S.lu)S.lu=null;else if(S.cel)S.cel.lvSeen=1;if(S.scnP){S.scn=1;S.scnP=0;S.scnSeen=1}S.lvShown=myLvl();S.top=true;render()}
+function lvWatch(){provaInit();try{remSync()}catch(e){}if(S.rkm==null)rkSnap();if(S.lvShown==null){S.lvShown=myLvl();return}
+ if(S.g||S.cel||S.lu||myLvl()<=S.lvShown)return;
+ S.eq=S.eq||{};for(let L=S.lvShown+1;L<=myLvl();L++){grantLv(L)}
+ S.lu={b4:cum(S.lvShown),lvl:myLvl()};if(rkI(myLvl())>rkI(lvlOf(S.lu.b4)))S.rcv={lvl:myLvl()}}
+function lvView(c){const A=[];const rkUp=rkI(c.lvl)>rkI(lvlOf(c.b4));for(let L=lvlOf(c.b4)+1;L<=c.lvl;L++)if(REW[L]&&!(rkUp&&REW[L].rk))A.push([L,REW[L]]);const _u=0,mk=rkUp||A.some(x=>x[1].m)||c.lvl%5===0;
+ if(!c.fx){c.fx=1;setTimeout(()=>{try{beep();if(navigator.vibrate)navigator.vibrate(mk?[80,50,80,50,200]:[60,40,120])}catch(e){}},50)}
+ const sp=Array.from({length:mk?28:18},(_,i)=>{const a=i/(mk?28:18)*6.283,r=110+Math.random()*100;return '<i class="spk" style="--bx:'+Math.round(Math.cos(a)*r)+'px;--by:'+Math.round(Math.sin(a)*r)+'px"></i>'}).join('');
+ const ico=n=>/roupa|visual/i.test(n)?'👘':/aura/i.test(n)?'✨':/pose/i.test(n)?'🧍':/título|titulo/i.test(n)?'🏷️':/moldura/i.test(n)?'🖼️':/fundo|cena/i.test(n)?'🌄':/dungeon/i.test(n)?'🗝️':/cap[ií]tulo/i.test(n)?'📖':'🎁';
+ const rkC=rkUp?'<div class="ulk"><span class="ui">⭐</span><div><b>Rank '+rankOf(c.lvl)+'</b><br><span class="note">Suas missões passam a render ×'+String(RM[rkI(c.lvl)]).replace('.',',')+' de XP, a partir de amanhã.</span></div></div>':'';
+ const cards=rkC+(A.length?A.map(x=>'<div class="ulk"><span class="ui">'+ico(x[1].n)+'</span><div><b>'+esc(x[1].n)+'</b><br><span class="note">'+(x[1].m?'Marco do caminho. ':'')+'Já está equipado. Veja em Personagem.</span></div></div>').join(''):(rkUp?'':'<div class="ulk"><span class="ui">🎁</span><div><b>Você chegou ao nível '+c.lvl+'</b><br><span class="note">Novos prêmios chegam nos próximos níveis.</span></div></div>'));
+ return '<div class="cel lvs">'+sp+'<div class="lvlbl">'+(rkUp?'SUBIU DE RANK':mk?'MARCO ALCANÇADO':'SUBIU DE NÍVEL')+'</div><div class="lvbig">'+(rkUp?'RANK '+rankOf(c.lvl):'NÍVEL '+c.lvl)+'</div>'+(mk?'<div class="av pbig '+outCls()+'"></div>':'')+'<p class="lvk">“'+esc(LVK[c.lvl%LVK.length])+'” <span class="g">Kaien</span></p><div class="note" style="text-align:center">Desbloqueado</div><div class="ulks">'+cards+'</div><button class="cta" onclick="lvSeen()">Continuar</button></div>'}
+function celView(){const c=S.cel,nv=lvlOf(c.af);let h='';
+ if(c.st==='done'&&c.lvl&&!c.lvSeen)return lvView(c);
+ const times=c.times.length?'<p class="note">Tempos: '+c.times.map(x=>esc(x.name.split(':')[0])+' '+fmt(x.sec)).join(' · ')+'</p>':'';
+ if(c.st==='done'){const bigK=c.lvl?'<div class="av pbig '+'pB'+((S.eq.aura&&c.lvl>=4)?' aur':'')+'"></div>':'';const KL=['Bom. Você apareceu quando ninguém estava olhando.','Feito. É assim que se constrói, um dia de cada vez.','Isso conta. Guarde essa sensação para amanhã.'];
+  const sp=Array.from({length:16},(_,i)=>{const a=i/16*6.283,r=90+Math.random()*60;return '<i class="spk" style="--bx:'+Math.round(Math.cos(a)*r)+'px;--by:'+Math.round(Math.sin(a)*r)+'px"></i>'}).join('');
+  h='<div class="cel">'+sp+bigK+'<div class="gcard"><div class="gl">Missão cumprida</div><b>'+esc(c.title)+'</b>'+(c.dg&&c.dg.mob?mobCel(c.dg):c.dg?'<div class="mcel">'+monImg(c.dg.h,'mth2')+'<div class="gl">3 golpes de '+c.dg.dm+'</div><div class="xb red"><i id="mbar" style="width:'+(c.dg.hp0/c.dg.max*100)+'%"></i></div><span class="note">'+esc(DGH[c.dg.h].m)+': '+c.dg.hp1+' / '+c.dg.max+' HP</span>'+(c.dg.won?'<div class="lvup">Monstro derrotado!</div><p class="note">Bônus de '+(c.dg.bon||100)+' XP'+(c.dg.rp?'.':' e um novo título.')+'</p>':'')+'</div>':'')+(c.esp?espCel(c.esp):'')+'<div class="gbig2" id="xpn">+0 XP</div><div class="xb"><i id="xbar" style="width:'+(xpInOf(c.b4)/costOf(lvlOf(c.b4))*100)+'%"></i></div>'+(c.lvl?'<div class="lvup">Nível '+c.lvl+'</div>'+(()=>{let r='';for(let L=lvlOf(c.b4)+1;L<=c.lvl;L++)if(REW[L])r+='<p class="note">'+(REW[L].m?'<b>Marco!</b> ':'')+'<b>Prêmio:</b> '+esc(REW[L].n)+'</p>';return r+'<p class="note">O novo visual já foi equipado. Você pode trocar na aba Personagem.</p>'})():'<span class="note">Nível '+nv+' · '+xpInOf(c.af)+' / '+costOf(nv)+' XP</span>')+'<span class="note">'+esc(c.stat)+': '+(c.pa%5)+' de 5 para o próximo ponto</span>'+(c.plus?'<div class="gl">+1 ponto em '+esc(c.stat)+'</div>':'')+times+celExtra(c)+'</div><div class="b" style="animation:none"><p><span class="g">Kaien</span><br>'+esc(c.lvl?'Você sobe devagar, e é assim que se sobe de verdade.':KL[c.title.length%3])+'</p></div><button class="cta" onclick="closeCel()">Continuar</button></div>'}
+ else if(c.st==='parcial'){h='<div class="cel"><div class="gcard"><div class="gl">Registrado</div><b>'+esc(c.title)+'</b><p class="note">'+esc(partText(c.part))+'</p><p class="note">Sem XP desta vez, mas anotei na sua evolução.</p>'+times+'</div><div class="b" style="animation:none"><p><span class="g">Kaien</span><br>Parte é mais do que nada. Amanhã a gente vê.</p></div><button class="cta" onclick="closeCel()">Continuar</button></div>'}
+ else if(c.st==='rec'){h='<div class="cel"><div class="gcard"><div class="gl">Tudo bem</div><b>'+esc(c.title)+'</b><p class="note">Recaída faz parte do caminho e não tira nada de você. O andar continua aberto. Se estiver pesado, vale conversar com alguém de confiança ou com um profissional.</p>'+SUP+'</div><div class="b" style="animation:none"><p><span class="g">Kaien</span><br>Eu não vou te julgar. Respire e volte quando puder.</p></div><button class="cta" onclick="closeCel()">Continuar</button></div>'}
+ else{h='<div class="cel"><div class="gcard"><div class="gl">Pare por hoje</div><b>'+esc(c.title)+'</b><p class="note">Dor é um aviso do corpo. Descanse. Se ela voltar ou continuar, procure um profissional de saúde antes de treinar de novo.</p>'+SUP+'</div><div class="b" style="animation:none"><p><span class="g">Kaien</span><br>Seu corpo vem primeiro.</p></div><button class="cta" onclick="closeCel()">Continuar</button></div>'}
+ return h}
+setInterval(()=>{const g=S&&S.g;if(!g||g.ph==='ask'||g.ph==='fb')return;const st=curStep(),e=elapsed(g);const gt=$('gt');if(gt)gt.textContent=fmt(e/1000);
+ if(g.ph==='rest'){const l=g.rtot*1000-(Date.now()-g.rs)*F();const gc=$('gc');if(gc)gc.textContent=fmt(Math.ceil(l/1000));if(l<=0){beep();gRestSkip()}}
+ else if(st.k==='timer'&&!g.paused){const l=st.sec*1000-e,gc=$('gc'),r=$('gring');if(gc)gc.textContent=fmt(Math.ceil(l/1000));if(r)r.style.setProperty('--p',Math.min(100,e/(st.sec*10)));
+  if(st.breath){const c=(e/1000)%10,sc=c<4?1+.35*c/4:1.35-.35*(c-4)/6,b=$('gbc'),t=$('gbr');if(b)b.style.transform='scale('+sc+')';if(t)t.textContent=c<4?'Inspire':'Solte'}
+  if(l<=0&&!g.fin){g.fin=true;beep();render()}}},250);

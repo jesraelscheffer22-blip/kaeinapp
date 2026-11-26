@@ -1,0 +1,19 @@
+/* ===== Prova de Ascensão ===== */
+.pvcard{padding:0;overflow:hidden;flex:none;border:1px solid rgba(217,179,106,.55)}
+.pvci{flex:none;height:150px;background-size:cover;background-position:center 62%;background-repeat:no-repeat}
+.pvct{padding:12px 14px 14px;display:flex;flex-direction:column;gap:6px}.pvct b{font-family:Georgia,serif;font-size:17px;color:#f1d48a}.pvct p{margin:0}
+.pv{position:absolute;inset:0;overflow:hidden;background:#000}
+.pvi{position:absolute;inset:0;background-size:cover;background-position:center 22%;background-repeat:no-repeat;animation:kb 18s ease-in-out infinite alternate;transform-origin:50% 40%}
+.pv .lf{position:absolute;top:-6%;width:12px;height:9px;background:#b3202c;border-radius:0 80% 0 80%;opacity:.8;animation:lfall var(--d) linear infinite;transform:scale(var(--s))}
+.pvt{position:absolute;left:0;right:0;bottom:0;max-height:84%;overflow-y:auto;padding:90px 18px calc(env(safe-area-inset-bottom,0px) + 18px);background:linear-gradient(0deg,rgba(5,4,16,.97) 72%,rgba(5,4,16,0));color:#eef0ff;display:flex;flex-direction:column;gap:10px}
+.pvt b{font-family:Georgia,serif;font-size:23px;color:#f1d48a}.pvt p{margin:0;font-size:14.5px;line-height:1.5}.pvt .g{color:#d9b36a}
+.pvt .note{color:#b9b4d8;font-size:12.5px}
+.pvt .cta{background:linear-gradient(180deg,#a3241d,#7a1712);color:#f6e6c8;border:1px solid #d9b36a;font-family:Georgia,serif;letter-spacing:1px;border-radius:4px}.pvt .cta:disabled{opacity:.45}
+.pvs{font-style:italic;color:#ffd98a}
+.pvl{display:flex;flex-direction:column;gap:8px}
+.pvk{display:flex;gap:12px;align-items:center;text-align:left;background:rgba(30,22,56,.82);border:1px solid rgba(217,179,106,.4);color:#eef0ff;border-radius:6px;padding:12px;font:inherit;font-size:14.5px}
+.pvk i{flex:none;width:24px;height:24px;border-radius:50%;border:2px solid #d9b36a;display:flex;align-items:center;justify-content:center;font-style:normal;color:#1a1204;font-weight:700}
+.pvk.on{background:rgba(217,179,106,.18);border-color:#d9b36a}.pvk.on i{background:#d9b36a}
+.pvt label{display:flex;flex-direction:column;gap:6px;font-size:13.5px;color:#d9d4f3}
+.pvt textarea{min-height:76px;resize:none;border-radius:6px;border:1px solid rgba(217,179,106,.45);background:rgba(15,10,35,.88);color:#fff;font:inherit;font-size:15px;padding:10px}
+.pvq{border:1px solid #d9b36a;border-radius:6px;padding:14px;font-style:italic;font-family:Georgia,serif;background:rgba(217,179,106,.1);line-height:1.5}

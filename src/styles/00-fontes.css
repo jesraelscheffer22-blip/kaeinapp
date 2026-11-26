@@ -1,0 +1,4 @@
+/* Space Grotesk embutida (antes vinha do Google Fonts, que exige internet). Licença: assets/fonts/OFL-space-grotesk.txt */
+@font-face{font-family:'Space Grotesk';font-style:normal;font-weight:400;font-display:swap;src:url(@@FONT:space-grotesk-latin-400-normal@@) format('woff2')}
+@font-face{font-family:'Space Grotesk';font-style:normal;font-weight:500;font-display:swap;src:url(@@FONT:space-grotesk-latin-500-normal@@) format('woff2')}
+@font-face{font-family:'Space Grotesk';font-style:normal;font-weight:700;font-display:swap;src:url(@@FONT:space-grotesk-latin-700-normal@@) format('woff2')}
