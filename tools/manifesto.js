@@ -78,7 +78,19 @@ const CAPS = [['noite-3', 'Amanhecer (nível 14)', 'a young man with long dark w
  ['caminho-3', 'Rank S (nível 50)', 'an adult master in a white-gold mantle standing on a peak under a giant full moon, looking down at the long path behind, a younger disciple climbing in the distance'],
  ['medo-0', 'O que eu não conto (nível 20)', 'an adult martial master with long dark wavy hair sitting alone at night with a cup of tea, thoughtful, many young students sleeping in the hall behind him'],
  ['espelho-0', 'O primeiro reflexo (nível 11)', 'a young man with long dark wavy hair looking into an old stained bronze mirror in a dark corner of a courtyard, disliking his reflection, an old master gently holding his arm'],
- ['noite-0', 'A noite no pátio (capítulo 1, opcional)', 'a young man with long dark wavy hair sitting on the stone floor of a torch-lit temple courtyard at night, an old white-haired master sitting silently beside him']];
+ ['amigos-0', 'O chá na porta (nível 23)', 'a gentle young woman healer with long dark hair tied with a green ribbon leaving a steaming bowl of tea covered with a cloth at a wooden door in a snowy mountain temple at dawn, warm and quiet'],
+ ['amigos-1', 'O ferreiro que veio do vale (nível 29)', 'a broad-shouldered blacksmith with a short beard hammering glowing iron slowly at an outdoor forge beside a temple wall at early morning, sparks flying, a young man with long dark wavy hair watching'],
+ ['amigos-2', 'O desafio do sobrinho (nível 33)', 'a confident sixteen-year-old swordsman with a wooden sword challenging a calm young man with long dark wavy hair in a temple courtyard, the teen out of breath, the other lowering his sword with a gentle smile'],
+ ['amigos-3', 'A flecha que esperou (nível 42)', 'a calm young woman archer with a high ponytail holding a drawn bow perfectly still in a temple courtyard at sunset, focused, falling maple leaves'],
+ ['escola-0', 'O primeiro mestre (nível 25)', 'a lone ancient man carrying a single heavy stone up a bare mountain slope before any temple existed, at dawn, determined, small village far below'],
+ ['escola-1', 'Os quatro alunos (nível 32)', 'four disciples training in four different ways in one courtyard: one with a blade in strict form, one breathing calmly by a pond, one running and leaping like wind, one standing firm like a mountain, an old master watching'],
+ ['escola-2', 'A briga das escolas (nível 37)', 'four disciples working together during a heavy snowstorm in a mountain temple: one organizing, one caring for the sick, one descending a dangerous trail, one keeping a big fire alive'],
+ ['escola-3', 'O pátio que nos une (nível 46)', 'a busy temple courtyard at different times blended into one image: students training at dawn, breathing in the afternoon, running stairs at sunset, sweeping at night, harmony'],
+ ['pico-0', 'O primeiro aluno que foi embora (nível 36)', 'an adult martial master with long dark wavy hair standing at an open temple gate at night beside a burning torch, a former student returning up the stairs holding a small child by the hand'],
+ ['pico-1', 'Aprender a descansar de novo (nível 44)', 'an adult master resting in bed recovering from fever, a kind healer woman bringing tea, through the window older students lead training in the courtyard and a forge glows'],
+ ['pico-2', 'A carta que eu não abri (nível 48)', 'an adult master sitting alone in a rainy temple courtyard opening an old sealed letter with a red wax seal, smiling softly under the rain'],
+ ['pico-3', 'Antes do último portão (nível 49)', 'a master and an old white-haired master sitting side by side in silence on the last rock below a moonlit peak, the summit and a giant full moon above them']]
+ .concat([['noite-0', 'A noite no pátio (capítulo 1, opcional)', 'a young man with long dark wavy hair sitting on the stone floor of a torch-lit temple courtyard at night, an old white-haired master sitting silently beside him']]);
 CAPS.forEach(([f, n, c]) => add('7. Capítulos das histórias', 'cap-' + f, 'Leitor de capítulos · ' + n, 'Ilustração, fundo normal', 'Kaien jovem: cabelo longo escuro ondulado, roupas escuras, antebraços enfaixados. Velho mestre: cabelo branco longo.', `${ESTILO} Story illustration: ${c}. Emotional, quiet, cinematic. Keep the lower half calmer because text appears over it. ${REGRAS}`));
 
 // 8. Mini monstros evoluídos
@@ -101,6 +113,8 @@ Object.keys(M2).forEach(s => M2[s].forEach(([n, c], i) => add('8. Mini monstros 
 [['20', 'rank C', 'dark jade green and bronze robes with bronze shoulder guard'], ['30', 'rank B', 'silver-grey and ice-blue robes with short fur-lined cape'], ['40', 'rank A', 'black and crimson robe with gold dragon embroidery and gold-trimmed coat'], ['50', 'rank S', 'white-gold master robe with lunar purple inner layer and long mantle']].forEach(([r, n, roupa]) =>
  ['front view', 'right side view (profile facing right)', 'back view', 'left side view (profile facing left)'].forEach((v, i) => add('10. Giro 360° das roupas (opcional)', `spin${r}-${i}`, `Personagem, lupa (giro) · ${n} · quadro ${i + 1}`, 'Personagem, fundo transparente', `assets/img/pH${r}.webp depois de pronta (anexe como referência da roupa)`, `${ESTILO} ${HEROI.replace('facing the viewer', '')} Outfit: ${roupa}. Camera: ${v}, same scale and same position in the frame as the other views. ${TRANSP} ${REGRAS}`)));
 
+// Usado pelo gerador do PDF (tools/manifesto-pdf.js).
+if (require.main !== module) { module.exports = { L, existe, ESTILO, REGRAS, TRANSP, HEROI }; return; }
 // ---------- saída ----------
 const pend = L.filter(x => !existe(x.f)), feitas = L.length - pend.length;
 const grupos = [...new Set(L.map(x => x.g))];

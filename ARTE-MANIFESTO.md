@@ -1,6 +1,6 @@
 # Manifesto de Arte do Kaien
 
-Gerado por `node tools/manifesto.js`. **120 imagens novas** (0 prontas, 120 pendentes), em ordem de importância.
+Gerado por `node tools/manifesto.js`. **132 imagens novas** (0 prontas, 132 pendentes), em ordem de importância.
 
 ## Como gerar e colocar no app
 
@@ -575,6 +575,114 @@ Dark fantasy murim (Korean martial arts manhwa) illustration, painterly digital 
 
 ```text
 Dark fantasy murim (Korean martial arts manhwa) illustration, painterly digital art, high detail, cinematic lighting, night palette of deep purple and indigo with crimson and gold accents, ink-wash textures, soft mist. Story illustration: a young man with long dark wavy hair looking into an old stained bronze mirror in a dark corner of a courtyard, disliking his reflection, an old master gently holding his arm. Emotional, quiet, cinematic. Keep the lower half calmer because text appears over it. Vertical image, 2:3 ratio (1024x1536). No text, no letters, no calligraphy, no symbols that look like writing, no watermark, no logos, no real brands.
+```
+
+### ⬜ `cap-amigos-0.png`
+- **Onde aparece:** Leitor de capítulos · O chá na porta (nível 23)
+- **Tipo:** Ilustração, fundo normal
+- **Referência:** Kaien jovem: cabelo longo escuro ondulado, roupas escuras, antebraços enfaixados. Velho mestre: cabelo branco longo.
+
+```text
+Dark fantasy murim (Korean martial arts manhwa) illustration, painterly digital art, high detail, cinematic lighting, night palette of deep purple and indigo with crimson and gold accents, ink-wash textures, soft mist. Story illustration: a gentle young woman healer with long dark hair tied with a green ribbon leaving a steaming bowl of tea covered with a cloth at a wooden door in a snowy mountain temple at dawn, warm and quiet. Emotional, quiet, cinematic. Keep the lower half calmer because text appears over it. Vertical image, 2:3 ratio (1024x1536). No text, no letters, no calligraphy, no symbols that look like writing, no watermark, no logos, no real brands.
+```
+
+### ⬜ `cap-amigos-1.png`
+- **Onde aparece:** Leitor de capítulos · O ferreiro que veio do vale (nível 29)
+- **Tipo:** Ilustração, fundo normal
+- **Referência:** Kaien jovem: cabelo longo escuro ondulado, roupas escuras, antebraços enfaixados. Velho mestre: cabelo branco longo.
+
+```text
+Dark fantasy murim (Korean martial arts manhwa) illustration, painterly digital art, high detail, cinematic lighting, night palette of deep purple and indigo with crimson and gold accents, ink-wash textures, soft mist. Story illustration: a broad-shouldered blacksmith with a short beard hammering glowing iron slowly at an outdoor forge beside a temple wall at early morning, sparks flying, a young man with long dark wavy hair watching. Emotional, quiet, cinematic. Keep the lower half calmer because text appears over it. Vertical image, 2:3 ratio (1024x1536). No text, no letters, no calligraphy, no symbols that look like writing, no watermark, no logos, no real brands.
+```
+
+### ⬜ `cap-amigos-2.png`
+- **Onde aparece:** Leitor de capítulos · O desafio do sobrinho (nível 33)
+- **Tipo:** Ilustração, fundo normal
+- **Referência:** Kaien jovem: cabelo longo escuro ondulado, roupas escuras, antebraços enfaixados. Velho mestre: cabelo branco longo.
+
+```text
+Dark fantasy murim (Korean martial arts manhwa) illustration, painterly digital art, high detail, cinematic lighting, night palette of deep purple and indigo with crimson and gold accents, ink-wash textures, soft mist. Story illustration: a confident sixteen-year-old swordsman with a wooden sword challenging a calm young man with long dark wavy hair in a temple courtyard, the teen out of breath, the other lowering his sword with a gentle smile. Emotional, quiet, cinematic. Keep the lower half calmer because text appears over it. Vertical image, 2:3 ratio (1024x1536). No text, no letters, no calligraphy, no symbols that look like writing, no watermark, no logos, no real brands.
+```
+
+### ⬜ `cap-amigos-3.png`
+- **Onde aparece:** Leitor de capítulos · A flecha que esperou (nível 42)
+- **Tipo:** Ilustração, fundo normal
+- **Referência:** Kaien jovem: cabelo longo escuro ondulado, roupas escuras, antebraços enfaixados. Velho mestre: cabelo branco longo.
+
+```text
+Dark fantasy murim (Korean martial arts manhwa) illustration, painterly digital art, high detail, cinematic lighting, night palette of deep purple and indigo with crimson and gold accents, ink-wash textures, soft mist. Story illustration: a calm young woman archer with a high ponytail holding a drawn bow perfectly still in a temple courtyard at sunset, focused, falling maple leaves. Emotional, quiet, cinematic. Keep the lower half calmer because text appears over it. Vertical image, 2:3 ratio (1024x1536). No text, no letters, no calligraphy, no symbols that look like writing, no watermark, no logos, no real brands.
+```
+
+### ⬜ `cap-escola-0.png`
+- **Onde aparece:** Leitor de capítulos · O primeiro mestre (nível 25)
+- **Tipo:** Ilustração, fundo normal
+- **Referência:** Kaien jovem: cabelo longo escuro ondulado, roupas escuras, antebraços enfaixados. Velho mestre: cabelo branco longo.
+
+```text
+Dark fantasy murim (Korean martial arts manhwa) illustration, painterly digital art, high detail, cinematic lighting, night palette of deep purple and indigo with crimson and gold accents, ink-wash textures, soft mist. Story illustration: a lone ancient man carrying a single heavy stone up a bare mountain slope before any temple existed, at dawn, determined, small village far below. Emotional, quiet, cinematic. Keep the lower half calmer because text appears over it. Vertical image, 2:3 ratio (1024x1536). No text, no letters, no calligraphy, no symbols that look like writing, no watermark, no logos, no real brands.
+```
+
+### ⬜ `cap-escola-1.png`
+- **Onde aparece:** Leitor de capítulos · Os quatro alunos (nível 32)
+- **Tipo:** Ilustração, fundo normal
+- **Referência:** Kaien jovem: cabelo longo escuro ondulado, roupas escuras, antebraços enfaixados. Velho mestre: cabelo branco longo.
+
+```text
+Dark fantasy murim (Korean martial arts manhwa) illustration, painterly digital art, high detail, cinematic lighting, night palette of deep purple and indigo with crimson and gold accents, ink-wash textures, soft mist. Story illustration: four disciples training in four different ways in one courtyard: one with a blade in strict form, one breathing calmly by a pond, one running and leaping like wind, one standing firm like a mountain, an old master watching. Emotional, quiet, cinematic. Keep the lower half calmer because text appears over it. Vertical image, 2:3 ratio (1024x1536). No text, no letters, no calligraphy, no symbols that look like writing, no watermark, no logos, no real brands.
+```
+
+### ⬜ `cap-escola-2.png`
+- **Onde aparece:** Leitor de capítulos · A briga das escolas (nível 37)
+- **Tipo:** Ilustração, fundo normal
+- **Referência:** Kaien jovem: cabelo longo escuro ondulado, roupas escuras, antebraços enfaixados. Velho mestre: cabelo branco longo.
+
+```text
+Dark fantasy murim (Korean martial arts manhwa) illustration, painterly digital art, high detail, cinematic lighting, night palette of deep purple and indigo with crimson and gold accents, ink-wash textures, soft mist. Story illustration: four disciples working together during a heavy snowstorm in a mountain temple: one organizing, one caring for the sick, one descending a dangerous trail, one keeping a big fire alive. Emotional, quiet, cinematic. Keep the lower half calmer because text appears over it. Vertical image, 2:3 ratio (1024x1536). No text, no letters, no calligraphy, no symbols that look like writing, no watermark, no logos, no real brands.
+```
+
+### ⬜ `cap-escola-3.png`
+- **Onde aparece:** Leitor de capítulos · O pátio que nos une (nível 46)
+- **Tipo:** Ilustração, fundo normal
+- **Referência:** Kaien jovem: cabelo longo escuro ondulado, roupas escuras, antebraços enfaixados. Velho mestre: cabelo branco longo.
+
+```text
+Dark fantasy murim (Korean martial arts manhwa) illustration, painterly digital art, high detail, cinematic lighting, night palette of deep purple and indigo with crimson and gold accents, ink-wash textures, soft mist. Story illustration: a busy temple courtyard at different times blended into one image: students training at dawn, breathing in the afternoon, running stairs at sunset, sweeping at night, harmony. Emotional, quiet, cinematic. Keep the lower half calmer because text appears over it. Vertical image, 2:3 ratio (1024x1536). No text, no letters, no calligraphy, no symbols that look like writing, no watermark, no logos, no real brands.
+```
+
+### ⬜ `cap-pico-0.png`
+- **Onde aparece:** Leitor de capítulos · O primeiro aluno que foi embora (nível 36)
+- **Tipo:** Ilustração, fundo normal
+- **Referência:** Kaien jovem: cabelo longo escuro ondulado, roupas escuras, antebraços enfaixados. Velho mestre: cabelo branco longo.
+
+```text
+Dark fantasy murim (Korean martial arts manhwa) illustration, painterly digital art, high detail, cinematic lighting, night palette of deep purple and indigo with crimson and gold accents, ink-wash textures, soft mist. Story illustration: an adult martial master with long dark wavy hair standing at an open temple gate at night beside a burning torch, a former student returning up the stairs holding a small child by the hand. Emotional, quiet, cinematic. Keep the lower half calmer because text appears over it. Vertical image, 2:3 ratio (1024x1536). No text, no letters, no calligraphy, no symbols that look like writing, no watermark, no logos, no real brands.
+```
+
+### ⬜ `cap-pico-1.png`
+- **Onde aparece:** Leitor de capítulos · Aprender a descansar de novo (nível 44)
+- **Tipo:** Ilustração, fundo normal
+- **Referência:** Kaien jovem: cabelo longo escuro ondulado, roupas escuras, antebraços enfaixados. Velho mestre: cabelo branco longo.
+
+```text
+Dark fantasy murim (Korean martial arts manhwa) illustration, painterly digital art, high detail, cinematic lighting, night palette of deep purple and indigo with crimson and gold accents, ink-wash textures, soft mist. Story illustration: an adult master resting in bed recovering from fever, a kind healer woman bringing tea, through the window older students lead training in the courtyard and a forge glows. Emotional, quiet, cinematic. Keep the lower half calmer because text appears over it. Vertical image, 2:3 ratio (1024x1536). No text, no letters, no calligraphy, no symbols that look like writing, no watermark, no logos, no real brands.
+```
+
+### ⬜ `cap-pico-2.png`
+- **Onde aparece:** Leitor de capítulos · A carta que eu não abri (nível 48)
+- **Tipo:** Ilustração, fundo normal
+- **Referência:** Kaien jovem: cabelo longo escuro ondulado, roupas escuras, antebraços enfaixados. Velho mestre: cabelo branco longo.
+
+```text
+Dark fantasy murim (Korean martial arts manhwa) illustration, painterly digital art, high detail, cinematic lighting, night palette of deep purple and indigo with crimson and gold accents, ink-wash textures, soft mist. Story illustration: an adult master sitting alone in a rainy temple courtyard opening an old sealed letter with a red wax seal, smiling softly under the rain. Emotional, quiet, cinematic. Keep the lower half calmer because text appears over it. Vertical image, 2:3 ratio (1024x1536). No text, no letters, no calligraphy, no symbols that look like writing, no watermark, no logos, no real brands.
+```
+
+### ⬜ `cap-pico-3.png`
+- **Onde aparece:** Leitor de capítulos · Antes do último portão (nível 49)
+- **Tipo:** Ilustração, fundo normal
+- **Referência:** Kaien jovem: cabelo longo escuro ondulado, roupas escuras, antebraços enfaixados. Velho mestre: cabelo branco longo.
+
+```text
+Dark fantasy murim (Korean martial arts manhwa) illustration, painterly digital art, high detail, cinematic lighting, night palette of deep purple and indigo with crimson and gold accents, ink-wash textures, soft mist. Story illustration: a master and an old white-haired master sitting side by side in silence on the last rock below a moonlit peak, the summit and a giant full moon above them. Emotional, quiet, cinematic. Keep the lower half calmer because text appears over it. Vertical image, 2:3 ratio (1024x1536). No text, no letters, no calligraphy, no symbols that look like writing, no watermark, no logos, no real brands.
 ```
 
 ### ⬜ `cap-noite-0.png`
