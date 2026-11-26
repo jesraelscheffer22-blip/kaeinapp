@@ -31,23 +31,23 @@ const SLOT={L:['sq','lg','gl','ca','co'],U:['pu','pl','sh','tr','co'],F:['pu','s
 const STIT={L:'pernas e glúteos',U:'parte superior',F:'corpo inteiro',P:'empurrar: peito, ombros e tríceps',Q:'puxar: costas e bíceps'};
 const ATIT={aL:'pernas e explosão',aT:'tronco e core',aC:'cardio'};
 const CHN={
-pu:[['Flexão na parede',10,15,'r'],['Flexão inclinada, mãos na mesa firme',8,12,'r'],['Flexão com joelhos no chão',8,12,'r'],['Flexão tradicional',8,12,'r'],['Flexão diamante',8,12,'r'],['Flexão com pés elevados',8,12,'r'],['Flexão arqueiro',6,10,'l']],
-sq:[['Agachamento na cadeira',10,15,'r'],['Agachamento livre',12,18,'r'],['Agachamento com pausa de 2 s embaixo',10,15,'r'],['Agachamento búlgaro',8,12,'p'],['Agachamento búlgaro com mochila',8,12,'p'],['Agachamento pistol assistido',5,8,'p']],
-lg:[['Afundo com apoio na parede',8,12,'p'],['Afundo alternado',8,12,'p'],['Afundo reverso com mochila',8,12,'p'],['Afundo caminhando com mochila',10,14,'p'],['Afundo com salto',8,12,'p']],
-gl:[['Elevação pélvica',12,18,'r'],['Elevação pélvica com pausa de 2 s',10,15,'r'],['Elevação pélvica unilateral',8,12,'p'],['Elevação pélvica unilateral com pé elevado',8,12,'p'],['Hip thrust unilateral com mochila',8,12,'p']],
-ca:[['Panturrilha com apoio',12,20,'r'],['Panturrilha com descida lenta de 3 s',12,18,'r'],['Panturrilha unilateral',10,15,'p'],['Panturrilha unilateral na borda do degrau',10,15,'p']],
-co:[['Bird dog',8,12,'l'],['Prancha',20,45,'s'],['Prancha com toque no ombro',12,20,'t'],['Prancha com elevação de perna',8,12,'l']],
-pl:[['Remada com mochila',10,15,'r'],['Remada unilateral com mochila',10,14,'l'],['Remada pesada com pausa de 2 s',8,12,'l'],['Remada invertida na mesa firme',6,12,'r']],
-pl2:[['Superman',10,15,'r'],['Superman com pausa de 3 s',8,12,'r'],['Remada em Y no chão',10,15,'r'],['Remada em Y com mochila',8,12,'r']],
-sh:[['Elevação lateral com garrafas',10,15,'r'],['Desenvolvimento de ombros com mochila',8,12,'r'],['Pike push-up',6,12,'r'],['Pike push-up com pés elevados',6,10,'r']],
+pu:[['Flexão na parede',10,15,'r'],['Flexão com as mãos na mesa firme',8,12,'r'],['Flexão com joelhos no chão',8,12,'r'],['Flexão tradicional',8,12,'r'],['Flexão tradicional com pausa de 2 s embaixo',8,12,'r'],['Flexão com os pés na cadeira',6,12,'r'],['Flexão com os pés na cadeira e descida de 3 s',6,10,'r']],
+sq:[['Sentar e levantar da cadeira',10,15,'r'],['Agachamento livre',12,18,'r'],['Agachamento sumô (pernas abertas)',12,18,'r'],['Agachamento com pausa de 2 s embaixo',10,15,'r'],['Agachamento com mochila',10,15,'r'],['Agachamento com mochila e pausa de 2 s',8,12,'r']],
+lg:[['Afundo parado, segurando numa cadeira',8,12,'p'],['Afundo alternado',8,12,'p'],['Afundo para trás',8,12,'p'],['Afundo andando',10,14,'p'],['Afundo com mochila',8,12,'p']],
+gl:[['Ponte de glúteo',12,18,'r'],['Ponte de glúteo com pausa de 2 s',10,15,'r'],['Ponte de glúteo com uma perna',8,12,'p'],['Ponte de glúteo com os pés no sofá',10,15,'r'],['Ponte de glúteo com mochila no quadril',10,15,'r']],
+ca:[['Panturrilha em pé (subir na ponta dos pés)',12,20,'r'],['Panturrilha em pé com descida lenta de 3 s',12,18,'r'],['Panturrilha com um pé só, segurando na parede',10,15,'p'],['Panturrilha no degrau da escada',10,15,'r']],
+co:[['Abdominal tradicional',12,20,'r'],['Prancha',20,45,'s'],['Abdominal bicicleta',10,16,'l'],['Prancha lateral (cada lado)',15,40,'s']],
+pl:[['Remada curvada com mochila',10,15,'r'],['Remada com um braço e mochila, apoiado na cadeira',10,14,'l'],['Remada curvada com mochila e pausa de 2 s',8,12,'r'],['Remada deitado embaixo da mesa firme',6,12,'r']],
+pl2:[['Superman',10,15,'r'],['Superman alternado (braço e perna opostos)',8,12,'l'],['Superman com pausa de 3 s',8,12,'r'],['Superman segurando garrafas',8,12,'r']],
+sh:[['Elevação lateral com garrafas',10,15,'r'],['Elevação frontal com garrafas',10,15,'r'],['Desenvolvimento com garrafas (empurrar acima da cabeça)',10,15,'r'],['Desenvolvimento com mochila',8,12,'r']],
 la:[['Elevação lateral com garrafas',10,15,'r'],['Elevação lateral com mochila leve',10,15,'r'],['Elevação lateral com pausa de 2 s',8,12,'r']],
-tr:[['Flexão fechada com joelhos no chão',8,12,'r'],['Flexão fechada',8,12,'r'],['Tríceps no banco firme',8,15,'r'],['Flexão fechada com pés elevados',6,12,'r']],
-bi:[['Rosca com mochila',10,15,'r'],['Rosca com mochila e descida de 3 s',8,12,'r'],['Rosca concentrada com mochila',8,12,'l']],
-ra:[['Elevação posterior curvado com garrafas',10,15,'r'],['Elevação posterior com pausa de 2 s',8,12,'r'],['Y-T-W no chão com mochila leve',8,12,'r']]};
+tr:[['Flexão fechada com joelhos no chão',8,12,'r'],['Tríceps na cadeira (mergulho)',8,15,'r'],['Flexão fechada',8,12,'r'],['Tríceps francês com garrafa',10,15,'r']],
+bi:[['Rosca direta com mochila',10,15,'r'],['Rosca martelo com garrafas',10,15,'r'],['Rosca direta com mochila e descida de 3 s',8,12,'r']],
+ra:[['Encolhimento de ombros com mochila',12,18,'r'],['Crucifixo invertido com garrafas',10,15,'r'],['Crucifixo invertido com pausa de 2 s',8,12,'r']]};
 const AGT={
-aL:[['Marcha acelerada','Passos laterais','Agachamento rápido','Afundo alternado sem salto'],['Polichinelo','Afundo alternado','Skater','Agachamento rápido'],['Agachamento com salto','Skater com salto','Afundo com salto','Corrida com joelho alto'],['Agachamento com salto e aterrissagem suave','Afundo com salto','Salto lateral','Burpee sem flexão']],
-aT:[['Mountain climber lento','Prancha com toque no joelho','Polichinelo sem salto','Prancha alta parada'],['Mountain climber','Prancha com toque no ombro','Polichinelo','Prancha com abertura de pernas'],['Mountain climber rápido','Burpee','Prancha com toque no ombro','Prancha lateral dinâmica'],['Burpee com flexão','Mountain climber cruzado','Prancha com abertura rápida','Prancha com elevação de perna']],
-aC:[['Marcha acelerada','Polichinelo sem salto','Passos laterais','Corrida parada leve'],['Polichinelo','Corrida parada','Skater','Mountain climber lento'],['Corrida com joelho alto','Polichinelo com salto','Skater com salto','Burpee sem flexão'],['Burpee','Corrida com joelho alto rápida','Polichinelo com salto agachado','Mountain climber rápido']]};
+aL:[['Marcha no lugar','Passos laterais','Agachamento rápido','Afundo alternado'],['Polichinelo','Afundo alternado','Agachamento rápido','Corrida parada'],['Agachamento com salto','Afundo alternado rápido','Polichinelo','Corrida com joelho alto'],['Agachamento com salto','Pular corda (com ou sem corda)','Burpee sem flexão','Corrida com joelho alto rápida']],
+aT:[['Prancha com joelhos no chão','Abdominal tradicional','Escalador lento','Marcha no lugar'],['Escalador','Abdominal bicicleta','Prancha com toque no ombro','Polichinelo'],['Escalador rápido','Burpee','Abdominal bicicleta','Prancha lateral'],['Burpee com flexão','Escalador rápido','Abdominal tesoura','Prancha com toque no ombro']],
+aC:[['Marcha no lugar rápida','Polichinelo sem salto','Socos no ar','Corrida parada leve'],['Polichinelo','Corrida parada','Socos no ar rápidos','Pular corda (com ou sem corda)'],['Corrida com joelho alto','Polichinelo','Pular corda (com ou sem corda)','Burpee sem flexão'],['Burpee','Corrida com joelho alto rápida','Pular corda rápido','Escalador rápido']]};
 const isAg=id=>id.length===2&&id[0]==='a';
 function baseOf(id){const L=S.lvl,a=S.a;if(id==='men')return 0;if(isAg(id))return [0,1,2][L];
  if(id==='pu')return a.flex===0?0:a.flex===1?2:[1,3,4][L];
