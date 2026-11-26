@@ -6,7 +6,7 @@
 'use strict';
 const fs = require('fs'), path = require('path'), { execFileSync } = require('child_process');
 const DIR = path.join(__dirname, '..', 'assets', 'img');
-const largura = n => /^(mob2?-|comp-|spin)/.test(n) ? 512 : 768;
+const largura = n => /^(mob2?-|comp-|spin)/.test(n) ? 512 : /^bg/.test(n) ? 1024 : 768;
 const tem = c => { try { execFileSync(c, ['-version'], { stdio: 'ignore' }); return true } catch (e) { try { execFileSync(c, ['--version'], { stdio: 'ignore' }); return true } catch (e2) { return false } } };
 const cwebp = tem('cwebp'), py = !cwebp && tem('python3');
 let n = 0;
