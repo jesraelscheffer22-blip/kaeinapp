@@ -5,7 +5,7 @@
 const Apoio={
  RX:/(me matar|suic[ií]d|n[aã]o quero mais viver|n[aã]o aguento mais viver|acabar com (a )?minha vida|tirar (a )?minha vida|me machucar de prop[oó]sito|quero sumir pra sempre|melhor (eu )?n[aã]o existir)/i,
  risco:t=>Apoio.RX.test(String(t||'')),
- card(){return '<div class="card apc"><span class="g">Kaien</span><b>Obrigado por confiar isso a mim.</b><p class="note">O que você escreveu parece muito pesado. Você não precisa carregar sozinho. Se puder, fale agora com alguém: o <b>CVV atende pelo 188</b>, de graça, a qualquer hora, ou pelo chat em cvv.org.br. Em perigo imediato, ligue <b>192 (SAMU)</b>.</p><p class="note">Eu continuo aqui. Nada no caminho se perde por você parar para se cuidar.</p></div>'}
+ card(){return '<div class="card apc"><span class="g">Kaien</span><b>Obrigado por confiar isso a mim.</b><p class="note">O que você escreveu parece muito pesado. Você não precisa carregar sozinho. Se puder, fale agora com alguém: o <b>CVV atende pelo 188</b>, de graça, 24 horas. Também há chat em cvv.org.br (confira o horário no site). Em perigo imediato, ligue <b>192 (SAMU)</b>.</p><p class="note">Eu continuo aqui. Nada no caminho se perde por você parar para se cuidar.</p></div>'}
 };
 
 // ---------- Retiro (B6): modo descanso consciente, disponível desde o início ----------

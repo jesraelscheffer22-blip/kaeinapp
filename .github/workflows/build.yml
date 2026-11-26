@@ -19,6 +19,8 @@ jobs:
           java-version: 17
       - name: Montar o app (src/ -> www/)
         run: |
+          sudo apt-get install -y webp
+          node tools/otimizar-imagens.js
           node tools/build.js
           mkdir -p www
           cp -r dist/* www/
