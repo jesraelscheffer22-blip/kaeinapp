@@ -32,3 +32,16 @@
 .dcw{margin:0 -14px!important}.dcw .dcs{margin:0!important}
 .sheet .card.rtp{background:linear-gradient(180deg,#eadbb8,#dcc896);color:#2a1d10}.sheet .card.rtp .note{color:#4a3a22}.sheet .card.rtp b{color:#2a1d10}
 .pvk span small{display:block;font-size:11.5px;color:#d9b36a;letter-spacing:.04em;text-transform:uppercase}
+/* Bestiário, Torre, Invasão, Espelhos */
+.bsg{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.bsc{display:flex;flex-direction:column;align-items:center;gap:4px;padding:6px 4px;border-radius:12px;border:1px solid rgba(var(--mc),.45);background:radial-gradient(circle at 50% 35%,rgba(var(--mc),.22),rgba(12,10,28,.9) 70%);color:#eef0ff;font:inherit;min-height:110px}
+.bsc.on{box-shadow:0 0 0 2px #d9b36a}.bsc.lk2{opacity:.45}.bsc small{font-size:11px;line-height:1.2;text-align:center}
+.bsi{width:100%;height:74px;object-fit:contain;background-size:contain;background-position:center;background-repeat:no-repeat}.bsi.q{display:flex;align-items:center;justify-content:center;font:700 28px Georgia,serif;color:rgba(255,255,255,.35)}
+.bsd .bsdi .bsi{height:180px}
+.twr{display:flex;flex-direction:column;gap:3px;margin:8px auto;width:70%}
+.twf{position:relative;display:flex;justify-content:space-between;align-items:center;padding:8px 12px;border-radius:4px;background:linear-gradient(90deg,#2a2148,#3a2d5c);border:1px solid rgba(217,179,106,.25);font:700 14px Georgia,serif;color:#cfc6ea}
+.twf.up{opacity:.35;border-style:dashed}.twf.cur{background:linear-gradient(90deg,#8e1f1a,#d9b36a);color:#1a1204;box-shadow:0 0 14px rgba(217,179,106,.6)}.twf.mk:after{content:"✦";color:#f1d48a}
+.twf small{font:400 11px inherit}
+.invc{position:relative;overflow:hidden;border:1px solid rgba(var(--mc),.6);background:radial-gradient(circle at 85% 30%,rgba(var(--mc),.25),rgba(20,16,40,.92) 60%)}
+.invi{float:right;width:90px;margin:-4px -6px 0 8px}.invi .bsi{height:90px}
+.esx{border:1px solid rgba(150,190,255,.35)}

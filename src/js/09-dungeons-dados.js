@@ -55,7 +55,12 @@ const DGH={
 [CH('Repita a rotina de sono completa hoje'),TM('Respiração lenta antes de deitar',5,{breath:true}),CH('Anote como se sente em comparação ao primeiro andar')]]}};
 const MIMG={'Procrastinação':'@@IMG:boss-procrastinacao@@','Celular e redes sociais':'@@IMG:boss-celular@@','Cigarro ou vape':'@@IMG:boss-cigarro@@','Álcool':'@@IMG:boss-alcool@@','Sono ruim':'@@IMG:boss-sono@@','Jogos':'@@IMG:boss-jogos@@','Apostas':'@@IMG:boss-apostas@@','Outra coisa':'@@IMG:boss-outra@@','O Espelho':'@@IMG:boss-espelho@@'};
 const SIL="url(data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20viewBox%3D%270%200%20100%20100%27%3E%3Cpath%20d%3D%27M50%208C30%208%2022%2028%2024%2044%2014%2062%2010%2084%208%2096H92C90%2084%2086%2062%2076%2044%2078%2028%2070%208%2050%208Z%27%20fill%3D%27%231b1233%27%20stroke%3D%27%236b4fc4%27%20stroke-width%3D%272%27%2F%3E%3Cellipse%20cx%3D%2741%27%20cy%3D%2738%27%20rx%3D%274%27%20ry%3D%272.5%27%20fill%3D%27%23fff%27%2F%3E%3Cellipse%20cx%3D%2759%27%20cy%3D%2738%27%20rx%3D%274%27%20ry%3D%272.5%27%20fill%3D%27%23fff%27%2F%3E%3C%2Fsvg%3E)";
-const monImg=(h,c)=>MIMG[h]?'<img class="'+c+((h==='Jogos'||h==='Apostas')&&c==='mth'?' rnd':'')+'" alt="" src="'+MIMG[h]+'">':'<div class="'+c+' sil" style="background-image:'+SIL+'"></div>';
+// Fase da dungeon do hábito (a aberta ou a última vista): 1, 2 (evoluída) ou 3 (Forma Verdadeira).
+const phOf=h=>{const D=(S.dg&&S.dg.habit===h)?S.dg:(S.dgAll&&S.dgAll[h]);return D?(D.ph||1):1};
+const dgDef=h=>{const p=phOf(h);return p===3&&DGH3[h]?DGH3[h]:p===2&&DGH2[h]?DGH2[h]:DGH[h]};
+const dgNome=h=>(dgDef(h)||DGH[h]).m;
+const dgBoss=D=>D?D.fl.length-1:4;
+const monImg=(h,c)=>{const p=phOf(h),src=(p===3&&MIMG3[h])||(p===2&&MIMG2[h])||MIMG[h],nm=(p===3&&MIMG3[h]?'boss3-':p===2&&MIMG2[h]?'boss2-':'boss-')+SLUGH[h];return src?'<img class="'+c+' af-'+nm+((h==='Jogos'||h==='Apostas')&&c==='mth'?' rnd':'')+'" alt="" src="'+src+'">':'<div class="'+c+' sil" style="background-image:'+SIL+'"></div>'};
 const BI={
 'Procrastinação':['Ah, você chegou. Eu estava esperando... mas sem pressa.','Amanhã você começa, não é? Sempre começa amanhã.','Vamos ver se hoje é diferente.'],
 'Celular e redes sociais':['Ding. Você veio olhar, né? Eu sei que veio.','Tem tanta coisa te esperando aqui. Só mais um minutinho.','Duvido que você aguente quatro andares sem me tocar.'],
@@ -67,7 +72,7 @@ const BI={
 'Outra coisa':['Você nunca me deu um nome. Isso me deixa forte.','Eu me escondo no que você faz sem perceber.','Hoje você vai me olhar de frente. Será que consegue?'],
 'O Espelho':['Olhe bem. Esse é você.','Quem você é quando ninguém está olhando?','Vamos ver se você enfrenta quem você é.']};
 const BIK='Eu estou com você. É um andar por dia, sem pressa. Você pode parar quando precisar.';
-const BII=(h)=>BI[h]||['...'];
+const BII=(h)=>{const p=phOf(h);return (p===3&&BI3[h])||(p===2&&BI2[h])||BI[h]||['...']};
 function biStart(h){S.bi={h,i:0};S.bossSeen=S.bossSeen||{};S.bossSeen[h]=1}
 function biNext(){const n=BII(S.bi.h).length+1;S.bi.i++;if(S.bi.i>=n){S.bi=null;S.dgSplash=S.day}S.top=true;render()}
 function biSkip(){S.bi=null;S.top=true;render()}
@@ -81,7 +86,7 @@ const MOBI={
 'Apostas':['Uma aposta pequena não pesa.','Hoje a sorte está do seu lado.','Quase deu, tenta de novo.','Só para recuperar o que perdeu.'],
 'Outra coisa':['Você nem percebeu que começou.','É só um costume, ninguém liga.','Já faz tempo, que diferença faz?','Só hoje, depois você vê.'],
 'O Espelho':['Você não é bom o suficiente.','Os outros fazem melhor.','Por que tentar de novo?','Você sempre desiste.']};
-const mobIn=(h,i)=>(MOBI[h]||[])[i]||'';
+const mobIn=(h,i)=>((phOf(h)===2?MOBI2:MOBI)[h]||[])[i]||'';
 const MOBS={
 'Procrastinação':[['Amanhã Eu Faço','Eu vivia de “depois”. Hoje você não deixou.'],['Soneca do Alarme','Mais cinco minutos... era tudo o que eu tinha.'],['Aba Aberta','Você fechou a aba. Sem ela, eu sumo.'],['Lista Infinita','Uma coisa de cada vez. Que golpe baixo.']],
 'Celular e redes sociais':[['Notificação Fantasma','Eu nem existia. Você olhou por hábito.'],['Scroll Sem Fim','Acabou o feed. Pelo menos por hoje.'],['Curtida Vazia','Ninguém precisava de mim para ser feliz.'],['Só Mais Um Vídeo','O próximo vídeo não vai tocar.']],
@@ -93,8 +98,8 @@ const MOBS={
 'Outra coisa':[['Primeiro Gatilho','Você me reconheceu. Isso me enfraquece.'],['Hábito Automático','Você notou antes de fazer.'],['Desculpa Pronta','Essa já não colou.'],['Vontade Passageira','Passou sozinha.']],
 'O Espelho':[['Voz Crítica','Eu só repetia o que você me contou.'],['Comparação','Você não é o feed de ninguém.'],['Passado Pesado','Ficou para trás.'],['Medo de Falhar','Você tentou assim mesmo.']]};
 const MOBIMG={'Apostas|0':'@@IMG:mob-apostas-0@@','Apostas|1':'@@IMG:mob-apostas-1@@','Apostas|2':'@@IMG:mob-apostas-2@@','Apostas|3':'@@IMG:mob-apostas-3@@','Jogos|0':'@@IMG:mob-jogos-0@@','Jogos|1':'@@IMG:mob-jogos-1@@','Jogos|2':'@@IMG:mob-jogos-2@@','Jogos|3':'@@IMG:mob-jogos-3@@','Outra coisa|0':'@@IMG:mob-outra-0@@','Outra coisa|1':'@@IMG:mob-outra-1@@','Outra coisa|2':'@@IMG:mob-outra-2@@','Outra coisa|3':'@@IMG:mob-outra-3@@','Cigarro ou vape|0':'@@IMG:mob-cigarro-0@@','Cigarro ou vape|1':'@@IMG:mob-cigarro-1@@','Cigarro ou vape|2':'@@IMG:mob-cigarro-2@@','Cigarro ou vape|3':'@@IMG:mob-cigarro-3@@','Sono ruim|0':'@@IMG:mob-sono-0@@','Sono ruim|1':'@@IMG:mob-sono-1@@','Sono ruim|2':'@@IMG:mob-sono-2@@','Sono ruim|3':'@@IMG:mob-sono-3@@','Celular e redes sociais|0':'@@IMG:mob-celular-0@@','Celular e redes sociais|1':'@@IMG:mob-celular-1@@','Celular e redes sociais|2':'@@IMG:mob-celular-2@@','Celular e redes sociais|3':'@@IMG:mob-celular-3@@','Álcool|0':'@@IMG:mob-alcool-0@@','Álcool|1':'@@IMG:mob-alcool-1@@','Álcool|2':'@@IMG:mob-alcool-2@@','Álcool|3':'@@IMG:mob-alcool-3@@','Procrastinação|0':'@@IMG:mob-procrastinacao-0@@','Procrastinação|1':'@@IMG:mob-procrastinacao-1@@','Procrastinação|2':'@@IMG:mob-procrastinacao-2@@','Procrastinação|3':'@@IMG:mob-procrastinacao-3@@'};
-const mobOf=(h,i)=>(MOBS[h]||[])[i]||['Mini monstro','...'];
-const mobImg=(h,i,c)=>MOBIMG[h+'|'+i]?'<img class="'+c+'" alt="" src="'+MOBIMG[h+'|'+i]+'">':'<div class="'+c+' sil" style="background-image:'+SIL+'"></div>';
+const mobOf=(h,i)=>((phOf(h)===2?MOBS2:MOBS)[h]||[])[i]||['Mini monstro','...'];
+const mobImg=(h,i,c)=>{const p2=phOf(h)===2,src=p2?MOBIMG2[h+'|'+i]:MOBIMG[h+'|'+i];return src?'<img class="'+c+(p2?' af-mob2-'+SLUGH[h]+'-'+i:'')+'" alt="" src="'+src+'">':'<div class="'+c+' sil" style="background-image:'+SIL+';--mc:'+(MCOL[h]||'150,150,220')+'"></div>'};
 const mobCel=d=>'<div class="mcel mobd">'+mobImg(d.h,d.idx,'mth2 mobdie')+'<div class="gl">Mini monstro derrotado</div><b>'+esc(mobOf(d.h,d.idx)[0])+'</b><p class="mfr">“'+esc(mobOf(d.h,d.idx)[1])+'”</p></div>';
 const statNow=n=>calc().v[n]+Math.floor(progOf(n)/5);
 const ST_SUM=()=>ST.reduce((a,s)=>a+statNow(s),0);
@@ -107,10 +112,10 @@ const maxHp=h=>150*calc().v[DGH[h].st];
 const hpOf=h=>(S.dgAll&&S.dgAll[h])?S.dgAll[h].hp:maxHp(h);
 const hpMaxOf=h=>(S.dgAll&&S.dgAll[h])?S.dgAll[h].max:maxHp(h);
 const dmgOf=h=>50*statNow(DGH[h].st);
-function floorsNeed(h){const D=S.dgAll&&S.dgAll[h];return D?5-D.fl.filter(Boolean).length:5}
+function floorsNeed(h){const D=S.dgAll&&S.dgAll[h];return D?D.fl.length-D.fl.filter(Boolean).length:5}
 let _dgi=null;
 const MCOL={'Procrastinação':'150,90,255','Celular e redes sociais':'255,190,70','Cigarro ou vape':'210,140,110','Álcool':'255,90,60','Sono ruim':'120,110,255','Jogos':'90,255,60','Apostas':'255,50,70','Outra coisa':'170,140,255','O Espelho':'150,190,255'};
 const dgOpts=()=>dgVis();
-function dgFloors(){const H=DGH[S.dg.habit],sc=[.75,1,1.25][S.lvl],mn=x=>Math.max(5,Math.round(x*sc/5)*5);
- const T=['O Portão','O Corredor','A Ponte','A Câmara','O Guardião'],X=[30,30,40,40,60];
- return H.F(mn).map((st,i)=>({stat:H.st,title:(i+1)+'º andar · '+T[i],steps:st,min:dgEst(st)||null,xp:X[i],key:'dg'+i,sup:!!H.sup,note:H.note||''}))}
+function dgFloors(){const H=dgDef(S.dg.habit),sc=[.75,1,1.25][S.lvl],mn=x=>Math.max(5,Math.round(x*sc/5)*5);
+ const T=S.dg.ph===3?['A Forma Verdadeira']:['O Portão','O Corredor','A Ponte','A Câmara','O Guardião'],X=S.dg.ph===3?[120]:[30,30,40,40,60];
+ return H.F(mn).map((st,i)=>({stat:H.st,title:(S.dg.ph===3?'':(i+1)+'º andar · ')+T[i],steps:st,min:dgEst(st)||null,xp:X[i],key:'dg'+i,sup:!!H.sup,note:H.note||''}))}

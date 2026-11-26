@@ -230,5 +230,157 @@
 "prova-s": {
 "base": "bg-dojo",
 "filtro": "hue-rotate(15deg) saturate(1.3) brightness(1.1)"
+},
+"boss2-procrastinacao": {
+"base": "boss-procrastinacao",
+"filtro": "hue-rotate(28deg) saturate(1.6) contrast(1.15) brightness(.95)"
+},
+"boss3-procrastinacao": {
+"base": "boss-procrastinacao",
+"filtro": "hue-rotate(185deg) saturate(1.9) contrast(1.3) brightness(1.05)"
+},
+"boss2-celular": {
+"base": "boss-celular",
+"filtro": "hue-rotate(28deg) saturate(1.6) contrast(1.15) brightness(.95)"
+},
+"boss3-celular": {
+"base": "boss-celular",
+"filtro": "hue-rotate(185deg) saturate(1.9) contrast(1.3) brightness(1.05)"
+},
+"boss2-cigarro": {
+"base": "boss-cigarro",
+"filtro": "hue-rotate(28deg) saturate(1.6) contrast(1.15) brightness(.95)"
+},
+"boss3-cigarro": {
+"base": "boss-cigarro",
+"filtro": "hue-rotate(185deg) saturate(1.9) contrast(1.3) brightness(1.05)"
+},
+"mob2-cigarro-0": {
+"base": "mob-cigarro-0",
+"filtro": "hue-rotate(28deg) saturate(1.6) contrast(1.15) brightness(.95)"
+},
+"mob2-cigarro-1": {
+"base": "mob-cigarro-1",
+"filtro": "hue-rotate(28deg) saturate(1.6) contrast(1.15) brightness(.95)"
+},
+"mob2-cigarro-2": {
+"base": "mob-cigarro-2",
+"filtro": "hue-rotate(28deg) saturate(1.6) contrast(1.15) brightness(.95)"
+},
+"mob2-cigarro-3": {
+"base": "mob-cigarro-3",
+"filtro": "hue-rotate(28deg) saturate(1.6) contrast(1.15) brightness(.95)"
+},
+"boss2-alcool": {
+"base": "boss-alcool",
+"filtro": "hue-rotate(28deg) saturate(1.6) contrast(1.15) brightness(.95)"
+},
+"boss3-alcool": {
+"base": "boss-alcool",
+"filtro": "hue-rotate(185deg) saturate(1.9) contrast(1.3) brightness(1.05)"
+},
+"boss2-sono": {
+"base": "boss-sono",
+"filtro": "hue-rotate(28deg) saturate(1.6) contrast(1.15) brightness(.95)"
+},
+"boss3-sono": {
+"base": "boss-sono",
+"filtro": "hue-rotate(185deg) saturate(1.9) contrast(1.3) brightness(1.05)"
+},
+"boss2-jogos": {
+"base": "boss-jogos",
+"filtro": "hue-rotate(28deg) saturate(1.6) contrast(1.15) brightness(.95)"
+},
+"boss3-jogos": {
+"base": "boss-jogos",
+"filtro": "hue-rotate(185deg) saturate(1.9) contrast(1.3) brightness(1.05)"
+},
+"mob2-jogos-0": {
+"base": "mob-jogos-0",
+"filtro": "hue-rotate(28deg) saturate(1.6) contrast(1.15) brightness(.95)"
+},
+"mob2-jogos-1": {
+"base": "mob-jogos-1",
+"filtro": "hue-rotate(28deg) saturate(1.6) contrast(1.15) brightness(.95)"
+},
+"mob2-jogos-2": {
+"base": "mob-jogos-2",
+"filtro": "hue-rotate(28deg) saturate(1.6) contrast(1.15) brightness(.95)"
+},
+"mob2-jogos-3": {
+"base": "mob-jogos-3",
+"filtro": "hue-rotate(28deg) saturate(1.6) contrast(1.15) brightness(.95)"
+},
+"boss2-apostas": {
+"base": "boss-apostas",
+"filtro": "hue-rotate(28deg) saturate(1.6) contrast(1.15) brightness(.95)"
+},
+"boss3-apostas": {
+"base": "boss-apostas",
+"filtro": "hue-rotate(185deg) saturate(1.9) contrast(1.3) brightness(1.05)"
+},
+"mob2-apostas-0": {
+"base": "mob-apostas-0",
+"filtro": "hue-rotate(28deg) saturate(1.6) contrast(1.15) brightness(.95)"
+},
+"mob2-apostas-1": {
+"base": "mob-apostas-1",
+"filtro": "hue-rotate(28deg) saturate(1.6) contrast(1.15) brightness(.95)"
+},
+"mob2-apostas-2": {
+"base": "mob-apostas-2",
+"filtro": "hue-rotate(28deg) saturate(1.6) contrast(1.15) brightness(.95)"
+},
+"mob2-apostas-3": {
+"base": "mob-apostas-3",
+"filtro": "hue-rotate(28deg) saturate(1.6) contrast(1.15) brightness(.95)"
+},
+"boss2-outra": {
+"base": "boss-outra",
+"filtro": "hue-rotate(28deg) saturate(1.6) contrast(1.15) brightness(.95)"
+},
+"boss3-outra": {
+"base": "boss-outra",
+"filtro": "hue-rotate(185deg) saturate(1.9) contrast(1.3) brightness(1.05)"
+},
+"mob2-outra-0": {
+"base": "mob-outra-0",
+"filtro": "hue-rotate(28deg) saturate(1.6) contrast(1.15) brightness(.95)"
+},
+"mob2-outra-1": {
+"base": "mob-outra-1",
+"filtro": "hue-rotate(28deg) saturate(1.6) contrast(1.15) brightness(.95)"
+},
+"mob2-outra-2": {
+"base": "mob-outra-2",
+"filtro": "hue-rotate(28deg) saturate(1.6) contrast(1.15) brightness(.95)"
+},
+"mob2-outra-3": {
+"base": "mob-outra-3",
+"filtro": "hue-rotate(28deg) saturate(1.6) contrast(1.15) brightness(.95)"
+},
+"boss2-espelho": {
+"base": "boss-espelho",
+"filtro": "hue-rotate(28deg) saturate(1.6) contrast(1.15) brightness(.95)"
+},
+"boss3-espelho": {
+"base": "boss-espelho",
+"filtro": "hue-rotate(185deg) saturate(1.9) contrast(1.3) brightness(1.05)"
+},
+"inv-outono": {
+"base": "boss-procrastinacao",
+"filtro": "sepia(.6) hue-rotate(-20deg) saturate(1.8)"
+},
+"inv-inverno": {
+"base": "boss-sono",
+"filtro": "grayscale(.6) hue-rotate(180deg) brightness(1.2)"
+},
+"inv-primavera": {
+"base": "boss-celular",
+"filtro": "hue-rotate(250deg) saturate(1.4) brightness(1.1)"
+},
+"inv-verao": {
+"base": "boss-alcool",
+"filtro": "sepia(.5) saturate(2) hue-rotate(-10deg) brightness(1.1)"
 }
 }

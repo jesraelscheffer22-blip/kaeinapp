@@ -79,4 +79,4 @@ function dismissSug(){S.sugDay=S.day;render()}
 function nextDay(){const C=calcXp(),ms=C.ms;const rec={day:S.day,ms:JSON.parse(JSON.stringify(S.ms)),water:C.wDone,xp:C.xp,keys:ms.map(m=>({key:m.key,title:m.title,stat:m.stat})),train:isTrain(S.day)};
  rec.active=Object.values(S.ms).some(x=>x.st==='done')||C.wDone;
  ms.forEach(m=>{if(stOf(m)==='done')S.progAcc[m.stat]=(S.progAcc[m.stat]||0)+1});
- S.xpPrev+=C.xp;S.hist.push(rec);S.day++;if(S.lvBase!=null){S.lvl=S.lvBase;S.lvBase=null}S.ms={};S.cups=0;rkSnap();dgRoll2();S.ms={};S.cups=0;S.g=null;S.cel=null;S.tab='ini';S.top=true;render()}
+ S.xpPrev+=C.xp;S.hist.push(rec);NDAY.forEach(f=>{try{f(rec)}catch(e){console.warn(e)}});S.day++;if(S.lvBase!=null){S.lvl=S.lvBase;S.lvBase=null}S.ms={};S.cups=0;rkSnap();dgRoll2();S.ms={};S.cups=0;S.g=null;S.cel=null;S.tab='ini';S.top=true;render()}

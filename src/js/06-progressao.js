@@ -9,8 +9,8 @@ const REW={2:{n:'Título: Aprendiz'},3:{n:'Capítulo 1 do mestre Kaien: a noite 
 35:{n:'Carta do Mestre, o Espelho do Passado e o fundo Tempestade',m:1},36:{n:'Invasões das estações'},37:{n:'Cor do nome: Prata'},38:{n:'Título: Neve que Não Cede'},39:{n:'Templo: o Portão da Montanha'},
 40:{n:'Rank A: roupa dourada, fundo Palácio do Dragão, título Garra do Dragão, a companheira Yue, armas cerimoniais e títulos compostos',m:1,rk:1},
 41:{n:'Arma cerimonial: Leque do Vento'},42:{n:'Aura de Ouro'},43:{n:'Cartão de Discípulo'},44:{n:'Arma cerimonial: Cajado do Velho Mestre'},
-45:{n:'Carta do Mestre, o Espelho do Futuro e o fundo Jardim do Dragão',m:1},46:{n:'Título: Chama Serena'},47:{n:'Cor do nome: Ouro'},48:{n:'Título: Sombra do Mestre e o Selo de Jade'},49:{n:'Arma cerimonial: Talismã da Lua'},
-50:{n:'Rank S: manto do mestre, fundo Pico da Lua, aura lunar, título Mestre do Caminho e o Caminho do Mestre',m:1,rk:1}};
+45:{n:'Carta do Mestre e o fundo Jardim do Dragão',m:1},46:{n:'Título: Chama Serena'},47:{n:'Cor do nome: Ouro'},48:{n:'Título: Sombra do Mestre e o Selo de Jade'},49:{n:'Arma cerimonial: Talismã da Lua'},
+50:{n:'Rank S: manto do mestre, fundo Pico da Lua, aura lunar, título Mestre do Caminho, o Espelho do Futuro e o Caminho do Mestre',m:1,rk:1}};
 // Títulos de nível, em ordem de prestígio: [nome, nível].
 const TITN=[['Aprendiz',2],['Constante',6],['Aspirante',10],['Persistente',13],['Discípulo do Templo',15],['Coração de Ferro',18],['Lâmina de Bronze',20],['Bambu que Verga',24],['Passo Leve',26],['Raiz Profunda',28],['Pico de Prata',30],['Vento da Montanha',34],['Neve que Não Cede',38],['Garra do Dragão',40],['Chama Serena',46],['Sombra do Mestre',48],['Mestre do Caminho',50]];
 // Títulos extras (Escola, Torre, Invasões, Caminho do Mestre...): cada módulo empurra uma função que devolve nomes.
