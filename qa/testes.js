@@ -68,7 +68,7 @@ async function testeAbertura(p) {
         case 'multi': togglePull(0); donePull(); break;
         case 'scales': ['en', 'mo', 'te', 'ir'].forEach(k => setSc(k, 3)); doneSc(); break;
         case 'wdays': [0, 2, 4].forEach(toggleWd); doneWd(); break;
-        case 'rem': doneRem(1); break;
+        case 'rem': doneRem(1); if (S.remRes) { if (!document.querySelector('.remok')) throw new Error('rem sem confirmação'); remCont(); } break;
         case 'level': chooseLvl(1); break;
         default: adv();
       }

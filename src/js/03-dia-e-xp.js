@@ -11,7 +11,7 @@ function plan(){let ms=plan0();PLAN_MODS.forEach(f=>{try{ms=f(ms)||ms}catch(e){c
 function plan0(){const R=calc(),gs=R.gs;const low=ST.filter(x=>x!==gs).sort((a,b)=>R.v[a]-R.v[b])[0];
  const tr=isTrain(S.day),MEN=['Foco','Calma','Disciplina'];
  const men=Object.assign(lib(MEN[(S.day-1)%3]),{tag:'Mente',key:'low'});
- const phys=tr?Object.assign(S.a.pain===3?lib('Força'):(()=>{const t=sessType();return t[0]==='a'?lib('Agilidade',t):lib('Força',t)})(),{tag:'Treino',key:'obj'}):{stat:'Calma',tag:'Descanso ativo',key:'obj',title:'Alongamento e caminhada leve',steps:[TM('Alongamento suave',pk([8,10,12])),TM('Caminhada curta e leve',pk([5,10,10]))],min:pk([13,20,22]),xp:10};
+ const phys=tr?Object.assign(S.a.pain===3?lib('Força'):(()=>{const t=sessType();return t==='aC'?Object.assign(lib('Agilidade',t),{stat:'Resistência'}):t[0]==='a'?lib('Agilidade',t):lib('Força',t)})(),{tag:'Treino',key:'obj'}):{stat:'Resistência',tag:'Descanso ativo',key:'obj',title:'Alongamento e caminhada leve',steps:[TM('Alongamento suave',pk([8,10,12])),TM('Caminhada curta e leve',pk([5,10,10]))],min:pk([13,20,22]),xp:10};
  const ms=[men,phys];
  const h=S.pull.find(x=>!NONE.includes(x));
  if(h)ms.push({stat:HAB[h],tag:'Hábito',key:'hab',title:HM[h].t,steps:HM[h].st(),min:null,xp:20,sup:(h==='Álcool'||h==='Cigarro ou vape')});

@@ -39,20 +39,20 @@ const Errante={
  hoje(){return Errante.ehDia()?ERR[Errante.idx(S.day)]:null},
  proximo(){for(let d=S.day+1;d<=S.day+7;d++)if(Errante.ehDia(d))return {e:ERR[Errante.idx(d)],em:d-S.day,dia:Errante.wd(d)===1?'terça':'sexta'};return null},
  est(){S.errt=S.errt||{};const e=Errante.hoje();if(!e)return null;return S.errt[S.day]=S.errt[S.day]||{id:e.id,ck:{},won:0}},
- dano(){const t=Errante.est();if(!t)return 0;const m=plan().filter(x=>S.ms[x.key]&&S.ms[x.key].st==='done').length,ag=!S.noWater&&S.cups>=waterPlan(plan()).cups?10:0;return Math.min(100,m*15+Object.values(t.ck).filter(Boolean).length*25+ag)},
+ dano(){const t=Errante.est();if(!t)return 0;const m=plan().filter(x=>S.ms[x.key]&&S.ms[x.key].st==='done').length,ag=!S.noWater&&S.cups>=waterPlan(plan()).cups?10:0;return Math.min(100,m*20+Object.values(t.ck).filter(Boolean).length*34+ag)},
  ck(i){const t=Errante.est();if(!t||t.won)return;t.ck[i]=!t.ck[i];try{Som.tambor()}catch(e){}Errante.checar();S.top=false;render()},
- checar(){const t=Errante.est();if(!t||t.won)return;if(Errante.dano()>=100){t.won=1;const x=Math.round(60*(S.rkm||1));S.xpPrev+=x;t.xp=x;S.errv=S.errv||{};S.errv[t.id]=(S.errv[t.id]||0)+1;S.errd=S.errd||{};if(!S.errd[t.id])S.errd[t.id]=S.day;try{Som.gongo()}catch(e){}}},
+ checar(re){const t=Errante.est();if(!t||t.won)return;if(Errante.dano()>=100){t.won=1;if(re)setTimeout(()=>{try{render()}catch(e){}},0);const x=Math.round(60*(S.rkm||1));S.xpPrev+=x;t.xp=x;S.errv=S.errv||{};S.errv[t.id]=(S.errv[t.id]||0)+1;S.errd=S.errd||{};if(!S.errd[t.id])S.errd[t.id]=S.day;try{Som.gongo()}catch(e){}}},
  vencidos(){return Object.keys(S.errv||{}).length},
  card(full){const e=Errante.hoje();
   if(!e){const p=Errante.proximo();return full?'<div class="card errc"><span class="g">Chefes Errantes</span><b>Hoje nenhum chefe apareceu</b><p class="note">Eles aparecem toda terça e toda sexta, um diferente a cada vez.'+(p?' Próximo: <b>'+esc(p.e.n)+'</b>, na '+p.dia+' (em '+p.em+(p.em===1?' dia':' dias')+').':'')+'</p></div>':''}
   const t=Errante.est(),d=Errante.dano(),hp=100-d;
   if(!full)return '<div class="card errc trnc" style="--ec:'+e.cor+'" onclick="setTab(\'dun\');dsub(\'c\')"><div class="erri">'+errSvg(e,72)+'</div><span class="g">Chefe Errante · '+(Errante.wd()===1?'terça':'sexta')+'</span><b>'+esc(e.n)+(t.won?' · vencido':'')+'</b><span class="note">'+(t.won?'Você venceu hoje.':'Vida '+hp+'/100. Toque para enfrentar.')+'</span></div>';
   return '<div class="card errc errg" style="--ec:'+e.cor+'"><span class="g">Chefe Errante de hoje ('+(Errante.wd()===1?'terça':'sexta')+')</span><b>'+esc(e.n)+'</b><div class="errbig'+(t.won?' won':'')+'">'+errSvg(e,170)+'</div><div class="xb red"><i style="width:'+hp+'%"></i></div><p class="note">Vida: <b>'+hp+' / 100</b> · simboliza '+esc(e.s)+'</p>'
-  +(t.won?'<p class="pvs">“'+esc(e.der)+'”</p><p class="note">Vencido! +'+(t.xp||0)+' XP. Ele volta numa próxima rodada do rodízio.</p>':'<p class="pvs">“'+esc(e.fala)+'”</p><p class="note">Cada tarefa abaixo tira 25 de vida, cada missão do dia tira 15 e a meta de água tira 10. As 3 tarefas e 2 missões já bastam. Vença hoje para ganhar '+Math.round(60*(S.rkm||1))+' XP. Se não der, nada se perde.</p>'+e.ch.map((x,i)=>'<button class="pvk'+(t.ck[i]?' on':'')+'" onclick="Errante.ck('+i+')"><i>'+(t.ck[i]?'✓':'')+'</i><span>'+esc(x)+'</span></button>').join(''))
+  +(t.won?'<p class="pvs">“'+esc(e.der)+'”</p><p class="note">Vencido! +'+(t.xp||0)+' XP. Ele volta numa próxima rodada do rodízio.</p>':'<p class="pvs">“'+esc(e.fala)+'”</p><p class="note">Cada tarefa abaixo tira 34 de vida: as 3 tarefas sozinhas já derrubam o chefe. Cada missão do dia também tira 20 e a meta de água tira 10. Vença hoje para ganhar '+Math.round(60*(S.rkm||1))+' XP. Se não der, nada se perde.</p>'+e.ch.map((x,i)=>'<button class="pvk'+(t.ck[i]?' on':'')+'" onclick="Errante.ck('+i+')"><i>'+(t.ck[i]?'✓':'')+'</i><span>'+esc(x)+'</span></button>').join(''))
   +'<p class="note">Dica: '+esc(e.dica)+'</p></div>'},
  colecao(){return '<div class="card"><div class="mt"><span class="g">Os 10 Errantes</span><b>'+Errante.vencidos()+' de 10 já vencidos</b></div><div class="errl">'+ERR.map(e=>{const v=(S.errv||{})[e.id];return '<div class="erra'+(v?'':' lk2')+'" style="--ec:'+e.cor+'">'+errSvg(e,60)+'<small>'+(v?esc(e.n)+(v>1?' ×'+v:''):'???')+'</small></div>'}).join('')+'</div></div>'}
 };
-AFTER_RENDER.push(()=>Errante.checar());
+AFTER_RENDER.push(()=>Errante.checar(1));
 INI_CARDS.unshift(()=>Errante.card(false));
 TITX.push(()=>Errante.vencidos()>=10?['Caçador de Errantes']:[]);
 ACH.push({n:'Primeiro Errante',d:'Vença um Chefe Errante (terça ou sexta)',f:()=>Errante.vencidos()>=1},{n:'Caçador de Errantes',d:'Vença os 10 Chefes Errantes',f:()=>Errante.vencidos()>=10});

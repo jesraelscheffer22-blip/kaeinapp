@@ -13,3 +13,6 @@
 .wd2tm{display:flex;align-items:center;justify-content:space-between;background:linear-gradient(180deg,rgba(236,222,188,.96),rgba(220,200,150,.96));border:1px solid #a98448;border-radius:4px;color:#2a1c10;padding:10px 12px;font:700 15px Georgia,serif}
 .wd2tm input{font:700 22px Georgia,serif;background:transparent;border:0;border-bottom:2px solid #8e1f1a;color:#2a1c10;padding:2px 4px}
 .tin{background:#1b2150;color:#fff;border:1px solid var(--line);border-radius:8px;padding:6px 8px;font:inherit}
+.remok{text-align:center;padding:18px 14px;border-radius:16px;background:rgba(20,14,38,.72);border:1px solid rgba(217,179,106,.45);margin-top:8px}
+.remok b{display:block;font-size:18px;color:#f0cf86;margin-bottom:6px}
+.remok p{margin:0;font-size:14px;line-height:1.45;color:#e8e2f4}

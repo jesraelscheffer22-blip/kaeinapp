@@ -10,7 +10,11 @@ function remDay(i){const r=remInit(),k=r.days.indexOf(i);if(k>=0)r.days.splice(k
 function remTime(j,v){const r=remInit();if(/^\d\d:\d\d$/.test(v)){r.times[j]=v;remSync(1);render()}}
 function remN(n){const r=remInit(),D=['07:30','13:00','20:30'];while(r.times.length<n)r.times.push(D[r.times.length]);r.times.length=n;remSync(1);render()}
 function remOn(v){const r=remInit();r.on=v?1:0;if(v){if(!r.days.length)r.days=[0,1,2,3,4,5,6];remPerm()}remSync(1);render()}
-function doneRem(on){const r=remInit();r.on=on?1:0;if(on&&!r.days.length)r.days=[0,1,2,3,4,5,6];if(on)remPerm();remSync(1);adv()}
+function doneRem(on){const r=remInit();r.on=on?1:0;if(on&&!r.days.length)r.days=[0,1,2,3,4,5,6];remSync(1);if(!on){adv();return}
+ // pede a permissão e, quando o celular responder, mostra a confirmação com o botão Continuar
+ const P=remPlug(),fim=ok=>{if(steps[S.i]&&steps[S.i].t==='rem'){S.remRes=ok?1:2;render()}};S.remRes=3;render();
+ if(!P){fim(1);return}try{P.requestPermissions().then(x=>fim(!x||x.display!=='denied')).catch(()=>fim(0))}catch(e){fim(0)}}
+function remCont(){delete S.remRes;remSync(1);adv()}
 function remTest(){const P=remPlug();if(!P){S.remMsg='Os lembretes só tocam no app instalado (APK), não no navegador.';render();return}
  try{P.requestPermissions().then(()=>P.schedule({notifications:[{id:9999,title:'Kaien',body:'Teste: se você viu isto, os lembretes estão funcionando.',schedule:{at:new Date(Date.now()+5000),allowWhileIdle:true}}]})).then(()=>{S.remMsg='Enviado. Em uns 5 segundos deve aparecer. Se não aparecer, veja se as notificações do app estão permitidas nas configurações do celular.';render()}).catch(()=>{S.remMsg='Não consegui agendar. Veja se as notificações do app estão permitidas.';render()})}catch(e){}}
 let _remSig='';
