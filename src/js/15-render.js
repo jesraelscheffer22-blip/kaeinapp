@@ -30,7 +30,7 @@ function render(){const s=steps[S.i],bg=$('bg'),k=$('k'),ui=$('ui');$('fx').styl
   const SCOL={'Força':'229,100,90','Resistência':'229,155,58','Agilidade':'79,209,197','Foco':'91,156,240','Disciplina':'166,120,240','Calma':'111,211,154'},SICO={'Força':'💪','Resistência':'🛡️','Agilidade':'⚡','Foco':'🎯','Disciplina':'🔥','Calma':'🌿'};
   const mcol=m=>SCOL[m.stat]||'150,150,220',mico=m=>STI[m.stat]||'✦';
   const nxm=ms.find(m=>!(S.ms[m.key]&&S.ms[m.key].st));
-  const featH=nxm?(()=>{const m=nxm,stp=m.steps.map(x=>x.k==='sets'?x.name+': '+x.sets+' x '+x.target:x.k==='timer'?x.name+' ('+Math.round(x.sec/60)+' min)':x.name),run=S.g&&S.g.key===m.key;
+  const featH=nxm?(()=>{const m=nxm,stp=m.steps.map(passoTxt),run=S.g&&S.g.key===m.key;
    return `<div class="mfeat${run?' run':''}" style="--mc:${mcol(m)}"><div class="mfi">${mico(m)}</div><span class="g">${run?'Em andamento':'Missão do dia'} · ${esc(m.tag)} · ${esc(m.stat)}</span><b class="mft">${esc(m.title)}</b><span class="note">${m.min?'~'+m.min+' min · ':''}+${Math.round(m.xp*mu)} XP</span><details><summary class="note">Ver passos</summary><ul>${stp.map(x=>`<li>${esc(x)}</li>`).join('')}</ul>${m.note?`<p class="note">${esc(m.note)}</p>`:''}</details><button class="mb on" onclick="startGuide('${m.key}')">${run?'Continuar':'Começar'}</button></div>`})():'';
   const rowsM=ms.filter(m=>m!==nxm).map(m=>{const e=S.ms[m.key],s=e&&e.st;
    let sub='',right='';
@@ -41,7 +41,7 @@ function render(){const s=steps[S.i],bg=$('bg'),k=$('k'),ui=$('ui');$('fx').styl
    return `<div class="mrw ${s==='done'?'dn':''}${s==='parcial'?' pt':''}" style="--mc:${mcol(m)}"><i class="mri">${s==='done'?'✓':mico(m)}</i><div class="mrt"><b>${esc(m.title)}</b><span class="note">${esc(m.stat)} · ${esc(sub)}</span></div>${right}</div>${(m.sup||s==='dor')?SUP:''}`}).join('');
   const BLK={low:['Mente','🧠','Treine a cabeça antes do corpo'],obj:['Treino','🏋️','Hora de mover o corpo'],hab:['Hábito','🔥','Enfrente o seu monstro'],sur:['Surpresa','🎁','Um presente do Kaien']};
   const blkH=(m,i)=>{const e=S.ms[m.key],s=e&&e.st,run=S.g&&S.g.key===m.key,isN=m===nxm,bl=BLK[m.key]||[m.tag,mico(m),''],lab=m.tag==='Descanso ativo'?'Descanso':bl[0],ico=m.tag==='Descanso ativo'?'🌙':bl[1],sub=m.tag==='Descanso ativo'?'O corpo cresce quando descansa':bl[2];
-   const stp=m.steps.map(x=>x.k==='sets'?x.name+': '+x.sets+' x '+x.target:x.k==='timer'?x.name+' ('+Math.round(x.sec/60)+' min)':x.name);
+   const stp=m.steps.map(passoTxt);
    const xp='+'+Math.round(m.xp*mu)+' XP';
    let stt='<span class="bst">Pendente</span>',foot='';
    if(s==='done'){stt='<span class="bst ok">✓ Concluída</span>';foot='<p class="bdone">Missão cumprida'+(e.times.length?' em '+fmt(e.times.reduce((x,t)=>x+t.sec,0)):'')+'. <b>'+xp+'</b></p>'}
@@ -150,7 +150,7 @@ function render(){const s=steps[S.i],bg=$('bg'),k=$('k'),ui=$('ui');$('fx').styl
      const open=i===cur&&S.floorDay!==S.day;
      if(i===cur&&!open)return `<div class="card ms">${th(i)}<div class="mt"><span class="g">${i===bI?'Sala do chefe':'Próximo andar'}</span><b>${esc(m.title)}</b></div><p class="note">Você já venceu um andar hoje. Este abre amanhã, o corpo precisa descansar.</p></div>`;
      if(!open)return `<div class="card ms" style="opacity:.55">${th(i)}<div class="mt"><span class="g">${i===bI?'Sala do chefe · bloqueada':'Bloqueado'}</span><b>${esc(m.title)}</b></div><p class="note">Vença o andar anterior para abrir.</p></div>`;
-     const stp=m.steps.map(x=>x.k==='sets'?x.name+': '+x.sets+' x '+x.target:x.k==='timer'?x.name+' ('+Math.round(x.sec/60)+' min)':x.name);
+     const stp=m.steps.map(passoTxt);
      const lt=D.last&&D.last.idx===i&&D.last.day===S.day?`<p class="note">${(D.last.st==='dor'||D.last.st==='rec')?'Você registrou uma recaída. Sem punição, o andar continua aberto.':'Você registrou parte. O andar continua aberto, volte quando puder.'}</p>`:'';
      return `<div class="card ms">${th(i)}<div class="mt"><span class="g">${i===bI?'Sala do chefe':'Andar '+(i+1)+' de '+bI}</span><b>${esc(m.title)}</b></div>${i<bI?`<p class="note">Mini monstro: <b>${esc(mobOf(hh0,i)[0])}</b>: <i>“${esc(mobIn(hh0,i))}”</i><br>Derrote-o para abrir o próximo andar.</p>`:`<p class="note">Chefe: <b>${esc(dgNome(hh0))}</b>. Cada etapa é um golpe com o seu status.</p>`}<ul>${stp.map(x=>`<li>${esc(x)}</li>`).join('')}</ul>${lt}${m.note?`<p class="note">${esc(m.note)}</p>`:''}<div class="mf"><span class="note">${m.min?'~'+m.min+' min · ':''}+${Math.round(m.xp*LV[S.lvl].m*dgMul(D,i))} XP</span><button class="mb on" onclick="startGuide('${m.key}',${i})">Entrar</button></div>${m.sup?SUP:''}</div>`}).join('');
     const mcol=MCOL[hh0]||'120,100,200',onMob=false,bgI=onMob?mobImg(hh0,cur,'monbg'+(S.hit?' hit':'')):monImg(hh0,'monbg'+(S.hit?' hit':''));dg=(bgI.indexOf('<img')===0?bgI.replace('class=','style="filter:drop-shadow(0 0 28px rgba('+mcol+',.55))" class='):bgI)+'<div style="height:36vh;flex:none"></div>'+hd2+cards+((cl===5||won)?'<div class="card"><p class="note">'+(won?'Monstro derrotado! Bônus de '+Math.round(100*(D.ph===2?1.5:1)*(D.rp?.5:1))+' XP'+(D.rp?'.':' e um novo título.'):'Dungeon concluída.')+'</p></div>':'')}

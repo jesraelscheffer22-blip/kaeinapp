@@ -65,16 +65,16 @@ function applyFb(id,a){S.px=S.px||{};const p=S.px[id]=S.px[id]||{v:0,r:0,l:''},b
  else if(a==='o'){if(isDl()||S.a.pain>=2)m='Semana leve: a carga só sobe depois.';else{bump(1);m='Mantido, com um pouco mais de meta.'}}
  else{m='Anotado. Mantemos a carga e você descansa mais.';if(p.l==='h'){m='Voltamos um degrau para você evoluir sem se machucar.';if(p.r>0)p.r=Math.max(0,p.r-2);else if(baseOf(id)+p.v>0)p.v--;}}
  p.l=a==='h'?'h':a;S.px[id]=p;return m}
-const tempoOf=()=>pk(['','descida em 2 s','descida em 3 s']);
+const tempoOf=()=>pk(['','descendo devagar, em 2 s','descendo devagar, em 3 s']);
 const UT={r:' repetições',p:' repetições por perna',l:' repetições por lado',s:' segundos',t:' toques'};
 function strength(type,ss,rest,dn){
  const WU=TM('Aquecimento: marcha, ombros, quadris, pernas e braços',5),FIN=TM('Finalização: caminhada leve, respiração e alongamento',4);
- const ex=SLOT[type].map(id=>{const x=exOf(id),e=x.e,tp=(e[3]==='r'||e[3]==='p'||e[3]==='l')&&tempoOf()&&!/pausa|lenta|descida/.test(e[0])?' · '+tempoOf():'';return Object.assign(SE(e[0],ss,x.N+UT[e[3]]+tp,rest),{fb:id})});
+ const ex=SLOT[type].map(id=>{const x=exOf(id),e=x.e,tp=(e[3]==='r'||e[3]==='p'||e[3]==='l')&&tempoOf()&&!/pausa|lenta|descida/.test(e[0])?', '+tempoOf():'';return Object.assign(SE(e[0],ss,x.N+UT[e[3]]+tp,rest),{fb:id})});
  const sec=ex.reduce((a,s)=>a+s.sets*(40+s.rest),0);
  return{title:'Treino de força: '+STIT[type],steps:[WU].concat(ex,[FIN]),note:(dn?dn+' ':'')+'Se usar mochila, comece leve e só aumente o peso com a técnica boa. Dor forte ou tontura: pare. Ao fim de cada exercício, conte como foi: o treino ajusta sozinho.',min:Math.round(5+sec/60+4),xp:30}}
 function agility(type,ss,dn){
  const id=type,x=exOf(id),mv=AGT[type][x.i],r=pk([45,60,75]),w=x.W;
- return{title:'Treino de agilidade: '+ATIT[type],steps:[TM('Aquecimento: marcha, ombros, quadris e pernas',3),Object.assign(SE('Circuito',ss,'Cada movimento por '+w+' s, sem pausa: '+mv.join(', ')+'. Depois descanse.',r),{fb:id}),TM('Finalização: caminhada leve, respiração e alongamento',3)],note:(dn?dn+' ':'')+'Ao fim do circuito, conte como foi: o treino ajusta sozinho.',min:Math.round(3+ss*(4*w/60+r/60)+3),xp:25}}
+ return{title:'Treino de agilidade: '+ATIT[type],steps:[TM('Aquecimento: marcha, ombros, quadris e pernas',3),Object.assign(SE('Circuito',ss,'Cada movimento por '+w+' s, sem pausa: '+mv.join(', ')+'. Depois descanse.',r),{fb:id,mv:mv.slice(),w}),TM('Finalização: caminhada leve, respiração e alongamento',3)],note:(dn?dn+' ':'')+'Ao fim do circuito, conte como foi: o treino ajusta sozinho.',min:Math.round(3+ss*(4*w/60+r/60)+3),xp:25}}
 function lib(stat,type){
  const L=S.lvl,dl=isDl(),ss=Math.max(2,LV[L].s-(dl?1:0)),light=S.a.pain===3,rest=pk([60,75,90]);
  const dn=dl?'Semana leve: uma série a menos para o corpo recuperar. Isso faz parte do progresso.':'';
@@ -111,4 +111,70 @@ function lib(stat,type){
    else o=mk('Tarefa no horário',['Qual tarefa você vem adiando? Escolha uma só.','Que horário você vai fazer? Escreva dia e hora.','Qual é o primeiro passo de 10 minutos?','Como você vai se lembrar e se proteger de distrações?'],[CH('Deixe o espaço pronto e o celular longe antes de começar.')],true)}}
  else o={title:'Respiração lenta',steps:fbq([TM('Respiração: inspire 4 s, solte 6 s',pk([5,8,10]),{breath:true})]),min:pk([5,8,10]),xp:15};
  return Object.assign(o,{stat})}
-const WDN=['Seg','Ter','Qua','Qui','Sex','Sáb','Dom'];
+const WDN=['Seg','Ter','Qua','Qui','Sex','Sáb','Dom'];// "Como fazer": explicação curta de cada exercício (procura pelo começo do nome, o mais específico primeiro)
+const COMO={
+'Aquecimento':'Faça um pouco de cada: marcha no lugar, gire os ombros e os braços, gire o quadril e dobre os joelhos devagar.',
+'Finalização':'Caminhe devagar, respire fundo e alongue pernas, braços e costas, sem forçar.',
+'Caminhada':'Caminhe num ritmo em que dá para falar, mas não para cantar.',
+'Alongamento':'Alongue pernas, braços e costas devagar. Sem dor, só uma leve tensão.',
+'Flexão na parede':'Mãos na parede na altura do peito e corpo reto. Dobre os cotovelos até o peito chegar perto da parede e empurre de volta.',
+'Flexão com as mãos na mesa':'Mãos na borda de uma mesa firme, corpo reto da cabeça aos pés. Desça o peito até perto da mesa e empurre.',
+'Flexão com joelhos':'Joelhos no chão e mãos um pouco mais abertas que os ombros. Desça o peito perto do chão e suba, sem deixar o quadril cair.',
+'Flexão tradicional':'Mãos no chão e corpo reto como uma tábua. Desça o peito perto do chão e empurre até esticar os braços.',
+'Flexão com os pés na cadeira':'Igual à flexão tradicional, mas com os pés numa cadeira firme. Fica mais pesado para o peito e os ombros.',
+'Flexão fechada':'Mãos juntas embaixo do peito. Desça com os cotovelos colados no corpo e suba. Trabalha o tríceps.',
+'Flexão':'Mãos no chão e corpo reto. Desça o peito perto do chão e empurre de volta.',
+'Sentar e levantar':'Sente numa cadeira e levante sem usar as mãos, com os pés firmes no chão. Desça devagar.',
+'Agachamento sumô':'Pernas bem abertas e pontas dos pés para fora. Desça o quadril com a coluna reta e suba.',
+'Agachamento com mochila':'Abrace uma mochila com peso junto ao peito e faça o agachamento normal.',
+'Agachamento com salto':'Faça o agachamento e suba pulando. Caia macio, com os joelhos dobrados.',
+'Agachamento':'Pés na largura dos ombros. Leve o quadril para trás como se fosse sentar, joelhos na direção dos pés, e suba.',
+'Afundo parado':'Uma perna na frente e outra atrás, segurando numa cadeira. Desça até os dois joelhos dobrarem e suba, sem sair do lugar.',
+'Afundo para trás':'Dê um passo grande para trás e desça até o joelho de trás chegar perto do chão. Volte e troque de perna.',
+'Afundo andando':'Faça o afundo e, em vez de voltar, dê o próximo passo com a outra perna, andando para frente.',
+'Afundo com mochila':'Afundo normal segurando uma mochila com peso junto ao peito.',
+'Afundo':'Dê um passo grande para frente e desça até o joelho de trás chegar perto do chão. Volte e troque de perna. Tronco reto.',
+'Ponte de glúteo com uma perna':'Igual à ponte de glúteo, mas com uma perna esticada no ar. Depois troque.',
+'Ponte de glúteo com os pés no sofá':'Deitado de costas com os pés em cima do sofá. Suba o quadril apertando o glúteo e desça devagar.',
+'Ponte de glúteo com mochila':'Ponte de glúteo com uma mochila apoiada no quadril, segurando com as mãos.',
+'Ponte de glúteo':'Deitado de costas, joelhos dobrados e pés no chão. Suba o quadril apertando o glúteo e desça devagar.',
+'Panturrilha no degrau':'Ponta dos pés na borda de um degrau, segurando no corrimão. Deixe o calcanhar descer e suba na ponta dos pés.',
+'Panturrilha':'Em pé, suba na ponta dos pés o mais alto que conseguir e desça devagar. Segure na parede se precisar.',
+'Abdominal bicicleta':'Deitado, leve o cotovelo em direção ao joelho oposto, alternando, como se pedalasse.',
+'Abdominal tesoura':'Deitado, pernas esticadas um pouco acima do chão. Cruze uma sobre a outra, alternando.',
+'Abdominal':'Deitado, joelhos dobrados. Tire os ombros do chão contraindo a barriga, sem puxar o pescoço com as mãos.',
+'Prancha lateral':'De lado, apoiado num antebraço, corpo reto e quadril no alto. Segure e depois troque de lado.',
+'Prancha com joelhos':'Antebraços e joelhos no chão, corpo reto. Segure sem deixar o quadril subir ou cair.',
+'Prancha com toque no ombro':'Na posição de flexão, toque um ombro com a mão oposta, alternando, sem balançar o quadril.',
+'Prancha':'Apoie os antebraços e as pontas dos pés, corpo reto. Segure sem deixar o quadril cair.',
+'Remada curvada':'Joelhos um pouco dobrados e tronco inclinado para frente, costas retas. Puxe a mochila até a barriga e desça devagar.',
+'Remada com um braço':'Uma mão e um joelho apoiados na cadeira. Com a outra mão, puxe a mochila até a cintura. Depois troque.',
+'Remada deitado':'Deite embaixo de uma mesa bem firme, segure na borda e puxe o peito até ela. Só faça se a mesa não balançar.',
+'Superman alternado':'Deitado de barriga para baixo, levante um braço e a perna oposta. Desça e troque.',
+'Superman':'Deitado de barriga para baixo, levante braços e pernas do chão ao mesmo tempo e desça devagar.',
+'Elevação lateral':'Em pé, uma garrafa em cada mão. Levante os braços para os lados até a altura dos ombros e desça devagar.',
+'Elevação frontal':'Em pé, uma garrafa em cada mão. Levante os braços para frente até a altura dos ombros e desça devagar.',
+'Desenvolvimento':'Peso na altura dos ombros. Empurre para cima até esticar os braços e desça devagar.',
+'Tríceps na cadeira':'De costas para uma cadeira firme, mãos na borda. Dobre os cotovelos descendo o corpo e suba.',
+'Tríceps francês':'Segure uma garrafa com as duas mãos atrás da cabeça. Estique os braços para cima e desça devagar.',
+'Rosca martelo':'Em pé, garrafas nas mãos com as palmas viradas uma para a outra. Dobre os cotovelos e desça devagar.',
+'Rosca':'Segure a mochila com os braços esticados. Dobre os cotovelos trazendo-a até o peito e desça devagar.',
+'Encolhimento':'Segure a mochila com os braços esticados e suba os ombros em direção às orelhas. Desça devagar.',
+'Crucifixo invertido':'Tronco inclinado para frente, uma garrafa em cada mão. Abra os braços para os lados, como asas, e desça devagar.',
+'Marcha':'Marche no lugar levantando os joelhos e balançando os braços.',
+'Passos laterais':'Dê passos para o lado, de um lado para o outro, com os joelhos levemente dobrados.',
+'Corrida lateral':'Corra de lado, para um lado e depois para o outro, com os joelhos dobrados.',
+'Corrida com joelho alto':'Corra no lugar levantando os joelhos até a altura do quadril.',
+'Corrida parada':'Corra no lugar, sem sair do lugar, balançando os braços.',
+'Polichinelo sem salto':'Abra um pé para o lado enquanto sobe os braços, volte e troque o lado. Sem pular.',
+'Polichinelo':'Pule abrindo as pernas e batendo as mãos acima da cabeça. Pule de novo fechando.',
+'Socos no ar':'Em pé, pés afastados, dê socos para frente alternando os braços, como um boxeador.',
+'Pular corda':'Pule com os dois pés juntos, girando os pulsos como se tivesse uma corda.',
+'Burpee com flexão':'Burpee com uma flexão quando estiver com o corpo esticado no chão.',
+'Burpee':'Agache, ponha as mãos no chão, jogue as pernas para trás, volte e levante com um pulinho.',
+'Escalador':'Na posição de flexão, traga os joelhos ao peito alternando, como se corresse no chão.',
+'Rotação':'Em pé, gire o tronco para um lado e para o outro, devagar.'};
+const _comoK=Object.keys(COMO).sort((a,b)=>b.length-a.length);
+const comoDe=n=>{n=String(n||'');const k=_comoK.find(x=>n.indexOf(x)===0);return k?COMO[k]:''};
+// texto de um passo na lista da missão, em linguagem simples
+const passoTxt=x=>x.k==='sets'?(x.mv?'Circuito, '+x.sets+(x.sets===1?' volta':' voltas')+': '+x.mv.join(', ')+' ('+x.w+' s cada)':x.name+': '+x.sets+(x.sets===1?' série de ':' séries de ')+x.target):x.k==='timer'?x.name+' ('+Math.round(x.sec/60)+' min)':x.name;
