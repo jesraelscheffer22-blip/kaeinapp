@@ -73,7 +73,7 @@ const Mand={
  dias(m){return Object.keys(m.d||{}).length},
  maxDias(){return Mand.lista().reduce((a,m)=>Math.max(a,Mand.dias(m)),0)},
  selos(m){const n=Mand.dias(m);return [7,21,66].filter(x=>n>=x)},
- criar(t){t=String(t||'').trim().slice(0,60);if(!t||Mand.lista().length>=3)return;S.mand.push({id:Date.now(),t,d:{},c:S.day});S.top=false;render()},
+ criar(t){t=Seg.texto(t,60);if(!t||Mand.lista().length>=3)return;S.mand.push({id:Date.now(),t,d:{},c:S.day});S.top=false;render()},
  apagar(id){if(S.mdel!==id){S.mdel=id;render();setTimeout(()=>{if(S.mdel===id){S.mdel=null;render()}},4000);return}S.mand=Mand.lista().filter(m=>m.id!==id);S.mdel=null;render()},
  marcar(id){const m=Mand.lista().find(x=>x.id===id);if(!m)return;m.d=m.d||{};if(m.d[S.day]){delete m.d[S.day];S.xpPrev-=2}else{m.d[S.day]=1;S.xpPrev+=2;try{Som.pincel()}catch(e){}const n=Mand.dias(m);if([7,21,66].includes(n)){S.mselo={t:m.t,n};try{Som.selo()}catch(e){}}}S.top=false;render()},
  seloH(n){return '<i class="mselo s'+n+'">'+n+'</i>'},

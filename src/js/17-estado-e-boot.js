@@ -4,7 +4,7 @@ function quick(){reset();S.name='Aluno';S.age=28;S.h=175;S.w=75;
  S.i=steps.findIndex(s=>s.t==='day1');render()}
 function _clk(){const e=document.getElementById('clk');if(e){const d=new Date();e.textContent=String(d.getHours()).padStart(2,'0')+':'+String(d.getMinutes()).padStart(2,'0')}}_clk();setInterval(_clk,10000);
 function _iso(){const d=new Date();return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0')}
-function _save(){try{localStorage.setItem('kaien.v1',JSON.stringify(Object.assign({},S,{g:null,cel:null,react:null})))}catch(e){}}
+function _save(){try{localStorage.setItem('kaien.v1',JSON.stringify(Object.assign({},S,{g:null,cel:null,react:null,bkEnc:null,bkImp:null,bkTxt:null})))}catch(e){}}
 function _sync(){if(!S||steps[S.i].t!=='day1')return;const t=_iso();if(!S.lastDate){S.lastDate=t;S.wd0=(new Date().getDay()+6)%7;return}
  const a=S.lastDate.split('-').map(Number),b=t.split('-').map(Number),n=Math.round((Date.UTC(b[0],b[1]-1,b[2])-Date.UTC(a[0],a[1]-1,a[2]))/864e5);
  S.lastDate=t;for(let k=0;k<Math.min(n,60);k++)nextDay()}

@@ -109,7 +109,7 @@ function doneSc(){const c=S.sc;let x;
  S.react={x,p:'A'};render()}
 function needSup(){const c=S.sc;return c.te>=5||(c.ir>=5&&c.te>=4)||S.a.ctrl===2}
 function donePull(){S.react={x:hasHabit()?'Admitir o que nos prende exige mais coragem do que qualquer treino. Obrigado por confiar isso a mim.':'Entendido. Se algo mudar no caminho, você pode me dizer.',p:'A'};render()}
-function doneName(){const v=$('nm').value.trim();if(!v){S.err='Digite um nome para continuar.';render();return}S.name=v;S.err='';S.react={x:v+'. Vou lembrar disso. Espero que você também lembre.',p:'B'};render()}
+function doneName(){const v=Seg.texto($('nm').value,20);if(!v){S.err='Digite um nome para continuar.';render();return}S.name=v;S.err='';S.react={x:v+'. Vou lembrar disso. Espero que você também lembre.',p:'B'};render()}
 function doneBody(){const a=+$('ag').value,h=+$('ht').value,w=+$('wt').value;
  if(!a||a<16||a>99){S.err=a&&a<16?'Este app é para maiores de 16 anos (idade mínima provisória).':'Informe uma idade válida.';render();return}
  if(h&&(h<100||h>230)){S.err='Altura em centímetros, entre 100 e 230.';render();return}

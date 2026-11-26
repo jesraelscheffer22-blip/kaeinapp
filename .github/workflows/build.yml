@@ -36,7 +36,16 @@ jobs:
           npx cap init Kaien com.kaien.app --web-dir www
           npx cap add android
           sed -i 's#<application#<uses-permission android:name="android.permission.VIBRATE" />\n    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />\n    <application#' android/app/src/main/AndroidManifest.xml
+          # Privacidade: os dados do app (diário, hábitos) não vão para o backup automático do Google
+          sed -i 's#android:allowBackup="true"#android:allowBackup="false" android:fullBackupContent="false"#' android/app/src/main/AndroidManifest.xml
+          grep -q 'android:allowBackup="false"' android/app/src/main/AndroidManifest.xml || echo "::warning::allowBackup não encontrado no manifesto"
+          # Só HTTPS dentro do app (sem tráfego em texto puro)
+          sed -i 's#<application#<application android:usesCleartextTraffic="false"#' android/app/src/main/AndroidManifest.xml
           npx cap sync android
+      - name: Verificar dependências (vulnerabilidades conhecidas)
+        run: |
+          npm audit --omit=dev --audit-level=high || echo "::warning::npm audit encontrou vulnerabilidades altas. Veja o log acima."
+          ! grep -rEn "(api[_-]?key|secret|password)\s*[:=]\s*['\"][A-Za-z0-9_\-]{12,}" src/ www/ || (echo "::error::Possível segredo no código" && exit 1)
       - name: Compilar o APK
         run: |
           cd android

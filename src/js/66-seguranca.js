@@ -1,0 +1,39 @@
+/* ===== Segurança e privacidade =====
+   O Kaien não tem servidor, conta, banco de dados nem API: os dados ficam só no aparelho.
+   Aqui ficam as proteções que valem para um app assim: entradas validadas, backup protegido
+   por senha (criptografia AES-GCM), importação restrita e limpa, e nenhum dado saindo do aparelho. */
+const Seg={
+ // texto digitado pelo usuário: sem caracteres de controle, sem espaços nas pontas, com limite de tamanho
+ texto(s,max){return String(s==null?'':s).replace(/[\u0000-\u0008\u000B\u000C\u000E-\u001F\u007F‪-‮⁦-⁩]/g,'').trim().slice(0,max||500)},
+ // limpeza profunda de dados importados (evita "poluir" objetos do JavaScript e textos gigantes)
+ limpar(v,prof){prof=prof||0;if(prof>12)return null;if(typeof v==='string')return v.slice(0,20000);if(typeof v==='number')return Number.isFinite(v)?v:0;if(typeof v==='boolean'||v===null)return v;
+  if(Array.isArray(v))return v.slice(0,20000).map(x=>Seg.limpar(x,prof+1));if(typeof v==='object'){const o={};Object.keys(v).forEach(k=>{if(k==='__proto__'||k==='constructor'||k==='prototype')return;o[k]=Seg.limpar(v[k],prof+1)});return o}return null},
+ // criptografia do backup: chave derivada da senha (PBKDF2-SHA256, 150 mil rodadas) + AES-GCM 256
+ b64:{de:b=>btoa(String.fromCharCode(...new Uint8Array(b))),para:s=>Uint8Array.from(atob(s),c=>c.charCodeAt(0))},
+ async chave(senha,salt,it){const base=await crypto.subtle.importKey('raw',new TextEncoder().encode(senha),'PBKDF2',false,['deriveKey']);return crypto.subtle.deriveKey({name:'PBKDF2',salt,iterations:it,hash:'SHA-256'},base,{name:'AES-GCM',length:256},false,['encrypt','decrypt'])},
+ async cifrar(txt,senha){const salt=crypto.getRandomValues(new Uint8Array(16)),iv=crypto.getRandomValues(new Uint8Array(12)),it=150000,k=await Seg.chave(senha,salt,it);const d=await crypto.subtle.encrypt({name:'AES-GCM',iv},k,new TextEncoder().encode(txt));return JSON.stringify({app:'kaien',v:5,enc:1,alg:'AES-GCM-256',kdf:'PBKDF2-SHA256',it,salt:Seg.b64.de(salt),iv:Seg.b64.de(iv),dados:Seg.b64.de(d)})},
+ async decifrar(o,senha){const k=await Seg.chave(senha,Seg.b64.para(o.salt),Math.min(1e6,Math.max(1e4,+o.it||150000)));const d=await crypto.subtle.decrypt({name:'AES-GCM',iv:Seg.b64.para(o.iv)},k,Seg.b64.para(o.dados));return new TextDecoder().decode(d)},
+ podeCifrar(){return !!(window.crypto&&crypto.subtle)}
+};
+
+// ---------- Backup: exportar com senha opcional; importar restrito, validado e limpo ----------
+const BK_MAX=5*1024*1024; // 5 MB: maior que qualquer backup real
+Backup.validar=o=>!!(o&&o.app==='kaien'&&o.S&&typeof o.S==='object'&&!Array.isArray(o.S)&&typeof o.S.name==='string'&&o.S.name.length<=60&&Array.isArray(o.S.hist)&&o.S.hist.length<=20000&&typeof o.S.xpPrev==='number'&&Number.isFinite(o.S.xpPrev)&&o.S.xpPrev>=0&&Number.isInteger(o.S.day)&&o.S.day>=1&&o.S.day<=100000);
+Backup.exportar=async()=>{let txt=Backup.dados(),nome='kaien-backup-'+_iso()+'.json';const sen=(document.getElementById('bksen')||{}).value||'';
+ if(S.bkProt){if(sen.length<6){S.bkMsg='A senha precisa ter pelo menos 6 caracteres.';render();return}if(!Seg.podeCifrar()){S.bkMsg='Este aparelho não consegue criptografar. Exporte sem senha e guarde o arquivo num lugar seguro.';render();return}txt=await Seg.cifrar(txt,sen);nome='kaien-backup-'+_iso()+'-protegido.json'}
+ try{const b=new Blob([txt],{type:'application/json'}),u=URL.createObjectURL(b),a=document.createElement('a');a.href=u;a.download=nome;document.body.appendChild(a);a.click();setTimeout(()=>{URL.revokeObjectURL(u);a.remove()},500)}catch(e){}
+ try{if(navigator.share&&window.File){const f=new File([txt],nome,{type:'application/json'});if(navigator.canShare&&navigator.canShare({files:[f]}))navigator.share({files:[f],title:'Backup do Kaien'}).catch(()=>{})}}catch(e){}
+ S.bkMsg=S.bkProt?'Arquivo protegido gerado. Sem a senha ninguém consegue abrir, nem você: guarde a senha.':'Arquivo gerado. Ele contém dados pessoais: guarde num lugar seguro.';render()};
+Backup.ler=async txt=>{S.bkImp=null;S.bkEnc=null;txt=String(txt||'');if(txt.length>BK_MAX){S.bkMsg='Arquivo grande demais para ser um backup do Kaien.';render();return}
+ try{const o=JSON.parse(txt);if(o&&o.app==='kaien'&&o.enc===1){S.bkEnc=o;S.bkMsg='Este backup é protegido. Digite a senha.';render();return}if(!Backup.validar(o))throw 0;S.bkImp={S:Seg.limpar(o.S),nome:Seg.texto(o.S.name,40),dia:o.S.day,data:Seg.texto(o.data,30)};S.bkMsg=''}catch(e){S.bkMsg='Esse arquivo não parece um backup do Kaien.'}render()};
+Backup.desbloquear=async()=>{const sen=(document.getElementById('bksen2')||{}).value||'';try{const txt=await Seg.decifrar(S.bkEnc,sen);S.bkEnc=null;await Backup.ler(txt)}catch(e){S.bkMsg='Senha incorreta ou arquivo danificado.';render()}};
+Backup.arquivo=inp=>{const f=inp.files&&inp.files[0];if(!f)return;if(f.size>BK_MAX){S.bkMsg='Arquivo grande demais para ser um backup do Kaien.';render();return}if(!/json|text|octet/i.test(f.type||'application/json')&&!/\.json$|\.txt$/i.test(f.name)){S.bkMsg='Escolha o arquivo .json do backup.';render();return}const r=new FileReader();r.onload=()=>Backup.ler(String(r.result));r.readAsText(f)};
+Backup.confirmar=()=>{const i=S.bkImp;if(!i)return;try{localStorage.setItem('kaien.v1.bak',localStorage.getItem('kaien.v1')||'');localStorage.setItem('kaien.v1',JSON.stringify(i.S));_save=()=>{};location.reload()}catch(e){S.bkMsg='Não consegui importar. Nada foi alterado.';render()}};
+Backup.v=()=>{const i=S.bkImp;return '<div class="card"><div class="mt"><span class="g">Exportar</span><b>Guardar o seu progresso</b></div><p class="note">Gera um arquivo com tudo: níveis, XP, missões, recordações e ajustes. Use para trocar de celular. O arquivo tem dados pessoais (diário, hábitos): por isso dá para protegê-lo com senha.</p>'
+ +'<label class="note" style="display:flex;gap:8px;align-items:center"><input type="checkbox" style="width:auto" '+(S.bkProt?'checked':'')+' onchange="S.bkProt=this.checked;render()">Proteger o arquivo com senha (recomendado)</label>'+(S.bkProt?'<input id="bksen" type="password" class="intin" maxlength="64" autocomplete="new-password" placeholder="Senha (mínimo 6 caracteres)"><p class="note">A senha não fica salva em lugar nenhum. Se você esquecer, o arquivo não abre.</p>':'')
+ +'<div class="ajl"><button class="mb on" onclick="Backup.exportar()">Exportar arquivo</button>'+(S.bkProt?'':'<button class="mb" onclick="Backup.copiar()">Copiar como texto</button>')+'</div>'+(S.bkTxt&&!S.bkProt?'<textarea class="dnote" rows="4" readonly onclick="this.select()">'+esc(Backup.dados())+'</textarea>':'')+'</div>'
+ +'<div class="card"><div class="mt"><span class="g">Importar</span><b>Trazer o progresso de outro aparelho</b></div><p class="note">Escolha o arquivo do backup ou cole o texto. Antes de trocar, o progresso atual é guardado como cópia de segurança.</p><input type="file" accept="application/json,.json,text/plain" onchange="Backup.arquivo(this)"><textarea id="bkcol" class="dnote" rows="3" maxlength="5000000" placeholder="Ou cole aqui o texto do backup"></textarea><button class="mb" onclick="Backup.ler(document.getElementById(\'bkcol\').value)">Ler texto colado</button>'
+ +(S.bkEnc?'<input id="bksen2" type="password" class="intin" maxlength="64" autocomplete="current-password" placeholder="Senha do backup"><button class="mb on" onclick="Backup.desbloquear()">Abrir backup protegido</button>':'')
+ +(i?'<div class="pvq">Backup de <b>'+esc(i.nome)+'</b>, dia '+i.dia+' do caminho'+(i.data?', gerado em '+esc(i.data.slice(0,10).split('-').reverse().join('/')):'')+'.<br>Isso vai substituir o progresso deste aparelho.</div><button class="mb on" onclick="Backup.confirmar()">Importar e substituir</button><button class="lk" onclick="S.bkImp=null;render()">Cancelar</button>':'')+'</div>'+(S.bkMsg?'<p class="note"><b>'+esc(S.bkMsg)+'</b></p>':'')};
+// senhas e textos de importação nunca ficam salvos no estado do app
+MIGS.push(()=>{delete S.bkEnc;delete S.bkImp;delete S.bkTxt});

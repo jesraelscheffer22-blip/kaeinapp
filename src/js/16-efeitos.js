@@ -1,4 +1,4 @@
-function esc(t){return String(t).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]))}
+function esc(t){return String(t).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
 (function(){const em=document.getElementById('em'),c=['#ffcf6a','#ffb347','#c9a8ff','#ffe9a8'];
  for(let i=0;i<24;i++){const e=document.createElement('i'),z=2+Math.random()*3.5;
   e.style.cssText='left:'+(Math.random()*100)+'%;width:'+z+'px;height:'+z+'px;background:'+c[i%4]+';box-shadow:0 0 '+(z*3)+'px '+c[i%4]+';animation-duration:'+(9+Math.random()*12)+'s;animation-delay:-'+(Math.random()*18)+'s;--dx:'+((Math.random()-.5)*90)+'px';
