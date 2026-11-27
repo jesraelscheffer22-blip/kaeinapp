@@ -1,7 +1,9 @@
 /* ===== Emblemas de rank (SVG vetorial, nítido em qualquer tamanho) ===== */
 const Emb={
  cor:{E:['#9aa0b4','#3a3d4a'],D:['#a9c4ee','#2a3550'],C:['#d29a5c','#2f7a5a'],B:['#e6eef8','#5a7fb0'],A:['#f1d48a','#a3241d'],S:['#fff4d6','#9b6cff']},
- svg(R,sz){const c=Emb.cor[R]||Emb.cor.E,id='em'+R+Math.random().toString(36).slice(2,6);let shape='',deco='';
+ art:{E:@@TEM:emb-E@@?'@@IMG:emb-E@@':'',D:@@TEM:emb-D@@?'@@IMG:emb-D@@':'',C:@@TEM:emb-C@@?'@@IMG:emb-C@@':'',B:@@TEM:emb-B@@?'@@IMG:emb-B@@':'',A:@@TEM:emb-A@@?'@@IMG:emb-A@@':'',S:@@TEM:emb-S@@?'@@IMG:emb-S@@':''},
+ svg(R,sz){if(Emb.art[R])return '<img class="embi" alt="Rank '+R+'" src="'+Emb.art[R]+'" width="'+sz+'" height="'+sz+'">';return Emb.svg0(R,sz)},
+ svg0(R,sz){const c=Emb.cor[R]||Emb.cor.E,id='em'+R+Math.random().toString(36).slice(2,6);let shape='',deco='';
   const poly=(n,r,rot)=>Array.from({length:n},(_,i)=>{const a=rot+i*2*Math.PI/n;return (50+r*Math.cos(a)).toFixed(1)+','+(50+r*Math.sin(a)).toFixed(1)}).join(' ');
   if(R==='C'){shape='<polygon points="'+poly(8,44,Math.PI/8)+'" fill="url(#g'+id+')" stroke="'+c[0]+'" stroke-width="3"/>';deco='<g stroke="'+c[1]+'" stroke-width="3.2" stroke-linecap="round"><path d="M30 80 40 18M50 84V14M70 80 60 18"/></g><g fill="'+c[1]+'"><path d="M40 30c8-4 14-2 18 2-8 2-12 1-18-2zM50 46c-8-4-14-2-18 2 8 2 12 1 18-2zM60 60c8-4 14-2 18 2-8 2-12 1-18-2z"/></g>'}
   else if(R==='B'){shape='<polygon points="'+poly(6,45,-Math.PI/2)+'" fill="url(#g'+id+')" stroke="'+c[0]+'" stroke-width="3"/>';deco='<g stroke="'+c[0]+'" stroke-width="2.4" stroke-linecap="round" opacity=".8">'+[0,1,2].map(i=>{const a=i*Math.PI/3;return '<path d="M'+(50+30*Math.cos(a)).toFixed(1)+' '+(50+30*Math.sin(a)).toFixed(1)+'L'+(50-30*Math.cos(a)).toFixed(1)+' '+(50-30*Math.sin(a)).toFixed(1)+'"/>'}).join('')+'</g><path d="M24 70 40 46 50 58 62 38 78 70Z" fill="'+c[1]+'" opacity=".9"/>'}

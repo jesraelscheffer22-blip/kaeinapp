@@ -41,6 +41,6 @@
 .rdr .chimg.cap3{background-image:url(@@IMG:chimg-cap3@@)}
 .rdr .chimg.cap4{background-image:url(@@IMG:chimg-cap4@@)}
 .rdr .chimg.cap5{background-image:url(@@IMG:chimg-cap5@@)}
-.emE{background-image:url(@@IMG:emE@@)}
-.emD{background-image:url(@@IMG:emD@@)}
+.emE{background-image:url(@@IMG:emb-E@@);background-size:contain;background-repeat:no-repeat}
+.emD{background-image:url(@@IMG:emb-D@@);background-size:contain;background-repeat:no-repeat}
 /*@@AF-CSS@@*/

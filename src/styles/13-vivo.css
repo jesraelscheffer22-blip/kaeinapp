@@ -50,3 +50,6 @@ body.rfx #vivo,body.rfx .vdust,body.rfx .vgate{display:none}
 .twr.tup .twf.cur{animation:tbri 1.4s ease-out}
 @keyframes tsobe{from{transform:translateY(-46px);opacity:.4}to{transform:none;opacity:1}}
 @keyframes tbri{0%{box-shadow:0 0 0 0 rgba(240,182,74,.9)}100%{box-shadow:0 0 0 14px rgba(240,182,74,0)}}
+/* emblemas de rank (arte): brilho pulsando */
+img.embi{display:inline-block;object-fit:contain;filter:drop-shadow(0 0 10px rgba(255,200,120,.35));animation:embp 3.2s ease-in-out infinite}
+@keyframes embp{50%{filter:drop-shadow(0 0 20px rgba(255,200,120,.6));transform:scale(1.03)}}

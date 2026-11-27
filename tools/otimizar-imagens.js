@@ -8,7 +8,7 @@ const fs = require('fs'), path = require('path'), { execFileSync } = require('ch
 const DIR = path.join(__dirname, '..', 'assets', 'img');
 // qualidade por tipo: fundos, provas e capítulos são grandes e escuros, aguentam mais compressão
 const qualidade = n => /^(bg|prova|cap|boss)/.test(n) ? 60 : 74;
-const largura = n => /^(mob2?-|comp-|spin)/.test(n) ? 512 : /^(bg|prova)/.test(n) ? 1024 : 768;
+const largura = n => /^(mob2?-|comp-|spin|emb-)/.test(n) ? 512 : /^(bg|prova)/.test(n) ? 1024 : 768;
 const tem = c => { try { execFileSync(c, ['-version'], { stdio: 'ignore' }); return true } catch (e) { try { execFileSync(c, ['--version'], { stdio: 'ignore' }); return true } catch (e2) { return false } } };
 const cwebp = tem('cwebp'), py = !cwebp && tem('python3');
 let n = 0;
