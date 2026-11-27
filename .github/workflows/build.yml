@@ -35,6 +35,8 @@ jobs:
           npm install @capacitor/core@6 @capacitor/cli@6 @capacitor/android@6 @capacitor/local-notifications@6
           npx cap init Kaien com.kaien.app --web-dir www
           npx cap add android
+          # Ícone do Kaien (gerado de resources/icon/; os PNGs prontos ficam em resources/android/res)
+          cp -r resources/android/res/. android/app/src/main/res/
           sed -i 's#<application#<uses-permission android:name="android.permission.VIBRATE" />\n    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />\n    <application#' android/app/src/main/AndroidManifest.xml
           # Privacidade: os dados do app (diário, hábitos) não vão para o backup automático do Google
           sed -i 's#android:allowBackup="true"#android:allowBackup="false" android:fullBackupContent="false"#' android/app/src/main/AndroidManifest.xml
