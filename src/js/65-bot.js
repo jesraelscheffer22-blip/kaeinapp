@@ -5,11 +5,11 @@ const Bot={
  aberto:0,
  // conclui um andar da dungeon D pelo modo guiado (respeita a lógica real do jogo)
  andar(D){const i=D.fl.findIndex(f=>!f);if(i<0)return;S.dg=D;S.floorDay=-1;startGuide('dg'+i,i);let n=0;while(S.g&&n++<400){const g=S.g,st=curStep();if(g.ph==='fb'){gFb('o');continue}if(g.ph==='rest'){gRestSkip();continue}if(st.k==='sets'){gSetDone();continue}if(st.k==='timer'){g.fin=true;finishStep();continue}if(st.k==='write'){g.note='Feito pelo bot de teste.';finishStep();continue}finishStep()}S.cel=null},
- // tudo do dia: missões, água, sono, mandamentos, chefe errante, um andar em cada dungeon aberta
+ // tudo do dia: missões, água, sono, mandamentos, chefe errante, desafio da torre, um andar em cada dungeon aberta
  hoje(silencio){const C=calcXp();C.ms.forEach(m=>{if(!(S.ms[m.key]&&S.ms[m.key].st==='done'))S.ms[m.key]={st:'done',times:[]}});if(!S.noWater)S.cups=Math.max(S.cups||0,C.wp.cups);
   if(slpOpen())slpSet(3);(S.mand||[]).forEach(m=>{m.d=m.d||{};if(!m.d[S.day]){m.d[S.day]=1;S.xpPrev+=2}});
   const t=Errante.est();if(t&&!t.won){ERR.find(e=>e.id===t.id).ch.forEach((_,i)=>t.ck[i]=1);Errante.checar()}
-  Object.values(S.dgAll||{}).filter(D=>!D.won).forEach(D=>Bot.andar(D));S.floorDay=S.day;
+  try{const tw=Torre.est();if(tw.h&&liberado('torre')&&tw.dd!==S.day){Torre.subir()}}catch(e){}Object.values(S.dgAll||{}).filter(D=>!D.won).forEach(D=>Bot.andar(D));S.floorDay=S.day;
   if(!silencio){S.botMsg='Dia '+S.day+' completo: missões, água, sono e um andar em cada dungeon aberta.';S.top=true;render()}},
  avancar(){Bot.hoje(1);nextDay();S.splashDay=S.day;S.botMsg='Avançou para o dia '+S.day+'.';S.top=true;render()},
  semana(){for(let i=0;i<7;i++){Bot.hoje(1);nextDay()}S.splashDay=S.day;S.botMsg='7 dias completos. Agora é o dia '+S.day+'.';S.top=true;render()},

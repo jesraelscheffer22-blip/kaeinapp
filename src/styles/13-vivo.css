@@ -37,3 +37,16 @@ body.rfx #vivo,body.rfx .vdust,body.rfx .vgate{display:none}
 .sheet.app>*{flex-shrink:0}
 .dcw{flex:none}
 .pvw .avw{display:block;width:100%}
+/* companheiros com retrato: maior, enquadrado no rosto e "respirando" */
+.cmpc{padding-right:118px;min-height:150px}
+.cmpa{width:104px;height:134px;box-shadow:0 0 18px rgba(var(--cc),.35)}
+.cmpa img{object-position:50% 8%;animation:vresp 5s ease-in-out infinite;transform-origin:50% 100%}
+.cmpa::after{content:'';position:absolute;inset:0;border-radius:10px;box-shadow:inset 0 0 0 1px rgba(var(--cc),.55);pointer-events:none}
+/* Torre: desafio do dia e subida animada */
+.tdc{border:1px solid rgba(240,182,74,.45);background:linear-gradient(160deg,rgba(240,182,74,.12),rgba(20,14,38,.75))}
+.tdc b{display:block;font-size:18px;line-height:1.35;margin:4px 0 6px}
+.tdc.ok{border-color:rgba(90,200,140,.5);background:linear-gradient(160deg,rgba(90,200,140,.14),rgba(20,14,38,.75))}
+.twr.tup{animation:tsobe .9s cubic-bezier(.2,.8,.2,1)}
+.twr.tup .twf.cur{animation:tbri 1.4s ease-out}
+@keyframes tsobe{from{transform:translateY(-46px);opacity:.4}to{transform:none;opacity:1}}
+@keyframes tbri{0%{box-shadow:0 0 0 0 rgba(240,182,74,.9)}100%{box-shadow:0 0 0 14px rgba(240,182,74,0)}}

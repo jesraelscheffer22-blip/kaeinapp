@@ -28,7 +28,7 @@ const alvo = path.resolve(process.argv[2] || 'dist/index.html');
     // Bestiário
     o.bestiario = Bestiario.qtd() + ' de ' + Bestiario.lista().length;
     // Torre
-    Torre.escolher('Jogos'); for (let d = 0; d < 12; d++) __dia(); o.torre = S.torre.n + ' andares, msg: ' + (S.torre.msg || '-');
+    Torre.escolher('Jogos'); for (let d = 0; d < 12; d++) { Torre.subir(); Torre.subir(); __dia(); } o.torre = S.torre.n + ' andares, msg: ' + (S.torre.msg || '-');
     // Invasão do verão (21 a 27/12): 5 dias ativos dentro da janela
     S._hojeTeste = '2026-12-20T12:00:00'; S.lastDate = '2026-12-20'; let n0 = Invasao.atual(); o.invAntes = n0 ? n0.id : 'fora da janela';
     for (let d = 0; d < 6; d++) { __dia(); const t = new Date(2026, 11, 21 + d, 12); S._hojeTeste = t.toISOString(); S.lastDate = _iso.call ? (t.getFullYear() + '-' + String(t.getMonth() + 1).padStart(2, '0') + '-' + String(t.getDate()).padStart(2, '0')) : S.lastDate; Invasao.checar() }
