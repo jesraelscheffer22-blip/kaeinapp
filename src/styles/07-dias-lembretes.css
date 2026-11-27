@@ -28,3 +28,6 @@ p.gcomo{text-align:center;background:none;padding:0 4px;color:#cfc8e0}
 .gmv li span{flex:1;font-size:14.5px;color:#e8e2f4;text-align:left}.gmv li small{color:#a9a2c4;font-size:12px}
 .gmv li.on{border-color:#f0b64a;background:rgba(240,182,74,.14)}.gmv li.on i{background:#f0b64a;color:#1a1230}
 .gmv li.ok{opacity:.55}.gmv li.ok i{background:#3f9d6c;color:#fff}
+/* boneco animado do exercício */
+svg.exa{display:block;width:100%;max-width:300px;height:auto;margin:6px auto 2px;border-radius:14px;background:radial-gradient(ellipse at 50% 60%,rgba(127,178,255,.10),rgba(10,8,24,.0) 70%)}
+.gcur svg.exa{max-width:240px}

@@ -175,6 +175,6 @@ const COMO={
 'Escalador':'Na posição de flexão, traga os joelhos ao peito alternando, como se corresse no chão.',
 'Rotação':'Em pé, gire o tronco para um lado e para o outro, devagar.'};
 const _comoK=Object.keys(COMO).sort((a,b)=>b.length-a.length);
-const comoDe=n=>{n=String(n||'');const k=_comoK.find(x=>n.indexOf(x)===0);return k?COMO[k]:''};
+const comoDe=n=>{n=String(n||'');const t=/^(Aquecimento|Finalização)/.test(n)?[n]:[n.indexOf(': ')>0?n.slice(n.indexOf(': ')+2):n];for(const v of t){const k=_comoK.find(x=>v.indexOf(x)===0);if(k)return COMO[k]}return ''};
 // texto de um passo na lista da missão, em linguagem simples
 const passoTxt=x=>x.k==='sets'?(x.mv?'Circuito, '+x.sets+(x.sets===1?' volta':' voltas')+': '+x.mv.join(', ')+' ('+x.w+' s cada)':x.name+': '+x.sets+(x.sets===1?' série de ':' séries de ')+x.target):x.k==='timer'?x.name+' ('+Math.round(x.sec/60)+' min)':x.name;
