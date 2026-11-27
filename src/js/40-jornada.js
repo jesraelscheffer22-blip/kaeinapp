@@ -39,7 +39,7 @@ const Intencao={
  card(){const L=myLvl();if(L<10)return '';const R=Intencao.rankAtual();S.int=S.int||{};const i=S.int[R];
   if(i)return '<div class="card intc"><span class="g">Intenção do rank '+R+'</span><b>'+esc(i.w)+'</b>'+(i.f?'<p class="note">“'+esc(i.f)+'”</p>':'')+'</div>';
   const w=S.intW||'';return '<div class="card"><div class="mt"><span class="g">Novo rank, nova intenção</span><b>Que palavra vai guiar o seu rank '+R+'?</b></div><div class="kchips">'+INTP.map(p=>'<button class="mb '+(w===p?'on':'')+'" onclick="S.intW=\''+p+'\';S.top=false;render()">'+p+'</button>').join('')+'</div><input id="intf" maxlength="80" placeholder="Uma frase sua (opcional)" class="intin"><button class="mb on" '+(w?'':'disabled')+' onclick="Intencao.salvar()">Guardar intenção</button><p class="note">Ela aparece aqui no Início e eu vou lembrar dela na sua próxima ascensão.</p></div>'},
- salvar(){const R=Intencao.rankAtual(),e=document.getElementById('intf');S.int=S.int||{};S.int[R]={w:S.intW,f:e?e.value.trim():'',d:S.day};S.intW='';S.top=false;render()},
+ salvar(){if(!S.intW)return;const R=Intencao.rankAtual(),e=document.getElementById('intf');S.int=S.int||{};S.int[R]={w:S.intW,f:e?e.value.trim():'',d:S.day};S.intW='';S.top=false;render()},
  lembrar(R){const i=S.int&&S.int[R];return i?'<p class="pvs">No começo do rank '+R+', você escolheu: “'+esc(i.w)+'”'+(i.f?'. '+esc(i.f):'')+'</p>':''}
 };
 INI_CARDS.unshift(()=>Intencao.card());

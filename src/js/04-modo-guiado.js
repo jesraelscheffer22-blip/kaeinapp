@@ -19,7 +19,7 @@ function gFb(a){const g=S.g,st=curStep(),t=applyFb(st.fb,a);g.fbs=(g.fbs||[]).co
 function finishStep2(toast){const g=S.g,m=curM(),st=curStep();if(g.note&&g.note.trim()){addDia(g.note.trim(),g.dg!=null&&S.dg?'dg':'ms',g.dg!=null&&S.dg?S.dg.habit+' · andar '+(g.dg<dgBoss(S.dg)?g.dg+1:'chefe'):(st.k==='write'?m.title+' · '+st.name:m.title))}if(S.wdr)delete S.wdr[m.key+'|'+g.si];g.note='';g.times.push({name:st.name,sec:Math.round(elapsed(g)/1000)});
  g.toast=toast||null;if(g.si+1<m.steps.length){g.si++;g.set=1;g.ph='work';g.acc=0;g.t0=Date.now();g.paused=false;g.fin=false;render()}else completeMission('done')}
 function gPart(){const g=S.g,st=curStep(),e=elapsed(g);let def=0,max=0,unit='';
- if(st.k==='sets'){max=st.sets;def=g.ph==='rest'?g.set:g.set-1;unit='séries completas'}else if(st.k==='timer'){max=Math.round(st.sec/60);def=Math.min(max,Math.floor(e/60000));unit='minutos feitos'}
+ if(st.k==='sets'){max=st.sets;def=g.ph==='rest'?g.set:g.set-1;unit=st.mv?'voltas completas':'séries completas'}else if(st.k==='timer'){max=Math.round(st.sec/60);def=Math.min(max,Math.floor(e/60000));unit='minutos feitos'}
  g.ph0=g.ph;g.ph='ask';g.ask={v:def,max,unit};render()}
 function gAsk(d){const a=S.g.ask;a.v=Math.max(0,Math.min(a.max,a.v+d));render()}
 function gAskBack(){const g=S.g;g.ph=g.ph0;g.ask=null;if(g.ph==='work'&&!g.paused){}render()}

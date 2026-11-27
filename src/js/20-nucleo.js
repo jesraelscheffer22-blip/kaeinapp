@@ -51,7 +51,7 @@ function telaView(){const T=TELAS[S.tela];return '<div class="gh"><button class=
 function tutH(id,titulo,txt){S.tut=S.tut||{};if(S.tut[id])return '';return '<div class="card tipc"><div class="mt"><span class="g">Primeira vez aqui</span><b>'+esc(titulo)+'</b></div><p class="note">'+txt+'</p><button class="mb on" onclick="S.tut[\''+id+'\']=1;S.top=false;render()">Entendi</button></div>'}
 // Sistemas liberados por nível (ver PLANO-EXPANSAO.md).
 const UNL={mapa:11,bestiario:11,mandamentos:13,meditacao:14,galeria:14,torneio:17,escola:20,espelho2:20,kata:21,diario:23,templo:25,auraDin:25,elixires:26,fase3:30,torre:30,cenas:31,retro:33,invasao:36,armas:40,titComp:40,cartao:43,mestre:50};
-const liberado=k=>myLvl()>=(UNL[k]||0);
+const liberado=k=>!!(S&&S.a&&S.a.goal!=null)&&myLvl()>=(UNL[k]||0);
 const discipuloDe=()=>['o aprendiz do Kaien','o discípulo do Kaien','o discípulo do Kaien','irmão de caminho do Kaien','o herdeiro do Kaien','mestre do Caminho'][rkI(myLvl())];
 // Data (AAAA-MM-DD) de um dia do app, contando para trás a partir de hoje.
 function dataDoDia(d){const t=S.lastDate||_iso(),p=t.split('-').map(Number),x=new Date(p[0],p[1]-1,p[2]-(S.day-d));return x}
