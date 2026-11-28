@@ -18,14 +18,16 @@ const PT = {
   '7': x => `Ilustração do capítulo "${x.onde.split('·')[1].trim()}" das histórias do Kaien. Kaien jovem: cabelo longo escuro ondulado, roupas escuras, antebraços enfaixados. Velho mestre: cabelo branco. A parte de baixo deve ficar mais calma, porque o texto aparece por cima.`,
   '8': x => `Mini monstro evoluído da dungeon (Fase 2): ${x.onde.split('·').slice(1).join('·').trim()}. Pequeno, um pouco fofo e travesso, nunca assustador. Fundo transparente.`,
   '9': x => `Monstro da invasão das estações: ${x.onde.split('·')[1].trim()}. Aparece por 7 dias, 4 vezes por ano. Fundo transparente.`,
+  '11': x => `Chefe Errante ${x.onde.split('·')[1].trim()}. Aparece na terça e na sexta, um diferente a cada vez. Hoje é um desenho simples; esta imagem o substitui. Fundo transparente.`,
   '10': x => `Quadro do giro 360° do personagem (${x.onde.split('·').slice(1).join('·').trim()}). São 4 quadros por roupa (frente, direita, costas, esquerda), todos no mesmo tamanho e na mesma posição. É o item menos importante: deixe para o fim.`
 };
 const ptDe = x => (PT[x.g.split('.')[0]] || (() => ''))(x);
 const nivel = x => { const m = x.onde.match(/nível (\d+)/); return m ? +m[1] : 99 };
 
 // Ordem: grupos na ordem de importância; capítulos por nível
-const grupos = [...new Set(L.map(x => x.g))];
-const itens = []; grupos.forEach(g => { let a = L.filter(x => x.g === g); if (g.startsWith('7.')) a = a.slice().sort((p, q) => nivel(p) - nivel(q)); a.forEach(x => itens.push(x)) });
+const FALTAM = process.argv.includes('--faltam'), L0 = FALTAM ? L.filter(x => !existe(x.f)) : L;
+const grupos = [...new Set(L0.map(x => x.g))].sort((a, b) => (a.startsWith('10.') ? 1 : 0) - (b.startsWith('10.') ? 1 : 0));
+const itens = []; grupos.forEach(g => { let a = L0.filter(x => x.g === g); if (g.startsWith('7.')) a = a.slice().sort((p, q) => nivel(p) - nivel(q)); a.forEach(x => itens.push(x)) });
 itens.forEach((x, i) => x.n = i + 1);
 
 // Plano B: imagens que já existem no index.html antigo de 12,8 MB
@@ -39,10 +41,12 @@ Object.keys(MOB1).forEach(s => MOB1[s].forEach(([n, c], i) => addB(`mob-${s}-${i
 addB('kemo', 'Kaien emocionado (cinemática do rank D)', 'O Kaien adulto, emocionado e orgulhoso, de frente.', 'uma das suas imagens do Kaien (a dele estendendo a mão)', `${ESTILO} The adult master Kaien: long dark wavy hair, ornate black and silver layered robes with chains, proud and emotional expression, soft smile, upper body, facing the viewer. ${TRANSP} ${REGRAS}`);
 [['emE', 'E', 'grey iron'], ['emD', 'D', 'steel blue']].forEach(([f, R, c]) => addB(f, 'Emblema do rank ' + R, 'Emblema do rank ' + R + ' (losango). Pode ficar sem imagem: o app já desenha um emblema vetorial.', '', `A flat ornate diamond-shaped martial arts rank emblem in ${c} metal with engraved patterns, centered, symmetrical, no letters, no text. ${TRANSP} Square 1:1.`));
 
+if (FALTAM) B.splice(0, B.length, ...B.filter(x => !existe(x.f) && !/^em[ED]$/.test(x.f)));
+const SAIDA = FALTAM ? 'KAIEN-IMAGENS-FALTAM' : 'KAIEN-IMAGENS';
 const caixa = (x, plano) => `<section class="it"><div class="hd"><span class="n">${plano ? 'B' : ''}${x.n || ''}</span><span class="f">${h(x.f)}.png</span>${existe(x.f) ? '<span class="ok">já feita</span>' : ''}${/#FF00FF/.test(x.p) ? '<span class="mg">🟣 fundo magenta</span>' : ''}</div>
 <p><b>Onde aparece:</b> ${h(x.onde)}</p><p><b>O que é:</b> ${h(plano ? x.pt : ptDe(x))}</p>${x.ref ? `<p><b>Anexe no ChatGPT:</b> ${h(x.ref.replace(/assets\/img\/([A-Za-z0-9-]+)\.webp/g,'$1.png'))}</p>` : ''}
 <p class="cp">Texto para copiar e colar no ChatGPT:</p><pre>${h(x.p)}</pre></section>`;
-const resumo = grupos.map(g => `<tr><td>${h(g.replace(/^\d+\. /, ''))}</td><td>${L.filter(x => x.g === g).length}</td><td>${itens.filter(x => x.g === g).map(x => x.n)[0]}–${itens.filter(x => x.g === g).slice(-1)[0].n}</td></tr>`).join('');
+const resumo = grupos.map(g => `<tr><td>${h(g.replace(/^\d+\. /, ''))}</td><td>${L0.filter(x => x.g === g).length}</td><td>${itens.filter(x => x.g === g).map(x => x.n)[0]}–${itens.filter(x => x.g === g).slice(-1)[0].n}</td></tr>`).join('');
 const html = `<!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><style>
 @page{size:A4;margin:16mm 14mm}body{font:11pt/1.45 Georgia,serif;color:#1f1a12}
 h1{font-size:30pt;margin:0 0 6px;color:#8e1f1a}h2{font-size:16pt;color:#8e1f1a;border-bottom:2px solid #d9b36a;padding-bottom:4px;margin:22px 0 10px;page-break-after:avoid}
@@ -56,7 +60,7 @@ table{border-collapse:collapse;width:100%;font-size:10pt}td,th{border:1px solid 
 .it p{margin:3px 0}.cp{font-weight:700;color:#8e1f1a;margin-top:6px!important}
 pre{white-space:pre-wrap;word-break:break-word;background:#fbf7ec;border:1px dashed #c9b27a;padding:8px;border-radius:4px;font:9pt/1.4 ui-monospace,Menlo,monospace;margin:4px 0 0}
 .nota{font-size:10pt;color:#5d5340}</style></head><body>
-<div class="capa"><h1>KAIEN</h1><p>Guia das imagens para gerar no ChatGPT</p><div class="big">${itens.length}</div><p>imagens novas, em ordem de importância</p><p style="margin-top:30px">+ ${B.length} imagens que já existem no seu arquivo antigo (Plano B no final)</p><p style="margin-top:40px;font-size:10pt;opacity:.8">Gerado em ${new Date().toLocaleDateString('pt-BR')}</p></div>
+<div class="capa"><h1>KAIEN</h1><p>Guia das imagens para gerar no ChatGPT</p><div class="big">${itens.length}</div><p>${FALTAM ? 'imagens que ainda faltam, em ordem de importância' : 'imagens novas, em ordem de importância'}</p>${B.length ? `<p style="margin-top:30px">+ ${B.length} imagens que já existem no seu arquivo antigo (Plano B no final)</p>` : ''}<p style="margin-top:40px;font-size:10pt;opacity:.8">Gerado em ${new Date().toLocaleDateString('pt-BR')}</p></div>
 <h2>Como fazer (leia antes)</h2>
 <div class="passo"><b>1. Abra o ChatGPT</b> com geração de imagens. Use uma conversa nova para cada grupo (roupas, fundos, monstros...). Assim ele mantém o mesmo estilo dentro do grupo.</div>
 <div class="passo"><b>2. Anexe as referências.</b> Se o item disser "Anexe no ChatGPT", envie essa imagem junto. As imagens de referência eu te mandei no chat, com o mesmo nome (por exemplo <b>pH5.png</b>, <b>boss-jogos.png</b>). Elas também estão no GitHub, na pasta <b>assets/img</b>. Também vale anexar <b>uma das suas imagens da abertura</b> (a do Kaien com o mestre, por exemplo) e escrever "use o mesmo estilo desta imagem". Isso ajuda muito na consistência.</div>
@@ -67,16 +71,16 @@ pre{white-space:pre-wrap;word-break:break-word;background:#fbf7ec;border:1px das
 <div class="passo"><b>Personagem x Kaien:</b> as roupas e os giros são do <b>seu personagem</b> (cabelo curto bagunçado, rosto na sombra, como na pH5). O <b>Kaien</b> é o mentor de cabelo longo e ondulado que aparece nas histórias. São pessoas diferentes.</div>
 <div class="passo"><b>Tamanho:</b> todas na vertical (2:3). Se o ChatGPT oferecer tamanhos, escolha o vertical (1024×1536).</div>
 <p class="nota">Enquanto uma imagem não existe, o app usa uma versão recolorida das artes atuais ou uma silhueta. Nada quebra. Você pode mandar aos poucos, na ordem deste guia.</p>
-<h2>Resumo por grupo</h2><table><tr><th>Grupo (ordem de importância)</th><th>Quantas</th><th>Itens</th></tr>${resumo}<tr><td>Plano B (só se você não tiver o arquivo antigo)</td><td>${B.length}</td><td>B1–B${B.length}</td></tr></table>
+<h2>Resumo por grupo</h2><table><tr><th>Grupo (ordem de importância)</th><th>Quantas</th><th>Itens</th></tr>${resumo}${B.length ? `<tr><td>Plano B (só se você não tiver o arquivo antigo)</td><td>${B.length}</td><td>B1–B${B.length}</td></tr>` : ''}</table>
 ${grupos.map(g => `<h2>${h(g)}</h2>` + itens.filter(x => x.g === g).map(x => caixa(x)).join('')).join('')}
-<h2>Plano B · imagens que já existem no seu index.html antigo (12,8 MB)</h2>
+${B.length ? `<h2>Plano B · imagens que já existem no seu index.html antigo (12,8 MB)</h2>
 <p class="nota"><b>Não gere estas se você ainda tiver aquele arquivo.</b> Basta me mandar o index.html antigo de 12,8 MB que eu extraio todas de uma vez, iguais às originais. Use os textos abaixo só se o arquivo tiver se perdido.</p>
-${B.map((x, i) => caixa(Object.assign({ n: i + 1 }, x), true)).join('')}
+${B.map((x, i) => caixa(Object.assign({ n: i + 1 }, x), true)).join('')}` : ''}
 </body></html>`;
-fs.writeFileSync(path.join(RAIZ, 'KAIEN-IMAGENS.html'), html);
+fs.writeFileSync(path.join(RAIZ, SAIDA + '.html'), html);
 (async () => {
   const { chromium } = require('playwright'); const b = await chromium.launch(); const p = await b.newPage();
   await p.setContent(html, { waitUntil: 'load' });
-  await p.pdf({ path: path.join(RAIZ, 'KAIEN-IMAGENS.pdf'), format: 'A4', printBackground: true, displayHeaderFooter: true, headerTemplate: '<span></span>', footerTemplate: '<div style="font-size:8pt;width:100%;text-align:center;color:#888">Kaien · imagens · página <span class="pageNumber"></span> de <span class="totalPages"></span></div>', margin: { top: '14mm', bottom: '16mm', left: '12mm', right: '12mm' } });
-  await b.close(); console.log(`KAIEN-IMAGENS.pdf: ${itens.length} itens + ${B.length} no Plano B`);
+  await p.pdf({ path: path.join(RAIZ, SAIDA + '.pdf'), format: 'A4', printBackground: true, displayHeaderFooter: true, headerTemplate: '<span></span>', footerTemplate: '<div style="font-size:8pt;width:100%;text-align:center;color:#888">Kaien · imagens · página <span class="pageNumber"></span> de <span class="totalPages"></span></div>', margin: { top: '14mm', bottom: '16mm', left: '12mm', right: '12mm' } });
+  await b.close(); console.log(`${SAIDA}.pdf: ${itens.length} itens + ${B.length} no Plano B`);
 })();
