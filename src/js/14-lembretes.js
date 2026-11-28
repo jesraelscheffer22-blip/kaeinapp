@@ -12,13 +12,16 @@ function remN(n){const r=remInit(),D=['07:30','13:00','20:30'];while(r.times.len
 function remOn(v){const r=remInit();r.on=v?1:0;if(v){if(!r.days.length)r.days=[0,1,2,3,4,5,6];remPerm()}remSync(1);render()}
 function doneRem(on){const r=remInit();r.on=on?1:0;if(on&&!r.days.length)r.days=[0,1,2,3,4,5,6];remSync(1);if(!on){adv();return}
  // pede a permissão e, quando o celular responder, mostra a confirmação com o botão Continuar
- const P=remPlug(),fim=ok=>{if(steps[S.i]&&steps[S.i].t==='rem'){S.remRes=ok?1:2;render()}};S.remRes=3;render();
- if(!P){fim(1);return}try{P.requestPermissions().then(x=>fim(!x||x.display!=='denied')).catch(()=>fim(0))}catch(e){fim(0)}}
-function remCont(){delete S.remRes;remSync(1);adv()}
+ // mostra a confirmação na hora; a resposta do celular só ajusta a mensagem
+ const P=remPlug(),fim=ok=>{if(steps[S.i]&&steps[S.i].t==='rem'&&S.remRes){S.remRes=ok?1:2;render()}};S.remRes=1;render();
+ if(!P)return;try{P.requestPermissions().then(x=>fim(!x||x.display!=='denied')).catch(()=>{})}catch(e){}}
+function remCont(){delete S.remRes;adv();remSync(1)}
 function remTest(){const P=remPlug();if(!P){S.remMsg='Os lembretes só tocam no app instalado (APK), não no navegador.';render();return}
  try{P.requestPermissions().then(()=>P.schedule({notifications:[{id:9999,title:'Kaien',body:'Teste: se você viu isto, os lembretes estão funcionando.',schedule:{at:new Date(Date.now()+5000),allowWhileIdle:true}}]})).then(()=>{S.remMsg='Enviado. Em uns 5 segundos deve aparecer. Se não aparecer, veja se as notificações do app estão permitidas nas configurações do celular.';render()}).catch(()=>{S.remMsg='Não consegui agendar. Veja se as notificações do app estão permitidas.';render()})}catch(e){}}
 let _remSig='';
-function remSync(force){const P=remPlug();if(!P||!S.rem)return;
+function remSync(force){try{remSync0(force)}catch(e){console.warn(e)}}
+// durante a abertura o plano do dia ainda não existe: os lembretes só são agendados depois dela
+function remSync0(force){const P=remPlug();if(!P||!S.rem)return;if(steps[S.i]&&steps[S.i].t!=='day1')return;
  const r=S.rem,now=new Date();let mD=false,tD=false,all=false;try{mD=(S.ms.low||{}).st==='done';tD=(S.ms.obj||{}).st==='done';all=calcXp().all}catch(e){}
  const sig=JSON.stringify([r,now.toDateString(),mD,tD,all,S.name,S.wd]);if(!force&&sig===_remSig)return;_remSig=sig;
  const out=[];let id=1;
